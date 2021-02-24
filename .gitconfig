@@ -1,0 +1,23 @@
+[user]
+	name = wan-nyan-wan
+	email = distributed.system.love@gmail.com
+[alias]
+    co = checkout
+    cm = commit -m
+    ad = add
+    ap = add -p
+    br = branch
+    ba = branch -a
+    pscb = !git push origin `git rev-parse --abbrev-ref HEAD`
+    ps = push
+    st = status
+[merge]
+    tool = vimdiff
+[http]
+	cookiefile = /home/sugerme/.gitcookies
+[sendemail]
+    smtpuser = distributed.system.love@gmail.com
+    smtpserver = smtp.googlemail.com
+    smtpencryption = tls
+    smtpserverport = 587
+

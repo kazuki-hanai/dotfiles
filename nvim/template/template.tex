@@ -1,0 +1,40 @@
+% \documentclass[uplatex]{jsarticle}
+\documentclass[a4paper,dvipdfmx,12pt]{article}
+\usepackage{comment}    % 複数行コメント
+\usepackage[dvipdfmx]{graphicx}    % 画像の貼り付け
+\usepackage[top=30truemm,bottom=30truemm,left=20truemm,right=20truemm]{geometry}    % 余白の調整
+\usepackage{here} % Hの使用
+\usepackage{url}  % url
+\usepackage{listings}
+%ここからソースコードの表示に関する設定
+\lstset{
+  basicstyle={\ttfamily},
+  identifierstyle={\small},
+  commentstyle={\smallitshape},
+  keywordstyle={\small\bfseries},
+  ndkeywordstyle={\small},
+  stringstyle={\small\ttfamily},
+  frame=shadowbox,
+  breaklines=true,
+  columns=[l]{fullflexible},
+  numbers=left,
+  xrightmargin=0zw,
+  xleftmargin=3zw,
+  numberstyle={\scriptsize},
+  stepnumber=1,
+  numbersep=1zw,
+  keepspaces=true,
+  lineskip=-0.5ex
+}
+\usepackage{titlesec}
+\titleformat*{\section}{\large\bfseries}
+\titleformat*{\subsection}{\normalsize\bfseries}
+% margin
+
+\title{<+CURSOR+>}
+\author{Hanai Kazuki\\82023663}
+\begin{document}
+\maketitle
+
+\end{document}
+ 

@@ -1,0 +1,10 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_1='/Users/sugerme/.config/nvim'
+let g:netrw_dirhist_2='/Users/sugerme/lang/rust/blog_server/src'
+let g:netrw_dirhist_3='/Users/sugerme/.config'
+let g:netrw_dirhist_4='/Users/sugerme/.config/nvim'
+let g:netrw_dirhist_5='/Users/sugerme/redox/cookbook/xargo'
+let g:netrw_dirhist_6='/Users/sugerme/os/x86_64_jisaku_os_4_samples/A00_kern_app_base/apps'
+let g:netrw_dirhist_7='/Users/sugerme/os/x86_64_jisaku_os_4_samples/A00_kern_app_base/apps/01_softirq'
+let g:netrw_dirhist_8='/home/sugerme/phoenix/loveplan/assets/css'
