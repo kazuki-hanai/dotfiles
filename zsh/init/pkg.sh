@@ -1,35 +1,45 @@
-install() {
-    if [ "$(uname)" = 'Darwin' ]; then
-	echo mac...
-    elif [ "$(expr substr $(uname -s) 1 5)" = 'Linux' ]; then
+existsCmd() {
+    type -a $1 > /dev/null 2>&1
+}
+
+installMac() {
+    if [ "$(uname)" = 'Darwin' ] && ! existsCmd $1; then
+        brew install $2;
+    fi
+}
+
+installUbuntu() {
+    if [ -e /etc/lsb-release ]; then
         if ! dpkg -s $1 1>/dev/null; then sudo apt -y install $1; fi
     fi
 }
 
-if [ "$(uname)" = 'Darwin' ]; then
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+if [ "$(uname)" = 'Darwin' ] && ! existsCmd brew; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 fi
 
-install git
-install zsh
-install tmux
-install curl
-install wget
-install build-essential
-install libbz2-dev
-install libdb-dev
-install libreadline-dev
-install libffi-dev
-install libgdbm-dev
-install liblzma-dev
-install libncursesw5-dev
-install libsqlite3-dev
-install libssl-dev
-install zlib1g-dev
-install uuid-dev
-install tk-dev
-install llvm
-install clang
-install clangd-10
-install ca-certificates
+installUbuntu git
+installUbuntu zsh
+installUbuntu tmux
+installUbuntu curl
+installUbuntu wget
+installUbuntu build-essential
+installUbuntu libbz2-dev
+installUbuntu libdb-dev
+installUbuntu libreadline-dev
+installUbuntu libffi-dev
+installUbuntu libgdbm-dev
+installUbuntu liblzma-dev
+installUbuntu libncursesw5-dev
+installUbuntu libsqlite3-dev
+installUbuntu libssl-dev
+installUbuntu zlib1g-dev
+installUbuntu uuid-dev
+installUbuntu tk-dev
+installUbuntu llvm
+installUbuntu clang
+installUbuntu clangd-10
+installUbuntu ca-certificates
 
+installMac gomi b4b4r07/tap/gomi
