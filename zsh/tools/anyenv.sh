@@ -6,6 +6,6 @@ fi
 export PATH="$HOME/.anyenv/bin:$PATH"
 eval "$(anyenv init -)"
 
-source ~/.dotfiles/zsh/init/tools/anyenv/pyenv.sh
-source ~/.dotfiles/zsh/init/tools/anyenv/nodenv.sh
-source ~/.dotfiles/zsh/init/tools/anyenv/goenv.sh
+source ~/.dotfiles/zsh/tools/anyenv/pyenv.sh
+source ~/.dotfiles/zsh/tools/anyenv/nodenv.sh
+source ~/.dotfiles/zsh/tools/anyenv/goenv.sh
