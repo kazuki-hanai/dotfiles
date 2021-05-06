@@ -8,3 +8,7 @@ if [ ! -d ~/.localbin ]; then
     mkdir -p ~/.localbin
 fi
 export PATH="$HOME/.localbin:$PATH"
+
+# deno
+export DENO_INSTALL="$HOME/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
