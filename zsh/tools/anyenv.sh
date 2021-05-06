@@ -5,8 +5,7 @@ if [ ! -d ~/.anyenv ]; then
 fi
 export PATH="$HOME/.anyenv/bin:$PATH"
 eval "$(anyenv init -)"
-export PATH=$PATH:$(go env GOPATH)/bin
 
-source ~/.dotfiles/zsh/init/tools/anyenv/pyenv.sh
-source ~/.dotfiles/zsh/init/tools/anyenv/nodenv.sh
-source ~/.dotfiles/zsh/init/tools/anyenv/goenv.sh
+source ~/.dotfiles/zsh/tools/anyenv/pyenv.sh
+source ~/.dotfiles/zsh/tools/anyenv/nodenv.sh
+source ~/.dotfiles/zsh/tools/anyenv/goenv.sh
