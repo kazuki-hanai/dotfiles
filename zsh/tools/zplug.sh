@@ -15,6 +15,7 @@ zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-completions"
 zplug "chrissicool/zsh-256color"
 zplug "mollifier/anyframe"
+zplug "darvid/zsh-poetry"
 zstyle ":anyframe:selector:" use peco
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then

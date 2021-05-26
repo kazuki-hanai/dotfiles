@@ -14,8 +14,12 @@ autoload -U promptinit; promptinit
 
 # completions
 fpath=(/usr/local/share/zsh-completions $fpath)
+fpath+=~/.zfunc
 
 # esc delay
 KEYTIMEOUT=1
 # user systemd
 export XDG_RUNTIME_DIR=/run/user/$UID
+
+# poetry
+source $HOME/.poetry/env
