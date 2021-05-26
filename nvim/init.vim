@@ -19,6 +19,7 @@ set wildmenu
 set noswapfile
 set autoread
 set tags=<tags_path>
+
 " common keymap
 inoremap <S-Tab> <C-d>
 inoremap <C-j> <Down>
@@ -53,38 +54,33 @@ augroup MyAutoCmd
   autocmd!
 augroup END
 
-" dein settings
-let s:cache_home = empty($XDG_CACHE_HOME) ? expand('~/.cache') : $XDG_CACHE_HOME
-let s:dein_dir = s:cache_home . '/dein'
-let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
-if !isdirectory(s:dein_repo_dir)
-  call system('git clone https://github.com/Shougo/dein.vim ' . shellescape(s:dein_repo_dir))
-endif
-let &runtimepath = s:dein_repo_dir .",". &runtimepath
-let s:toml_file = fnamemodify(expand('<sfile>'), ':h').'/dein.toml'
-if dein#load_state(s:dein_dir)
-  call dein#begin(s:dein_dir)
-  call dein#load_toml(s:toml_file)
-  call dein#end()
-  call dein#save_state()
-endif
-if has('vim_starting') && dein#check_install()
-  call dein#install()
-endif
+"{{{
+" vim-plug
+call plug#begin(stdpath('data') . '/plugged')
+" nerdtree
+Plug 'scrooloose/nerdtree'
+" fzf
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+" autopairs
+Plug 'jiangmiao/auto-pairs'
+" coc
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+call plug#end()
+"}}}
 
-" ctags setting
-autocmd BufNewFile,BufRead * source ~/.config/nvim/ctags.vim
-
-" cscope
-autocmd BufNewFile,BufRead * source ~/.config/nvim/cscope.vim
-
-" auto complete
-autocmd BufNewFile,BufRead * source ~/.config/nvim/auto.vim
-
-" c/c++ completion
-" autocmd BufNewFile,BufRead * source ~/.config/nvim/c_completion.vim
-
-" colorscheme
-colorscheme base16-default-dark
-
-syntax on
+" {{{
+" fzf
+command! -bang -nargs=* Rg
+    \ call fzf#vim#grep(
+    \ 'rg --column --line-number --hidden --ignore-case --no-heading --color=always --smart-case '. <q-args>, 1,
+    \ <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
+    \ : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%', '?'),
+    \ <bang>0)
+let g:rg_derive_root='true'
+nnoremap <C-s> :Rg<Space>
+nnoremap <C-p> :GFiles<CR>
+" nnoremap <C-h> :History<CR>
+nnoremap <Leader>b :Buffers<cr>
+nnoremap <Leader>s :BLines<cr>
+" }}}
