@@ -43,3 +43,14 @@ installUbuntu clangd-10
 installUbuntu ca-certificates
 
 installMac gomi b4b4r07/tap/gomi
+
+# poetry
+if [ ! type poetry > /dev/null 2>&1 ]; then
+    curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+fi
+
+# vim-plug
+if [ ! -e "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim ]; then
+    sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+fi

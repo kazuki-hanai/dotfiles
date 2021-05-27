@@ -12,3 +12,6 @@ export PATH="$HOME/.localbin:$PATH"
 # deno
 export DENO_INSTALL="$HOME/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
+
+# poetry
+export PATH="$HOME/.poetry/bin:$PATH"
