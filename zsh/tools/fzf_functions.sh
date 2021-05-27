@@ -46,3 +46,25 @@ fs() {
     fzf --query="$1" --select-1 --exit-0) &&
   tmux switch-client -t "$session"
 }
+
+fd_wrap() {
+  flag='-f'
+  if [ $# -eq 0 ]; then
+    builtin cd
+  elif [ $# -eq 1 ]; then
+    if [ $1 = "$flag" ]; then
+      dirs=$(fd --type d . $HOME | fzf)
+      if [ "$dirs" != '' ]; then
+        builtin cd "$dirs"
+      fi
+    else
+      builtin cd $1
+    fi
+  elif [ $2 = "$flag" ]; then
+    target=${1:-$HOME}
+    dirs=$(fd --type d . $target | fzf)
+    if [ "$dirs" != '' ]; then
+      builtin cd "$dirs"
+    fi
+  fi
+}
