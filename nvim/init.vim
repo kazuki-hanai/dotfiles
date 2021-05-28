@@ -82,8 +82,7 @@ Plug 'flazz/vim-colorschemes'
 call plug#end()
 "}}}
 
-" {{{
-" fzf
+" {{{ fzf
 command! -bang -nargs=* Rg
     \ call fzf#vim#grep(
     \ 'rg --column --line-number --hidden --ignore-case --no-heading --color=always --smart-case '. <q-args>, 1,
@@ -96,10 +95,9 @@ nnoremap <C-p> :GFiles<CR>
 " nnoremap <C-h> :History<CR>
 nnoremap <Leader>b :Buffers<cr>
 nnoremap <Leader>s :BLines<cr>
-" }}}
+" fzf }}}
 
-" {{{
-" coc
+" {{{ coc
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
@@ -235,9 +233,8 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR> 
-" }}}
+" coc }}}
 
-" {{{
-" color
-" }}}
+" {{{ color
 colorscheme molokai
+" color }}}
