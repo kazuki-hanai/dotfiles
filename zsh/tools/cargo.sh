@@ -13,9 +13,8 @@ export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/src/
 installCargoPackage() {
     if [ ! -f ~/.cargo/bin/$2 ]; then
         cargo install $1;
-    else
-        alias $3=$2;
     fi
+    alias $3=$2;
 }
 
 installCargoPackage exa exa ls
