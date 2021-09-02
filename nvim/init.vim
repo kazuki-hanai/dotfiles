@@ -237,4 +237,5 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 " {{{ color
 colorscheme molokai
+" colorscheme gobo
 " color }}}
