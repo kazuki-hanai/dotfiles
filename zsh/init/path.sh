@@ -15,3 +15,6 @@ export PATH="$DENO_INSTALL/bin:$PATH"
 
 # poetry
 export PATH="$HOME/.poetry/bin:$PATH"
+
+# bvm
+export PATH=$HOME/bin:$PATH

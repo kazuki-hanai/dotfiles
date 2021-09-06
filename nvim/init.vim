@@ -69,8 +69,7 @@ augroup MyAutoCmd
   autocmd!
 augroup END
 
-"{{{
-" vim-plug
+"{{{ vim-plug
 call plug#begin(stdpath('data') . '/plugged')
 Plug 'scrooloose/nerdtree'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -85,8 +84,7 @@ Plug 'xolox/vim-session'
 call plug#end()
 "}}}
 
-" {{{
-" coc plugins
+" {{{ coc plugins
 let g:coc_global_extensions = [
     \  'coc-tsserver'
     \, 'coc-snippets'
@@ -100,14 +98,12 @@ let g:coc_global_extensions = [
 \, ]
 " }}}
 
-" {{{
-" nerdtree
+" {{{ nerdtree
 nnoremap <C-n> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
 " }}}
 
-" {{{
-" fzf
+" {{{ fzf
 command! -bang -nargs=* Rg
     \ call fzf#vim#grep(
     \ 'rg --column --line-number --hidden --ignore-case --no-heading --color=always --smart-case '. <q-args>, 1,
@@ -120,10 +116,9 @@ nnoremap <C-p> :GFiles<CR>
 " nnoremap <C-h> :History<CR>
 nnoremap <Leader>b :Buffers<cr>
 nnoremap <Leader>s :BLines<cr>
-" }}}
+" fzf }}}
 
-" {{{
-" coc
+" {{{ coc
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
@@ -225,8 +220,8 @@ endif
 
 " Use CTRL-S for selections ranges.
 " Requires 'textDocument/selectionRange' support of language server.
-nmap <silent> <C-a> <Plug>(coc-range-select)
-xmap <silent> <C-a> <Plug>(coc-range-select)
+" nmap <silent> <C-a> <Plug>(coc-range-select)
+" xmap <silent> <C-a> <Plug>(coc-range-select)
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
@@ -265,12 +260,12 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR> 
 
-" Coc plugins
+" {{{ Coc plugins
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 " }}}
 
-" {{{
-" color
-" }}}
+" {{{ color
 colorscheme molokai
+" colorscheme gobo
+" color }}}
