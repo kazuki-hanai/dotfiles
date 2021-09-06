@@ -26,3 +26,9 @@ zstyle :compinstall filename $HOME'/.zshrc'
 
 autoload -Uz compinit
 compinit
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/hanaiikki/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/hanaiikki/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/hanaiikki/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/hanaiikki/Downloads/google-cloud-sdk/completion.zsh.inc'; fi

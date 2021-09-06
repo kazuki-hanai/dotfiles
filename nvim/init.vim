@@ -79,8 +79,32 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'itchyny/lightline.vim'
 Plug 'flazz/vim-colorschemes'
+Plug 'simeji/winresizer'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-session'
 call plug#end()
 "}}}
+
+" {{{
+" coc plugins
+let g:coc_global_extensions = [
+    \  'coc-tsserver'
+    \, 'coc-snippets'
+    \, 'coc-prettier'
+    \, 'coc-pairs'
+    \, 'coc-fzf-preview'
+    \, 'coc-explorer'
+    \, 'coc-rust-analyzer'
+    \, 'coc-json'
+    \, 'coc-yaml'
+\, ]
+" }}}
+
+" {{{
+" nerdtree
+nnoremap <C-n> :NERDTreeToggle<CR>
+let NERDTreeShowHidden=1
+" }}}
 
 " {{{
 " fzf
@@ -216,7 +240,12 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+let g:lightline = {
+    \ 'active': {
+    \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'absolutepath', 'modified' ] ],
+    \ }
+\ }
 
 " Mappings for CoCList
 " Show all diagnostics.
@@ -235,6 +264,10 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR> 
+
+" Coc plugins
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
 " }}}
 
 " {{{
