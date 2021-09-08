@@ -3,9 +3,11 @@
     "css",
     "markdown",
     "typescript",
+    "typescriptreact",
     "javascript",
     "json",
-    "yaml"
+    "yaml",
+    "python"
   ],
   "jedi": {
     "enable": true,
