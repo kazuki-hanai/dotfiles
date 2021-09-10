@@ -89,6 +89,8 @@ let g:coc_global_extensions = [
     \  'coc-tsserver'
     \, 'coc-snippets'
     \, 'coc-prettier'
+    \, 'coc-eslint'
+    \, 'coc-vetur'
     \, 'coc-pairs'
     \, 'coc-fzf-preview'
     \, 'coc-explorer'

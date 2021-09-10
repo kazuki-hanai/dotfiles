@@ -15,5 +15,6 @@
   "json": {
     "enable": true,
     "format.enable": true
-  }
+  },
+  "eslint.filetypes": ["javascript", "typescript", "vue"]
 }
