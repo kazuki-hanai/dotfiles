@@ -7,16 +7,13 @@
     "javascript",
     "json",
     "yaml",
-    "python"
+    "python",
+    "go"
   ],
-  "jedi": {
-    "enable": true,
-    "startupMessage": false,
-    "executable.command": "~/.anyenv/envs/pyenv/versions/neovim3/bin/jedi-language-server"
-  },
   "json": {
     "enable": true,
     "format.enable": true
   },
-  "eslint.filetypes": ["javascript", "typescript", "vue"]
+  "eslint.filetypes": ["javascript", "typescript", "vue"],
+  "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/12.0.1/clangd_12.0.1/bin/clangd"
 }

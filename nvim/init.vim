@@ -49,9 +49,14 @@ inoremap <C-t> <Esc>:tabnew<CR>i
 inoremap <C-l> <Esc>:tabnext<CR>i
 inoremap <C-h> <Esc>:tabprevious<CR>i
 nnoremap tt  :tabedit<Space>
-nnoremap tn  :tabnext<Space>
-nnoremap tm  :tabm<Space>
 nnoremap td  :tabclose<CR>
+
+" lasttab
+if !exists('g:lasttab')
+  let g:lasttab = 1
+endif
+nmap <C-a> :exe "tabn ".g:lasttab<CR>
+au TabLeave * let g:lasttab = tabpagenr()
 
 set fileformats=unix,dos,mac
 set fileencodings=utf-8
@@ -83,6 +88,7 @@ Plug 'flazz/vim-colorschemes'
 Plug 'simeji/winresizer'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
+Plug 'tomlion/vim-solidity'
 call plug#end()
 "}}}
 
@@ -101,6 +107,7 @@ let g:coc_global_extensions = [
     \, 'coc-yaml'
     \, 'coc-python'
     \, 'coc-styled-components'
+    \, 'coc-go'
 \, ]
 " }}}
 
