@@ -1,6 +1,6 @@
 [user]
-	name = wan-nyan-wan
-	email = distributed.system.love@gmail.com
+    name = wan-nyan-wan
+    email = distributed.system.love@gmail.com
 [alias]
     co = checkout
     cm = commit -m
@@ -14,7 +14,7 @@
 [merge]
     tool = vimdiff
 [http]
-	cookiefile = /home/sugerme/.gitcookies
+    cookiefile = /home/sugerme/.gitcookies
 [sendemail]
     smtpuser = distributed.system.love@gmail.com
     smtpserver = smtp.googlemail.com
@@ -35,4 +35,4 @@
     file-style = bold yellow ul
     file-decoration-style = none
 [init]
-	defaultBranch = main
+    defaultBranch = main

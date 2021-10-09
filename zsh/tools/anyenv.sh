@@ -18,4 +18,3 @@ eval "$(anyenv init -)"
 
 source ~/.dotfiles/zsh/tools/anyenv/pyenv.sh
 source ~/.dotfiles/zsh/tools/anyenv/nodenv.sh
-source ~/.dotfiles/zsh/tools/anyenv/goenv.sh
