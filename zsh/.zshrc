@@ -10,6 +10,7 @@ source ~/.dotfiles/zsh/tools/fzf.sh
 source ~/.dotfiles/zsh/tools/gomi.sh
 source ~/.dotfiles/zsh/tools/cargo.sh
 source ~/.dotfiles/zsh/tools/anyenv.sh
+source ~/.dotfiles/zsh/go.sh
 source ~/.dotfiles/zsh/tools/nvim.sh
 
 # import localsetting
@@ -33,8 +34,6 @@ if [ -f '/Users/hanaiikki/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/U
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/hanaiikki/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/hanaiikki/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 
-export GOPATH=$HOME/go
-export GOROOT=/usr/local/go
-export GOBIN=$GOPATH/bin
-export PATH=$PATH:$GOBIN
-export PATH=$PATH:$GOROOT/bin
+# tabtab source for packages
+# uninstall by removing these lines
+[[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true

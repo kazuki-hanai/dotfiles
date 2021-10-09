@@ -49,9 +49,14 @@ inoremap <C-t> <Esc>:tabnew<CR>i
 inoremap <C-l> <Esc>:tabnext<CR>i
 inoremap <C-h> <Esc>:tabprevious<CR>i
 nnoremap tt  :tabedit<Space>
-nnoremap tn  :tabnext<Space>
-nnoremap tm  :tabm<Space>
 nnoremap td  :tabclose<CR>
+
+" lasttab
+if !exists('g:lasttab')
+  let g:lasttab = 1
+endif
+nmap <C-a> :exe "tabn ".g:lasttab<CR>
+au TabLeave * let g:lasttab = tabpagenr()
 
 set fileformats=unix,dos,mac
 set fileencodings=utf-8
@@ -75,12 +80,15 @@ Plug 'scrooloose/nerdtree'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'jiangmiao/auto-pairs'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'itchyny/lightline.vim'
 Plug 'flazz/vim-colorschemes'
 Plug 'simeji/winresizer'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
+Plug 'tomlion/vim-solidity'
 call plug#end()
 "}}}
 
@@ -89,12 +97,17 @@ let g:coc_global_extensions = [
     \  'coc-tsserver'
     \, 'coc-snippets'
     \, 'coc-prettier'
+    \, 'coc-eslint'
+    \, 'coc-vetur'
     \, 'coc-pairs'
     \, 'coc-fzf-preview'
     \, 'coc-explorer'
     \, 'coc-rust-analyzer'
     \, 'coc-json'
     \, 'coc-yaml'
+    \, 'coc-python'
+    \, 'coc-styled-components'
+    \, 'coc-go'
 \, ]
 " }}}
 
@@ -117,6 +130,10 @@ nnoremap <C-p> :GFiles<CR>
 nnoremap <Leader>b :Buffers<cr>
 nnoremap <Leader>s :BLines<cr>
 " fzf }}}
+
+" {{{ vim-jsx-typescript
+autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
+" }}}
 
 " {{{ coc
 " Use tab for trigger completion with characters ahead and navigate.
