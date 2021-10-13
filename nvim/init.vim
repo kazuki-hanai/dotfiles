@@ -55,7 +55,7 @@ nnoremap td  :tabclose<CR>
 if !exists('g:lasttab')
   let g:lasttab = 1
 endif
-nmap <C-a> :exe "tabn ".g:lasttab<CR>
+" nmap <C-a> :exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
 
 set fileformats=unix,dos,mac
@@ -108,6 +108,7 @@ let g:coc_global_extensions = [
     \, 'coc-python'
     \, 'coc-styled-components'
     \, 'coc-go'
+    \, 'coc-cmake'
 \, ]
 " }}}
 
@@ -276,10 +277,10 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR> 
+" }}}
 
 " {{{ Coc plugins
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
-
 " }}}
 
 " {{{ color

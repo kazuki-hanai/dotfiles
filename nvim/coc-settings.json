@@ -1,5 +1,6 @@
 {
   "coc.preferences.formatOnSaveFiletypes": [
+    "cpp",
     "css",
     "markdown",
     "typescript",
@@ -8,7 +9,8 @@
     "json",
     "yaml",
     "python",
-    "go"
+    "go",
+    "rust"
   ],
   "json": {
     "enable": true,
