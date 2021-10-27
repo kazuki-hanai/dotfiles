@@ -77,6 +77,8 @@ augroup END
 " {{{ vim-plug
 call plug#begin(stdpath('data') . '/plugged')
 Plug 'scrooloose/nerdtree'
+Plug 'yggdroot/indentline'
+Plug 'luochen1990/rainbow'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'jiangmiao/auto-pairs'
@@ -116,6 +118,12 @@ let g:coc_global_extensions = [
 nnoremap <C-n> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
 " }}} nerdtree
+
+" {{{ luochen1990/rainbow
+" set to 0 if you want to enable it later via :RainbowToggle
+let g:rainbow_active = 1
+" }}} luochen1990/rainbow
+
 
 " {{{ fzf
 command! -bang -nargs=* Rg
@@ -288,3 +296,4 @@ colorscheme molokai
 " colorscheme gobo
 " }}} color
 
+set runtimepath^=/home/sugerme/oss/coc-solidity
