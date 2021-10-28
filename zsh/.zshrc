@@ -1,31 +1,20 @@
-source ~/.dotfiles/zsh/init/zsh.sh
-source ~/.dotfiles/zsh/init/path.sh
-source ~/.dotfiles/zsh/init/pkg.sh
-source ~/.dotfiles/zsh/init/symboliclink.sh
-source ~/.dotfiles/zsh/init/ssh.sh
+# Import standard settings
+source ~/.dotfiles/zsh/zsh-configs.sh
+source ~/.dotfiles/zsh/export-path.sh
+source ~/.dotfiles/zsh/pkg.sh
+source ~/.dotfiles/zsh/symbolic-link.sh
+source ~/.dotfiles/zsh/dotfiles-private.sh
 
+# Import local settings
+source ~/.dotfiles/zsh/localconfig.sh
+
+# Import tool settings
 source ~/.dotfiles/zsh/tools/tmux.sh
 source ~/.dotfiles/zsh/tools/zplug.sh
-source ~/.dotfiles/zsh/tools/fzf.sh
-source ~/.dotfiles/zsh/tools/gomi.sh
+source ~/.dotfiles/zsh/tools/fzf/fzf.sh
 source ~/.dotfiles/zsh/tools/cargo.sh
-source ~/.dotfiles/zsh/tools/anyenv.sh
-source ~/.dotfiles/zsh/go.sh
+source ~/.dotfiles/zsh/tools/anyenv/anyenv.sh
+source ~/.dotfiles/zsh/tools/go/go.sh
+source ~/.dotfiles/zsh/tools/poetry.sh
 source ~/.dotfiles/zsh/tools/nvim.sh
-source ~/.dotfiles/zsh/localbash.sh
 
-zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
-zstyle :compinstall filename $HOME'/.zshrc'
-
-autoload -Uz compinit
-compinit
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/hanaiikki/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/hanaiikki/Downloads/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/hanaiikki/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/hanaiikki/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
-
-# tabtab source for packages
-# uninstall by removing these lines
-[[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
