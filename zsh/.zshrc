@@ -5,9 +5,6 @@ source ~/.dotfiles/zsh/pkg.sh
 source ~/.dotfiles/zsh/symbolic-link.sh
 source ~/.dotfiles/zsh/dotfiles-private.sh
 
-# Import local settings
-source ~/.dotfiles/zsh/localconfig.sh
-
 # Import tool settings
 source ~/.dotfiles/zsh/tools/tmux.sh
 source ~/.dotfiles/zsh/tools/zplug.sh
@@ -17,4 +14,7 @@ source ~/.dotfiles/zsh/tools/anyenv/anyenv.sh
 source ~/.dotfiles/zsh/tools/go/go.sh
 source ~/.dotfiles/zsh/tools/poetry.sh
 source ~/.dotfiles/zsh/tools/nvim.sh
+
+# Import local settings
+source ~/.dotfiles/zsh/localconfig.sh
 
