@@ -12,15 +12,7 @@ source ~/.dotfiles/zsh/tools/cargo.sh
 source ~/.dotfiles/zsh/tools/anyenv.sh
 source ~/.dotfiles/zsh/go.sh
 source ~/.dotfiles/zsh/tools/nvim.sh
-
-# import localsetting
-if [ ! -f ~/.localbash ]; then
-    touch ~/.localbash
-else
-    source ~/.localbash
-fi
-
-# The following lines were added by compinstall
+source ~/.dotfiles/zsh/localbash.sh
 
 zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
 zstyle :compinstall filename $HOME'/.zshrc'
