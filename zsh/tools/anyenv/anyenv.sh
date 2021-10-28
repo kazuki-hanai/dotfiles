@@ -1,19 +1,15 @@
 ## anyenv
 
+# To export PYENV paths, these source processes
+# should be executed before `anyenv init -`
+source ~/.dotfiles/zsh/tools/anyenv/pyenv.sh
+source ~/.dotfiles/zsh/tools/anyenv/nodenv.sh
+
 if [ ! -d ~/.anyenv ]; then
     git clone https://github.com/anyenv/anyenv ~/.anyenv
     yes | ~/.anyenv/bin/anyenv install --init
 fi
 export PATH="$HOME/.anyenv/bin:$PATH"
 
-export PYENV_ROOT="$HOME/.anyenv/envs/pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
-
 eval "$(anyenv init -)"
 
-source ~/.dotfiles/zsh/tools/anyenv/pyenv.sh
-source ~/.dotfiles/zsh/tools/anyenv/nodenv.sh
