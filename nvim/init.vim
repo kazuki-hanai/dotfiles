@@ -82,10 +82,10 @@ Plug 'luochen1990/rainbow'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'jiangmiao/auto-pairs'
+Plug 'itchyny/lightline.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'itchyny/lightline.vim'
 Plug 'flazz/vim-colorschemes'
 Plug 'simeji/winresizer'
 Plug 'xolox/vim-misc'
@@ -105,8 +105,8 @@ let g:coc_global_extensions = [
     \, 'coc-fzf-preview'
     \, 'coc-explorer'
     \, 'coc-rust-analyzer'
-    \, 'coc-json'
     \, 'coc-yaml'
+    \, 'coc-json'
     \, 'coc-python'
     \, 'coc-styled-components'
     \, 'coc-go'
@@ -118,6 +118,12 @@ let g:coc_global_extensions = [
 nnoremap <C-n> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
 " }}} nerdtree
+
+" {{{ indentline
+let g:indentLine_enabled = 1
+autocmd Filetype json let g:indentLine_enabled = 0
+let g:vim_json_syntax_conceal = 0
+" }}} indentline
 
 " {{{ luochen1990/rainbow
 " set to 0 if you want to enable it later via :RainbowToggle
@@ -261,7 +267,7 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
-" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 let g:lightline = {
     \ 'active': {
     \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'absolutepath', 'modified' ] ],
