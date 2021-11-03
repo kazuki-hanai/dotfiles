@@ -298,6 +298,8 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 " }}} Coc plugins
 
 " {{{ color
+highlight Pmenu guibg=#300000
+highlight FgCocErrorFloatBgCocFloating guibg=#300000
 " colorscheme molokai
 " colorscheme gobo
 " }}} color
