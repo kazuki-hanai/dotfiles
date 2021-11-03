@@ -63,7 +63,7 @@ set fileencodings=utf-8
 set termguicolors
 set ambiwidth=double
 syntax on
-colorscheme desert
+" colorscheme desert
 
 if !&compatible
   set nocompatible
@@ -298,7 +298,7 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 " }}} Coc plugins
 
 " {{{ color
-colorscheme molokai
+" colorscheme molokai
 " colorscheme gobo
 " }}} color
 
