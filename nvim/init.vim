@@ -130,7 +130,6 @@ let g:vim_json_syntax_conceal = 0
 let g:rainbow_active = 1
 " }}} luochen1990/rainbow
 
-
 " {{{ fzf
 command! -bang -nargs=* Rg
     \ call fzf#vim#grep(
@@ -298,9 +297,9 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 " }}} Coc plugins
 
 " {{{ color
-highlight Pmenu guibg=#300000
-highlight FgCocErrorFloatBgCocFloating guibg=#300000
-" colorscheme molokai
+" highlight Pmenu guibg=#300000
+" highlight FgCocErrorFloatBgCocFloating guibg=#300000
+colorscheme molokai
 " colorscheme gobo
 " }}} color
 
