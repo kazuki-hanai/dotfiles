@@ -79,8 +79,7 @@ call plug#begin(stdpath('data') . '/plugged')
 Plug 'scrooloose/nerdtree'
 Plug 'yggdroot/indentline'
 Plug 'luochen1990/rainbow'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'jiangmiao/auto-pairs'
@@ -131,8 +130,31 @@ let g:vim_json_syntax_conceal = 0
 let g:rainbow_active = 1
 " }}} luochen1990/rainbow
 
-" {{{ vim-airline
-" }}} vim-airline
+" {{{ lightline
+function! LightlineFilename()
+  let root = fnamemodify(get(b:, 'git_dir'), ':h')
+  let path = expand('%:p')
+  if path[:len(root)-1] ==# root
+    return path[len(root)+1:]
+  endif
+  return expand('%')
+endfunction
+
+let g:lightline = {
+\   'active': {
+\     'left':[ [ 'mode', 'paste' ],
+\              [ 'gitbranch', 'readonly', 'filename', 'modified' ]
+\     ]
+\   },
+\   'component': {
+\     'lineinfo': ' %3l:%-2v',
+\   },
+\   'component_function': {
+\     'gitbranch': 'fugitive#head',
+\     'filename': 'LightlineFilename',
+\   }
+\ }
+" }}} lightline
 
 " {{{ fzf
 command! -bang -nargs=* Rg
@@ -270,7 +292,7 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
-" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " let g:lightline = {
 "     \ 'active': {
 "     \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'absolutepath', 'modified' ] ],
