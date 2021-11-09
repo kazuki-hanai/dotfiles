@@ -80,6 +80,8 @@ Plug 'scrooloose/nerdtree'
 Plug 'yggdroot/indentline'
 Plug 'luochen1990/rainbow'
 Plug 'itchyny/lightline.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'jiangmiao/auto-pairs'
