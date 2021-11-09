@@ -132,7 +132,6 @@ let g:rainbow_active = 1
 " }}} luochen1990/rainbow
 
 " {{{ vim-airline
-let g:airline_powerline_fonts = 1
 " }}} vim-airline
 
 " {{{ fzf
