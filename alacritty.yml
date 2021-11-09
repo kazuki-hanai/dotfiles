@@ -111,7 +111,8 @@
 font:
   # Normal (roman) font face
   normal:
-    family: Meslo LG L for Powerline
+    # family: Meslo LG L for Powerline
+    family: Source Code Pro for Powerline
 # Font family
 #
 # Default:
