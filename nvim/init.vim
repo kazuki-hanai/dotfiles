@@ -327,6 +327,7 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 " {{{ color
 highlight Pmenu guibg=#300000
 highlight FgCocErrorFloatBgCocFloating guibg=#300000
+highlight SignColumn guibg=default
 " colorscheme molokai
 " colorscheme gobo
 " }}} color
