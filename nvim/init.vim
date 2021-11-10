@@ -163,6 +163,12 @@ let g:lightline = {
 \ }
 " }}} lightline
 
+" {{{ vim-gitgutter
+highlight GitGutterAdd    guifg=#00E157 ctermfg=2
+highlight GitGutterChange guifg=#FFBF00 ctermfg=3
+highlight GitGutterDelete guifg=#FF2222 ctermfg=1
+" }}} vim-gitgutter
+
 " {{{ fzf
 command! -bang -nargs=* Rg
     \ call fzf#vim#grep(
