@@ -142,6 +142,11 @@ function! LightlineFilename()
   return expand('%')
 endfunction
 
+function! GitStatus()
+  let [a,m,r] = GitGutterGetHunkSummary()
+  return printf('%s +%d ~%d -%d', fugitive#head(), a, m, r)
+endfunction
+
 let g:lightline = {
 \   'active': {
 \     'left':[ [ 'mode', 'paste' ],
@@ -152,7 +157,7 @@ let g:lightline = {
 \     'lineinfo': ' %3l:%-2v',
 \   },
 \   'component_function': {
-\     'gitbranch': 'fugitive#head',
+\     'gitbranch': 'GitStatus',
 \     'filename': 'LightlineFilename',
 \   }
 \ }
