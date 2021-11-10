@@ -737,9 +737,9 @@ font:
 # If the same trigger is assigned to multiple actions, all of them are executed
 # in the order they were defined in.
 key_bindings:
-  - { key: Return, mods: Control|Shift, action: SpawnNewInstance }
-  - { key: Equals, mods: Control|Shift, action: IncreaseFontSize }
-  - { key: Minus, mods: Control, action: DecreaseFontSize }
+  - {key: Return, mods: Control|Shift, action: SpawnNewInstance}
+  - {key: Equals, mods: Control|Shift, action: IncreaseFontSize}
+  - {key: Minus, mods: Control, action: DecreaseFontSize}
   #- { key: Paste,                                       action: Paste          }
   #- { key: Copy,                                        action: Copy           }
   #- { key: L,         mods: Control,                    action: ClearLogNotice }
@@ -869,3 +869,52 @@ key_bindings:
 
 # Print all received window events.
 #print_events: false
+colors:
+  # COLORSCHEME: iterm.yaml
+  # Default colors
+  primary:
+    background: '0x101421'
+    foreground: '0xfffbf6'
+
+  # Normal colors
+  normal:
+    black: '0x2e2e2e'
+    red: '0xeb4129'
+    green: '0xabe047'
+    yellow: '0xf6c744'
+    blue: '0x47a0f3'
+    magenta: '0x7b5cb0'
+    cyan: '0x64dbed'
+    white: '0xe5e9f0'
+
+  # Bright colors
+  bright:
+    black: '0x565656'
+    red: '0xec5357'
+    green: '0xc0e17d'
+    yellow: '0xf9da6a'
+    blue: '0x49a4f8'
+    magenta: '0xa47de9'
+    cyan: '0x99faf2'
+    white: '0xffffff'
+  cursor:
+    text: '0x191622'
+    cursor: '0xf8f8f2'
+
+  search:
+    matches:
+      foreground: '0xb2b2b2'
+      background: '0xb26818'
+    focused_match:
+      foreground: CellBackground
+      background: CellForeground
+
+  dim:
+    black: '0x000000'
+    red: '0xb21818'
+    green: '0x18b218'
+    yellow: '0xb26818'
+    blue: '0x1818b2'
+    magenta: '0xb218b2'
+    cyan: '0x18b2b2'
+    white: '0xb2b2b2'

@@ -1,12 +1,18 @@
-if [ ! -d ~/.bin ]; then
-    mkdir -p ~/.bin
-fi
-export PATH="$HOME/.bin:$PATH"
-export PATH="$HOME/.dotfiles/.bin:$PATH"
 
-if [ ! -d ~/.localbin ]; then
-    mkdir -p ~/.localbin
-fi
+# Check wether a directory exists and 
+# export the directory
+check_and_export_dir () {
+    local DIR=$1
+    if [ ! -d $DIR ]; then
+        mkdir -p $DIR
+    fi
+    export PATH="$DIR:$PATH"
+}
+
+# local binary
+check_and_export_dir $HOME/.bin
+check_and_export_dir $HOME/.dotfiles/.bin
+check_and_export_dir $HOME/.local/bin
 export PATH="$HOME/.localbin:$PATH"
 
 # deno
@@ -18,3 +24,4 @@ export PATH="$HOME/.poetry/bin:$PATH"
 
 # bvm
 export PATH=$HOME/bin:$PATH
+
