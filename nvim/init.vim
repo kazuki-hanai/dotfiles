@@ -336,9 +336,24 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 " }}} Coc plugins
 
 " {{{ color
-highlight Pmenu guibg=#300000
-highlight FgCocErrorFloatBgCocFloating guibg=#300000
-highlight SignColumn guibg=default
+function! ChangeColorScheme(theme)
+  let theme = a:theme
+  echo theme
+  if strlen(theme) != 0
+    execute 'colorscheme ' . a:theme
+  endif
+  highlight Pmenu guibg=#300000
+  highlight FgCocErrorFloatBgCocFloating guibg=#300000
+  highlight SignColumn guibg=default
+  " {{{ vim-gitgutter
+  highlight GitGutterAdd    guifg=#00E157 guibg=default ctermfg=2
+  highlight GitGutterChange guifg=#FFBF00 guibg=default ctermfg=3
+  highlight GitGutterDelete guifg=#FF2222 guibg=default ctermfg=1
+  " }}} vim-gitgutter
+endfunction
+command! -nargs=1 ChangeColorScheme :call ChangeColorScheme(<args>)
+
+call ChangeColorScheme("")
 " colorscheme molokai
 " colorscheme gobo
 " }}} color
