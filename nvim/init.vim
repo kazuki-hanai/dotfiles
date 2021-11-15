@@ -8,7 +8,7 @@ set expandtab
 set tabstop=8
 filetype on
 filetype plugin indent on
-set shiftwidth=4
+set shiftwidth=2
 set nrformats-=octal
 set hidden
 set history=50
