@@ -386,9 +386,11 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 let g:mythemes = {
 \  0: 'default',
 \  1: 'iceberg',
-\  2: 'Monokai',
-\  3: 'desert',
-\  4: 'solarized',
+\  2: 'ayu',
+\  3: 'falcon',
+\  4: 'tender',
+\  5: 'gruvbox',
+\  6: 'monokai-phoenix',
 \  }
 let g:mythemes_status = 0
 
@@ -421,14 +423,14 @@ endfunction
 function s:toggleColorScheme()
   let themes_len = len(keys(g:mythemes))
   let g:mythemes_status = (g:mythemes_status + 1) % themes_len
-  call ChangeColorScheme(g:mythemes_status)
+  call s:changeColorScheme(g:mythemes_status)
 endfunction
 
 command! -nargs=1 ChangeColorScheme :call s:changeColorScheme(<q-args>)
 command! -nargs=1 ToggleColorScheme :call s:toggleColorScheme()
 noremap <C-c> :ToggleColorScheme()<CR>
 
-call ChangeColorScheme(g:mythemes_status)
+call s:changeColorScheme(g:mythemes_status)
 " colorscheme molokai
 " colorscheme gobo
 " }}} color
