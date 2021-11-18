@@ -382,12 +382,31 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 " }}} Coc plugins
 
 " {{{ color
-function! ChangeColorScheme(theme)
-  let theme = a:theme
+" Define mythemes
+let g:mythemes = {
+\  0: 'default',
+\  1: 'iceberg',
+\  2: 'Monokai',
+\  3: 'desert',
+\  4: 'solarized',
+\  }
+let g:mythemes_status = 1
+
+" Change Color Scheme
+function! s:changeColorScheme(themeno)
+  let themeno = a:themeno
+  if has_key(g:mythemes, themeno)
+    let theme = get(g:mythemes, themeno)
+  else
+    let theme = themeno
+  endif
   echo theme
   if strlen(theme) != 0
-    execute 'colorscheme ' . a:theme
+    execute 'colorscheme ' . theme
   endif
+  " ---------------------"
+  " Fix wacky highlights "
+  " ---------------------"
   highlight Pmenu guibg=#300000
   highlight FgCocErrorFloatBgCocFloating guibg=#300000
   highlight SignColumn guibg=default
@@ -395,11 +414,21 @@ function! ChangeColorScheme(theme)
   highlight GitGutterAdd    guifg=#00E157 guibg=default ctermfg=2
   highlight GitGutterChange guifg=#FFBF00 guibg=default ctermfg=3
   highlight GitGutterDelete guifg=#FF2222 guibg=default ctermfg=1
-  " }}} vim-gitgutter
+  " }}} vim-gitgutoer
 endfunction
-command! -nargs=1 ChangeColorScheme :call ChangeColorScheme(<args>)
 
-call ChangeColorScheme("")
+" Toggle colorscheme
+function s:toggleColorScheme()
+  let themes_len = len(keys(g:mythemes))
+  let g:mythemes_status = (g:mythemes_status + 1) % themes_len
+  call ChangeColorScheme(g:mythemes_status)
+endfunction
+
+command! -nargs=1 ChangeColorScheme :call s:changeColorScheme(<q-args>)
+command! -nargs=1 ToggleColorScheme :call s:toggleColorScheme()
+noremap <C-c> :ToggleColorScheme()<CR>
+
+call ChangeColorScheme(g:mythemes_status)
 " colorscheme molokai
 " colorscheme gobo
 " }}} color
