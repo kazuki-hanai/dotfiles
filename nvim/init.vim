@@ -390,7 +390,7 @@ let g:mythemes = {
 \  3: 'desert',
 \  4: 'solarized',
 \  }
-let g:mythemes_status = 1
+let g:mythemes_status = 0
 
 " Change Color Scheme
 function! s:changeColorScheme(themeno)
