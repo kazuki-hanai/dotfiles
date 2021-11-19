@@ -13,7 +13,7 @@ runtime plugins/vim_gitgutter.vim
 runtime plugins/vim_jsx_typescript.vim
 
 " 2 coc.nvim settings
-runtime coc_settings.vim
+runtime plugins/coc.vim
 runtime coc_plugins/prettier.vim
 
 " 3 colorscheme settings

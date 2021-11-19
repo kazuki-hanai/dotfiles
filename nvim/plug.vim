@@ -20,5 +20,3 @@ Plug 'tomlion/vim-solidity'
 call plug#end()
 " }}} vim-plug
 
-runtime plugins/nerdtree.vim
-runtime plugins/indentline.vim
