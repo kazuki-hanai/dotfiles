@@ -2,6 +2,7 @@
 " This config set general rule for vim.
 " e.g. set **, map **
 runtime general_settings.vim
+runtime keymaps.vim
 
 " 1 vim-plug settings
 runtime plug.vim

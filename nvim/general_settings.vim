@@ -23,6 +23,11 @@ set tags=<tags_path>
 set cmdheight=2
 set updatetime=300
 set shortmess+=c
+set fileformats=unix,dos,mac
+set fileencodings=utf-8
+set termguicolors
+set ambiwidth=double
+syntax on
 filetype on
 filetype plugin indent on
 
@@ -33,40 +38,6 @@ if has("nvim-0.5.0") || has("patch-8.1.1564")
   set signcolumn=number
 else
   set signcolumn=yes
-endif
-
-" common keymap
-inoremap <S-Tab> <C-d>
-inoremap <C-j> <Down>
-inoremap <C-k> <Up>
-inoremap <C-l> <Right>
-nnoremap <C-t> :tabnew<CR>
-nnoremap <C-l> :tabnext<CR>
-nnoremap <C-h> :tabprevious<CR>
-nnoremap tl :+tabmove<CR>
-nnoremap th :-tabmove<CR>
-inoremap <C-t> <Esc>:tabnew<CR>i
-inoremap <C-l> <Esc>:tabnext<CR>i
-inoremap <C-h> <Esc>:tabprevious<CR>i
-nnoremap tt  :tabedit<Space>
-nnoremap td  :tabclose<CR>
-
-" lasttab
-if !exists('g:lasttab')
-  let g:lasttab = 1
-endif
-" nmap <C-a> :exe "tabn ".g:lasttab<CR>
-au TabLeave * let g:lasttab = tabpagenr()
-
-set fileformats=unix,dos,mac
-set fileencodings=utf-8
-set termguicolors
-set ambiwidth=double
-syntax on
-" colorscheme desert
-
-if !&compatible
-  set nocompatible
 endif
 
 " reset augroup
