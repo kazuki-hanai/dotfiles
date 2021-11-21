@@ -1,4 +1,3 @@
-set encoding=utf-8
 set clipboard+=unnamedplus
 set hls
 set number
@@ -23,6 +22,7 @@ set tags=<tags_path>
 set cmdheight=2
 set updatetime=300
 set shortmess+=c
+set encoding=utf-8
 set fileformats=unix,dos,mac
 set fileencodings=utf-8
 set termguicolors
