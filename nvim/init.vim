@@ -11,6 +11,7 @@ runtime plugins/indentline.vim
 runtime plugins/rainbow.vim
 runtime plugins/lightline.vim
 runtime plugins/vim_gitgutter.vim
+runtime plugins/fzf.vim
 runtime plugins/vim_jsx_typescript.vim
 
 " 2 coc.nvim settings
