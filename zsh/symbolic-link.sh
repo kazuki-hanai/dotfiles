@@ -11,3 +11,4 @@ mkdir -p ~/.config/alacritty && \
     link ~/.dotfiles/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
 link ~/.dotfiles/.gitconfig ~/.gitconfig
 mkdir -p ~/.config && link ~/.dotfiles/nvim ~/.config/nvim
+mkdir -p ~/.config && link ~/.dotfiles/starship.toml ~/.config/starship.toml
