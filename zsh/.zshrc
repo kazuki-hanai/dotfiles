@@ -1,5 +1,6 @@
 # Import standard settings
 source ~/.dotfiles/zsh/zsh-configs.sh
+source ~/.dotfiles/zsh/history.sh
 source ~/.dotfiles/zsh/export-path.sh
 source ~/.dotfiles/zsh/pkg.sh
 source ~/.dotfiles/zsh/symbolic-link.sh
