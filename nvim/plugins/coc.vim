@@ -11,7 +11,7 @@ let g:coc_global_extensions = [
     \, 'coc-rust-analyzer'
     \, 'coc-yaml'
     \, 'coc-json'
-    \, 'coc-python'
+    \, 'coc-pyright'
     \, 'coc-styled-components'
     \, 'coc-go'
     \, 'coc-cmake'
