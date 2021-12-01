@@ -17,6 +17,9 @@ zstyle :compinstall filename $HOME'/.zshrc'
 
 autoload -U promptinit; promptinit
 
+# bindings
+bindkey "^[[Z" reverse-menu-complete
+
 # completions
 fpath=(/usr/local/share/zsh-completions $fpath)
 fpath+=~/.zfunc

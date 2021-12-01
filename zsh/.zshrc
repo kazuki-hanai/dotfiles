@@ -18,6 +18,3 @@ source ~/.dotfiles/zsh/tools/nvim.sh
 
 # Import local settings
 source ~/.dotfiles/zsh/localconfig.sh
-
-# Load starship
-source ~/.dotfiles/zsh/starship.sh
