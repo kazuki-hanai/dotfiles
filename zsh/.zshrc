@@ -5,6 +5,7 @@ source ~/.dotfiles/zsh/export-path.sh
 source ~/.dotfiles/zsh/pkg.sh
 source ~/.dotfiles/zsh/symbolic-link.sh
 source ~/.dotfiles/zsh/dotfiles-private.sh
+source ~/.dotfiles/zsh/completion.sh
 
 # Import tool settings
 source ~/.dotfiles/zsh/tools/tmux.sh
@@ -18,3 +19,4 @@ source ~/.dotfiles/zsh/tools/nvim.sh
 
 # Import local settings
 source ~/.dotfiles/zsh/localconfig.sh
+[[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh) # add autocomplete permanently to your zsh shell
