@@ -22,6 +22,7 @@
     smtpserverport = 587
 [core]
     pager = delta
+    editor = vim
 
 [interactive]
     diffFilter = delta --color-only
