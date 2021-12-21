@@ -6,8 +6,8 @@ if [ ! -d ~/.fzf ]; then
 fi
 
 # fzf
-export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
-export FZF_CTRL_T_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+export FZF_DEFAULT_COMMAND="rg -u --files --hidden --follow --glob '!.git'"
+export FZF_CTRL_T_COMMAND='rg -u --files --hidden --follow --glob "!.git/*"'
 export FZF_CTRL_T_OPTS='--preview "bat  --color=always --style=header,grid --line-range :100 {}"'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source ~/.dotfiles/zsh/tools/fzf/fzf_functions.sh
