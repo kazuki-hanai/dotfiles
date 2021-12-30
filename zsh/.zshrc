@@ -19,4 +19,3 @@ source ~/.dotfiles/zsh/tools/nvim.sh
 
 # Import local settings
 source ~/.dotfiles/zsh/localconfig.sh
-[[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh) # add autocomplete permanently to your zsh shell
