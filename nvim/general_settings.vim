@@ -44,3 +44,7 @@ endif
 augroup MyAutoCmd
   autocmd!
 augroup END
+
+" perenthesis settings
+hi MatchParen guifg=LightGreen guibg=default
+set matchpairs& matchpairs+=<:>
