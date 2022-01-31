@@ -9,7 +9,8 @@
     "yaml",
     "coc-pyright",
     "go",
-    "rust"
+    "rust",
+    "cpp"
   ],
   "json": {
     "enable": true,
