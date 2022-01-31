@@ -2,4 +2,6 @@
 highlight GitGutterAdd    guifg=#00E157 ctermfg=2 guibg=default
 highlight GitGutterChange guifg=#FFBF00 ctermfg=3 guibg=default
 highlight GitGutterDelete guifg=#FF2222 ctermfg=1 guibg=default
+set signcolumn=yes:1
+set numberwidth=3
 " }}} vim-gitgutter
