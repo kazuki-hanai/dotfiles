@@ -17,6 +17,7 @@ Plug 'simeji/winresizer'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
 Plug 'tomlion/vim-solidity'
+Plug 'hashivim/vim-terraform'
 Plug 'vim-denops/denops.vim'
 call plug#end()
 " }}} vim-plug
