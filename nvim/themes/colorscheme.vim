@@ -5,9 +5,8 @@ let g:mythemes = {
 \  1: 'iceberg',
 \  2: 'ayu',
 \  3: 'falcon',
-\  4: 'tender',
-\  5: 'gruvbox',
-\  6: 'monokai-phoenix',
+\  4: 'gruvbox',
+\  5: 'monokai-phoenix',
 \  }
 let g:mythemes_status = 0
 
@@ -28,12 +27,11 @@ function! s:changeColorScheme(themeno)
   " ---------------------"
   highlight Pmenu guibg=#300000
   highlight FgCocErrorFloatBgCocFloating guibg=#300000
-  highlight SignColumn guibg=default
   " {{{ vim-gitgutter
-  highlight GitGutterAdd    guifg=#00E157 guibg=default ctermfg=2
-  highlight GitGutterChange guifg=#FFBF00 guibg=default ctermfg=3
-  highlight GitGutterDelete guifg=#FF2222 guibg=default ctermfg=1
-  " }}} vim-gitgutoer
+  highlight GitGutterAdd    guifg=#00E157 ctermfg=2
+  highlight GitGutterChange guifg=#FFBF00 ctermfg=3
+  highlight GitGutterDelete guifg=#FF2222 ctermfg=1
+  " " }}} vim-gitgutoer
 endfunction
 
 " Toggle colorscheme
