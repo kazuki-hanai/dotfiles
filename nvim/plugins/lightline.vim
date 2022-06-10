@@ -18,10 +18,10 @@ function! GitStatus()
   " If winwidth is small, this function doesn't return
   " any string
   if winwidth(0) < 80
-    return printf('%s', fugitive#head())
+    return printf('%s', FugitiveHead())
   else
     let [a,m,r] = GitGutterGetHunkSummary()
-    return printf('%s +%d ~%d -%d', fugitive#head(), a, m, r)
+    return printf('%s +%d ~%d -%d', FugitiveHead(), a, m, r)
   endif
 endfunction
 
