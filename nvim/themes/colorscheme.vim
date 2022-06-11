@@ -1,12 +1,12 @@
 " {{{ color
 " Define mythemes
 let g:mythemes = {
-\  0: 'default',
-\  1: 'iceberg',
-\  2: 'ayu',
-\  3: 'falcon',
-\  4: 'gruvbox',
-\  5: 'monokai-phoenix',
+\  0: 'iceberg',
+\  1: 'ayu',
+\  2: 'falcon',
+\  3: 'monokain',
+\  4: 'base16-ateliercave',
+\  5: 'badwolf',
 \  }
 let g:mythemes_status = 0
 
