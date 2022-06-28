@@ -47,6 +47,3 @@ augroup END
 
 " perenthesis settings
 set matchpairs& matchpairs+=<:>
-
-" cursol settings
-autocmd InsertEnter,InsertLeave * set cul!
