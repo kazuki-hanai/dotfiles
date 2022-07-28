@@ -5,7 +5,7 @@ link() {
 }
 
 # symbolic link
-link ~/.dotfiles/.zshrc ~/.zshrc
+link ~/.dotfiles/zsh/.zshrc ~/.zshrc
 link ~/.dotfiles/.tmux.conf ~/.tmux.conf
 mkdir -p ~/.config/alacritty && \
     link ~/.dotfiles/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
