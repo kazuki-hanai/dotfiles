@@ -25,3 +25,7 @@ export PATH="$HOME/.poetry/bin:$PATH"
 # bvm
 export PATH=$HOME/bin:$PATH
 
+# brew
+if [ "$(uname)" = 'Darwin' ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
