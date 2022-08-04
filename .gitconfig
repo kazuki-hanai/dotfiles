@@ -1,6 +1,7 @@
 [user]
     name = Kazuki Hanai
     email = kazuki.hanai@wan-nyan-wan.net
+    signingkey = 053805F1E1001A79
 [alias]
     co = checkout
     cm = commit -m
