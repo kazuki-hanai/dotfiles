@@ -1,6 +1,6 @@
 " {{{ coc plugins
 let g:coc_global_extensions = [
-    \  'coc-tsserver'
+    \  'coc-deno'
     \, 'coc-snippets'
     \, 'coc-prettier'
     \, 'coc-eslint'
