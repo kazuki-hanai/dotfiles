@@ -7,7 +7,6 @@
     "javascript",
     "json",
     "yaml",
-    "coc-pyright",
     "go",
     "rust",
     "cpp"
