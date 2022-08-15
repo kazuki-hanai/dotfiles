@@ -10,7 +10,6 @@ let g:coc_global_extensions = [
     \, 'coc-explorer'
     \, 'coc-rust-analyzer'
     \, 'coc-yaml'
-    \, 'coc-json'
     \, 'coc-pyright'
     \, 'coc-styled-components'
     \, 'coc-go'
