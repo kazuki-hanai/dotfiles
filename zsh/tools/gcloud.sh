@@ -1,4 +1,4 @@
-
+[ -d "$HOME/google-cloud-sdk" ] && export PATH="$PATH:$HOME/google-cloud-sdk/bin"
 if [ -x "`which gcloud`" ]; then
   # The next line updates PATH for the Google Cloud SDK.
   if [ -f ~/google-cloud-sdk/path.zsh.inc ]; then . ~/google-cloud-sdk/path.zsh.inc; fi
