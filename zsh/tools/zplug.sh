@@ -1,27 +1,18 @@
-## zplug
-if [ ! -d ~/.zplug ]; then
-    curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+
+if [ ! -d $ZINIT_HOME ]; then
+    mkdir -p "$(dirname $ZINIT_HOME)"
+    git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
-source ~/.zplug/init.zsh
+source "${ZINIT_HOME}/zinit.zsh"
 
-# zplug
-zplug 'zplug/zplug', hook-build:'zplug --self-manage'
-zplug "mafredri/zsh-async"
-zplug "sindresorhus/pure"
-zplug "zsh-users/zsh-syntax-highlighting"
-zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-completions"
-zplug "chrissicool/zsh-256color"
-zplug "mollifier/anyframe"
-zplug "darvid/zsh-poetry"
+zinit light "zsh-users/zsh-syntax-highlighting"
+zinit light "zsh-users/zsh-autosuggestions"
+zinit light "zsh-users/zsh-completions"
+zinit light "chrissicool/zsh-256color"
+zinit light "mollifier/anyframe"
+zinit light "darvid/zsh-poetry"
 
-zstyle ":anyframe:selector:" use peco
-
-# Install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
-  printf "Install? [y/N]: "
-  if read -q; then
-    echo; zplug install
-  fi
-fi
-zplug load
+# Load pure theme
+zinit ice pick"async.zsh" src"pure.zsh" # with zsh-async library that's bundled with it.
+zinit light sindresorhus/pure
