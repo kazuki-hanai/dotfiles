@@ -22,7 +22,6 @@ installCargoPackage bat bat cat
 installCargoPackage ripgrep rg grep
 installCargoPackage kmon kmon kmon
 installCargoPackage git-delta delta git-delta
-installCargoPackage procs procs ps
 installCargoPackage du-dust dust dust
 installCargoPackage tokei tokei tokei
 installCargoPackage hyperfine hyperfine hyperfine
