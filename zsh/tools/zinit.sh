@@ -16,3 +16,5 @@ zinit light "darvid/zsh-poetry"
 # Load pure theme
 zinit ice pick"async.zsh" src"pure.zsh" # with zsh-async library that's bundled with it.
 zinit light sindresorhus/pure
+
+zstyle :prompt:pure:git:stash show yes

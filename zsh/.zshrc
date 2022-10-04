@@ -9,7 +9,7 @@ source ~/.dotfiles/zsh/completion.sh
 
 # Import tool settings
 source ~/.dotfiles/zsh/tools/tmux.sh
-source ~/.dotfiles/zsh/tools/zplug.sh
+source ~/.dotfiles/zsh/tools/zinit.sh
 source ~/.dotfiles/zsh/tools/fzf/fzf.sh
 source ~/.dotfiles/zsh/tools/cargo.sh
 source ~/.dotfiles/zsh/tools/anyenv/anyenv.sh
