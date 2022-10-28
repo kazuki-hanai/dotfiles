@@ -29,4 +29,5 @@ KEYTIMEOUT=1
 # user systemd
 export XDG_RUNTIME_DIR=/run/user/$UID
 
-local WORDCHARS='*?_[]~=&;!#$%^(){}<>'
+# separate char
+export WORDCHARS='*?_[]~=&;!#$%^(){}<>'
