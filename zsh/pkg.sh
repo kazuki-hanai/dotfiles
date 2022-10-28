@@ -3,8 +3,14 @@ existsCmd() {
 }
 
 installMac() {
-    if [ "$(uname)" = 'Darwin' ] && ! existsCmd $1; then
-        brew install $2;
+    if [ "$#" = 1 ]; then
+        if [ "$(uname)" = 'Darwin' ] && ! existsCmd $1; then
+            brew install $1;
+        fi
+    else
+        if [ "$(uname)" = 'Darwin' ] && ! existsCmd $1; then
+            brew install $2;
+        fi
     fi
 }
 
@@ -44,6 +50,9 @@ installUbuntu clangd-10
 installUbuntu ca-certificates
 
 installMac gomi b4b4r07/tap/gomi
+installMac gh
+installMac reattach-to-user-namespace
+installMac tmux
 
 # poetry
 if [ ! type poetry > /dev/null 2>&1 ]; then

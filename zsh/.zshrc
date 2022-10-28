@@ -15,6 +15,7 @@ source ~/.dotfiles/zsh/tools/cargo.sh
 source ~/.dotfiles/zsh/tools/anyenv/anyenv.sh
 source ~/.dotfiles/zsh/tools/go/go.sh
 source ~/.dotfiles/zsh/tools/poetry.sh
+source ~/.dotfiles/zsh/tools/deno.sh
 source ~/.dotfiles/zsh/tools/nvim.sh
 source ~/.dotfiles/zsh/tools/gcloud.sh
 source ~/.dotfiles/zsh/tools/kubectl.sh
