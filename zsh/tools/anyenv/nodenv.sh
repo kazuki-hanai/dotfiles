@@ -1,4 +1,3 @@
-### nodenv
 local NODE_VERSION=19.0.0
 if [ ! -d ~/.anyenv/envs/nodenv ]; then
     ~/.anyenv/bin/anyenv install nodenv

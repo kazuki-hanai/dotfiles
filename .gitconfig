@@ -1,10 +1,10 @@
 [user]
     name = Kazuki Hanai
     email = kazuki.hanai@wan-nyan-wan.net
-    signingkey = 053805F1E1001A79
+	signingkey = 07ED93316E47B528
 [alias]
     co = checkout
-    cm = commit -m
+    cm = commit -S -m
     ad = add
     ap = add -p
     br = branch
@@ -38,3 +38,7 @@
     file-decoration-style = none
 [init]
     defaultBranch = main
+[gpg]
+	program = /opt/homebrew/bin/gpg
+[commit]
+	gpgsign = true
