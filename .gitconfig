@@ -1,7 +1,6 @@
 [user]
     name = Kazuki Hanai
     email = kazuki.hanai@wan-nyan-wan.net
-	signingkey = 07ED93316E47B528
 [alias]
     co = checkout
     cm = commit -S -m
@@ -38,7 +37,11 @@
     file-decoration-style = none
 [init]
     defaultBranch = main
-[gpg]
-	program = /opt/homebrew/bin/gpg
 [commit]
-	gpgsign = true
+    gpgsign = true
+[includeIf "gitdir:/Users"]
+    path = ~/.dotfiles/gitconfigs/gitconfig-macos
+[includeIf "gitdir:C:"]
+    path = ~/.dotfiles/gitconfigs/gitconfig-windows
+[includeIf "gitdir:/home"]
+    path = ~/.dotfiles/gitconfigs/gitconfig-linux
