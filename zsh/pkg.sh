@@ -46,7 +46,6 @@ installUbuntu uuid-dev
 installUbuntu tk-dev
 installUbuntu llvm
 installUbuntu clang
-installUbuntu clangd-10
 installUbuntu ca-certificates
 
 installMac gomi b4b4r07/tap/gomi
