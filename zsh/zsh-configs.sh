@@ -19,6 +19,8 @@ autoload -U promptinit; promptinit
 
 # bindings
 bindkey "^[[Z" reverse-menu-complete
+bindkey ^U backward-word
+bindkey ^O forward-word
 
 # completions
 fpath=(/usr/local/share/zsh-completions $fpath)
@@ -31,3 +33,4 @@ export XDG_RUNTIME_DIR=/run/user/$UID
 
 # separate char
 export WORDCHARS='*?_[]~=&;!#$%^(){}<>'
+
