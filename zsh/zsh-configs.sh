@@ -19,7 +19,7 @@ autoload -U promptinit; promptinit
 
 # bindings
 bindkey "^[[Z" reverse-menu-complete
-bindkey ^I backward-word
+bindkey ^Y backward-word
 bindkey ^O forward-word
 
 # completions
