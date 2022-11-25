@@ -9,7 +9,7 @@
     br = branch
     ba = branch -a
     pscb = !git push origin `git rev-parse --abbrev-ref HEAD`
-    poc = !git pull origin `currbr`
+    pocb = !git pull origin `currbr`
     ps = push
     st = status
 [merge]
