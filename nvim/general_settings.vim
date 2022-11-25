@@ -27,6 +27,8 @@ set fileformats=unix,dos,mac
 set fileencodings=utf-8
 set termguicolors
 set ambiwidth=double
+set mouse=
+set ttymouse=
 syntax on
 filetype on
 filetype plugin indent on
