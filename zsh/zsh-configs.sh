@@ -34,3 +34,6 @@ export XDG_RUNTIME_DIR=/run/user/$UID
 # separate char
 export WORDCHARS='*?_[]~=&;!#$%^(){}<>'
 
+
+# default editor
+EDITOR=vim
