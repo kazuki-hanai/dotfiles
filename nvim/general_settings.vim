@@ -48,3 +48,6 @@ augroup END
 
 " perenthesis settings
 set matchpairs& matchpairs+=<:>
+
+" Disable concealing quatation
+let g:vim_json_conceal=0
