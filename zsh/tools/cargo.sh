@@ -35,6 +35,7 @@ installCargoPackage ytop
 installCargoPackage bandwhich
 installCargoPackage grex
 installCargoPackage tokei 
+installCargoPackage tre-command tre
 
 # Alias for cargo package
 alias cat=bat
