@@ -1,7 +1,8 @@
 local TERRAFORM_VERSION=1.1.0
 
 if [ ! -d ~/.anyenv/envs/tfenv ]; then
-    ~/.anyenv/bin/anyenv install tfenv
+  ~/.anyenv/bin/anyenv install tfenv
+  eval "$(anyenv init -)"
 fi
 
 if [[ $(tfenv list 2>/dev/null | wc -l | awk '{print $1}') = 0 ]];then
