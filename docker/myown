@@ -1,3 +1,27 @@
 FROM ubuntu:latest
 
-RUN apt update && apt install -y wget jq less
+RUN apt update
+RUN apt install -y wget
+RUN apt install -y jq
+RUN apt install -y less
+RUN apt install -y git
+RUN apt install -y zsh
+RUN apt install -y vim
+RUN apt install -y tmux
+RUN apt install -y net-tools
+RUN apt install -y iputils-ping
+RUN apt install -y curl
+RUN apt install -y zip unzip
+
+RUN git clone https://github.com/kazuki-hanai/dotfiles ~/.dotfiles
+RUN cd ~/.dotfiles && git checkout dev
+
+RUN ls ~/.dotfiles
+RUN ln -s ~/.dotfiles/zsh/.zshrc ~/.zshrc
+
+RUN echo '6'
+RUN alias sudo= && zsh -f ~/.zshrc
+
+WORKDIR /app
+
+CMD ["zsh"]
