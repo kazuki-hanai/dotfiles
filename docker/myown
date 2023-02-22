@@ -32,7 +32,7 @@ RUN ls ~/.dotfiles
 RUN ln -s ~/.dotfiles/zsh/.zshrc ~/.zshrc
 RUN echo 'alias sudo=' > ~/.prezshrc
 
-RUN echo '7'
+RUN echo '8'
 RUN zsh -f ~/.zshrc
 
 WORKDIR /app
