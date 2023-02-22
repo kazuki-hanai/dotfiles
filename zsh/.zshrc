@@ -1,4 +1,5 @@
 # Import standard settings
+source ~/.prezshrc
 source ~/.dotfiles/zsh/zsh-configs.sh
 source ~/.dotfiles/zsh/history.sh
 source ~/.dotfiles/zsh/export-path.sh
