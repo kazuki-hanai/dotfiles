@@ -9,6 +9,8 @@ if ! which nvim 1>/dev/null; then
     brew install neovim
   fi
   pip install neovim
+
+  nvim +PlugInstall +CocInstall
 else
   alias vim='nvim'
 fi
