@@ -1,30 +1,31 @@
 FROM ubuntu:latest
 
+RUN echo '13'
+
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt update
-RUN apt install -y wget
-RUN apt install -y jq
-RUN apt install -y less
-RUN apt install -y git
-RUN apt install -y zsh
-RUN apt install -y vim
-RUN apt install -y tmux
-RUN apt install -y net-tools
-RUN apt install -y iputils-ping
-RUN apt install -y curl
-RUN apt install -y zip unzip
-RUN apt install -y build-essential
-RUN apt install -y python3
-RUN apt install -y software-properties-common
+RUN apt-get update
+RUN apt-get install -y wget
+RUN apt-get install -y jq
+RUN apt-get install -y less
+RUN apt-get install -y git
+RUN apt-get install -y zsh
+RUN apt-get install -y vim
+RUN apt-get install -y tmux
+RUN apt-get install -y net-tools
+RUN apt-get install -y iputils-ping
+RUN apt-get install -y curl
+RUN apt-get install -y zip unzip
+RUN apt-get install -y build-essential
+RUN apt-get install -y python3
+RUN apt-get install -y software-properties-common
 
 RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg \
   && chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg \
   && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
   && apt update \
-  && apt install -y gh
+  && apt install gh -y
 
-RUN echo '12'
 RUN git clone https://github.com/kazuki-hanai/dotfiles ~/.dotfiles
 RUN cd ~/.dotfiles && git fetch
 RUN cd ~/.dotfiles && git checkout dev
