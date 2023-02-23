@@ -9,7 +9,6 @@ source "$PYENV_ROOT/completions/pyenv.zsh"
 
 if [ ! -d ~/.anyenv/envs/pyenv ]; then
   ~/.anyenv/bin/anyenv install pyenv
-  eval "$(anyenv init -)"
 fi
 
 if command -v pyenv 1>/dev/null 2>&1; then

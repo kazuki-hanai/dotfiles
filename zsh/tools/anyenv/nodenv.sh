@@ -1,7 +1,6 @@
-local NODE_VERSION=19.0.0
+local NODE_VERSION=19.6.0
 if [ ! -d ~/.anyenv/envs/nodenv ]; then
   ~/.anyenv/bin/anyenv install nodenv
-  eval "$(anyenv init -)"
 fi
 
 eval "$(nodenv init -)"
