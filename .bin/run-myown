@@ -1,2 +1,16 @@
 #!/bin/bash
-docker run -it --rm -v `pwd`:/app -w /app myown bash
+
+if [ "$#" == 0 ]; then
+  docker run -it --rm -w /app myown
+elif [ "$#" == 1 ]; then
+  target_dir=$1
+  docker run -it --rm -v $target_dir:/app -w /app myown
+else
+  echo 'run-myown [absolute_dir_path]'
+  echo ''
+  echo 'Example:'
+  echo ''
+  echo '# Run myown with pwd mount'
+  echo '$ run-myown `pwd`'
+fi
+
