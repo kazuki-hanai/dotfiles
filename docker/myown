@@ -32,7 +32,10 @@ RUN ls ~/.dotfiles
 RUN ln -s ~/.dotfiles/zsh/.zshrc ~/.zshrc
 RUN echo 'alias sudo=' > ~/.prezshrc
 
-RUN echo '8'
+RUN echo '9'
+
+# Start shell twice to avoid *env error
+RUN zsh -f ~/.zshrc
 RUN zsh -f ~/.zshrc
 
 WORKDIR /app
