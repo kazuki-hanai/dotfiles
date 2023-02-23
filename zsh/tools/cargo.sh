@@ -23,21 +23,21 @@ installCargoPackage() {
 }
 
 # Install package
-# installCargoPackage exa
-# installCargoPackage bat
-# installCargoPackage ripgrep rg
-# installCargoPackage kmon
-# installCargoPackage git-delta delta
-# installCargoPackage du-dust dust
-# installCargoPackage tokei
-# installCargoPackage hyperfine
-# installCargoPackage ytop
-# installCargoPackage bandwhich
-# installCargoPackage grex
-# installCargoPackage tokei 
-# installCargoPackage tre-command tre
+installCargoPackage exa
+installCargoPackage bat
+installCargoPackage ripgrep rg
+installCargoPackage kmon
+installCargoPackage git-delta delta
+installCargoPackage du-dust dust
+installCargoPackage tokei
+installCargoPackage hyperfine
+installCargoPackage ytop
+installCargoPackage bandwhich
+installCargoPackage grex
+installCargoPackage tokei 
+installCargoPackage tre-command tre
 
 # Alias for cargo package
-# alias cat=bat
-# alias ls=exa
-# alias git-delta=delta
+alias cat=bat
+alias ls=exa
+alias git-delta=delta
