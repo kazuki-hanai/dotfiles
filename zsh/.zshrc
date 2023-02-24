@@ -1,5 +1,10 @@
-# Import standard settings
+# Import basic settings before loading others
+if [ ! -f ~/.prezshrc ]; then
+  touch ~/.prezshrc
+fi
 source ~/.prezshrc
+
+# Import standard settings
 source ~/.dotfiles/zsh/zsh-configs.sh
 source ~/.dotfiles/zsh/history.sh
 source ~/.dotfiles/zsh/export-path.sh
