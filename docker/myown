@@ -17,6 +17,7 @@ RUN apt-get install -y zip unzip
 RUN apt-get install -y build-essential
 RUN apt-get install -y python3
 RUN apt-get install -y software-properties-common
+RUN apt-get install -y htop
 
 RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg \
   && chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg \
