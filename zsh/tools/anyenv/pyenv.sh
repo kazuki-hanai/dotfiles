@@ -21,3 +21,8 @@ if [[ $(pyenv versions | wc -l | awk '{print $1}') = 1 ]];then
   pyenv install $PYENV_VERSION
   pyenv global $PYENV_VERSION
 fi
+
+# poetry
+if [ ! type poetry > /dev/null 2>&1 ]; then
+    curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+fi
