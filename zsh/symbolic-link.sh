@@ -1,9 +1,3 @@
-link() {
-    if [ ! -e $2 ]; then
-        ln -s $1 $2
-    fi
-}
-
 # symbolic link
 # .zshrc
 link ~/.dotfiles/zsh/.zshrc ~/.zshrc
