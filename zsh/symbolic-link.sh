@@ -8,10 +8,6 @@ link() {
 # .zshrc
 link ~/.dotfiles/zsh/.zshrc ~/.zshrc
 
-# alacritty.yml
-mkdir -p ~/.config/alacritty && \
-    link ~/.dotfiles/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
-
 # .gitconfig
 link ~/.dotfiles/.gitconfig ~/.gitconfig
 
