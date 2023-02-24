@@ -1,8 +1,5 @@
 # Import basic settings before loading others
-if [ ! -f ~/.prezshrc ]; then
-  touch ~/.prezshrc
-fi
-source ~/.prezshrc
+source ~/.dotfiles/zsh/preload.sh
 
 # Import standard settings
 source ~/.dotfiles/zsh/zsh-configs.sh
