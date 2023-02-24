@@ -24,9 +24,7 @@ RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | d
   && apt update \
   && apt install gh -y
 
-RUN git clone https://github.com/kazuki-hanai/dotfiles ~/.dotfiles
-RUN cd ~/.dotfiles && git fetch
-# RUN cd ~/.dotfiles && git checkout dev
+ADD ./ /root/.dotfiles/
 
 RUN ls ~/.dotfiles
 RUN ln -s ~/.dotfiles/zsh/.zshrc ~/.zshrc
