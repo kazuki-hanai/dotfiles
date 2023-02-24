@@ -7,7 +7,7 @@ installMac() {
         if [ "$(uname)" = 'Darwin' ] && ! existsCmd $1; then
             brew install $1;
         fi
-    else
+    elif [ "$#" = 2 ]; then
         if [ "$(uname)" = 'Darwin' ] && ! existsCmd $1; then
             brew install $2;
         fi
@@ -15,12 +15,18 @@ installMac() {
 }
 
 installUbuntu() {
-    if [ -e /etc/lsb-release ]; then
-        if ! dpkg -s $1 1>/dev/null; then sudo apt -y install $1; fi
+    if [ "$#" = 1 ]; then
+      if [ -e /etc/lsb-release ]; then
+          if ! dpkg -s $1 1>/dev/null; then sudo apt -y install $1; fi
+      fi
+    elif [ "$#" = 2 ]; then
+      if [ -e /etc/lsb-release ]; then
+          if ! dpkg -s $2 1>/dev/null; then sudo apt -y install $1; fi
+      fi
     fi
 }
 
-
+# Install brew
 if [ "$(uname)" = 'Darwin' ] && ! existsCmd brew; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
     eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -47,19 +53,21 @@ installUbuntu tk-dev
 installUbuntu llvm
 installUbuntu clang
 installUbuntu ca-certificates
+installUbuntu exa
+installUbuntu bat
+installUbuntu ripgrep rg
+installUbuntu git-delta
 
 installMac gomi b4b4r07/tap/gomi
 installMac gh
 installMac reattach-to-user-namespace
 installMac tmux
+installMac exa
+installMac bat
+installMac rg
+installMac delta git-delta
 
-# poetry
-if [ ! type poetry > /dev/null 2>&1 ]; then
-    curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
-fi
-
-# vim-plug
-if [ ! -e "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim ]; then
-    sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-fi
+# alias
+alias cat=bat
+alias ls=exa
+alias git-delta=delta
