@@ -1,26 +1,29 @@
+
+source ~/.dotfiles/zsh/lib.sh
+
 # Import basic settings before loading others
-source ~/.dotfiles/zsh/preload.sh
+loadsh ~/.dotfiles/zsh/preload.sh
 
 # Import standard settings
-source ~/.dotfiles/zsh/zsh-configs.sh
-source ~/.dotfiles/zsh/history.sh
-source ~/.dotfiles/zsh/export-path.sh
-source ~/.dotfiles/zsh/pkg.sh
-source ~/.dotfiles/zsh/symbolic-link.sh
-source ~/.dotfiles/zsh/dotfiles-private.sh
-source ~/.dotfiles/zsh/completion.sh
+loadsh ~/.dotfiles/zsh/zsh-configs.sh
+loadsh ~/.dotfiles/zsh/history.sh
+loadsh ~/.dotfiles/zsh/export-path.sh
+loadsh ~/.dotfiles/zsh/pkg.sh
+loadsh ~/.dotfiles/zsh/symbolic-link.sh
+loadsh ~/.dotfiles/zsh/dotfiles-private.sh
+loadsh ~/.dotfiles/zsh/completion.sh
 
 # Import tool settings
-source ~/.dotfiles/zsh/tools/tmux.sh
-source ~/.dotfiles/zsh/tools/zinit.sh
-source ~/.dotfiles/zsh/tools/fzf/fzf.sh
-source ~/.dotfiles/zsh/tools/cargo.sh
-source ~/.dotfiles/zsh/tools/anyenv/anyenv.sh
-source ~/.dotfiles/zsh/tools/go/go.sh
-source ~/.dotfiles/zsh/tools/poetry.sh
-source ~/.dotfiles/zsh/tools/deno.sh
-source ~/.dotfiles/zsh/tools/nvim.sh
-source ~/.dotfiles/zsh/tools/kubectl.sh
+loadsh ~/.dotfiles/zsh/tools/tmux.sh
+loadsh ~/.dotfiles/zsh/tools/zinit.sh
+loadsh ~/.dotfiles/zsh/tools/fzf/fzf.sh
+loadsh ~/.dotfiles/zsh/tools/cargo.sh
+loadsh ~/.dotfiles/zsh/tools/anyenv/anyenv.sh
+loadsh ~/.dotfiles/zsh/tools/go/go.sh
+loadsh ~/.dotfiles/zsh/tools/poetry.sh
+loadsh ~/.dotfiles/zsh/tools/deno.sh
+loadsh ~/.dotfiles/zsh/tools/nvim.sh
+loadsh ~/.dotfiles/zsh/tools/kubectl.sh
 
 # Import local settings
-source ~/.dotfiles/zsh/localconfig.sh
+loadsh ~/.dotfiles/zsh/localconfig.sh
