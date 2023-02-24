@@ -1,2 +1,0 @@
-#!/bin/bash
-docker build ~/.dotfiles/docker --progress plain -f ~/.dotfiles/docker/myown -t myown
