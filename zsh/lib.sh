@@ -1,6 +1,6 @@
 
 # Reset
-NC='\033[0m'       # Text Reset
+NC='\033[0m'              # Text Reset
 
 # Regular Colors
 Black='\033[0;30m'        # Black
@@ -82,6 +82,59 @@ loadsh() {
     echo "${Bold}[${BIGreen}INFO${NC}${Bold}] Load $1 in $(($(($end - $start))/1000000)) ms${NC}"
   else
     source $1
+  fi
+}
+
+existsCmd() {
+  type -a $1 > /dev/null 2>&1
+}
+
+installMac() {
+  # Check brew is installed and install it if it's not.
+  if [ "$(uname)" = 'Darwin' ] && ! existsCmd brew; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+
+    # brew install
+    if [ "$#" = 1 ]; then
+      if ! existsCmd $1; then
+        brew install $1;
+      fi
+    elif [ "$#" = 2 ]; then
+      if ! existsCmd $1; then
+        brew install $2;
+      fi
+    fi
+  fi
+}
+
+installUbuntu() {
+  if [ "$#" = 1 ]; then
+    if [ -e /etc/lsb-release ]; then
+      if ! dpkg -s $1 1>/dev/null; then sudo apt -y install $1; fi
+    fi
+  elif [ "$#" = 2 ]; then
+    if [ -e /etc/lsb-release ]; then
+      if ! dpkg -s $2 1>/dev/null; then sudo apt -y install $1; fi
+    fi
+  fi
+}
+
+installCargoPackage() {
+  if [ "$#" = 2 ]; then
+    binary_file=$2
+  else
+    binary_file=$1
+  fi
+
+  if [ ! -f ~/.cargo/bin/$binary_file ]; then
+    cargo install $1;
+  fi
+}
+
+link() {
+  if [ ! -e $2 ]; then
+    ln -s $1 $2
   fi
 }
 

@@ -1,37 +1,3 @@
-existsCmd() {
-    type -a $1 > /dev/null 2>&1
-}
-
-installMac() {
-    if [ "$#" = 1 ]; then
-        if [ "$(uname)" = 'Darwin' ] && ! existsCmd $1; then
-            brew install $1;
-        fi
-    elif [ "$#" = 2 ]; then
-        if [ "$(uname)" = 'Darwin' ] && ! existsCmd $1; then
-            brew install $2;
-        fi
-    fi
-}
-
-installUbuntu() {
-    if [ "$#" = 1 ]; then
-      if [ -e /etc/lsb-release ]; then
-          if ! dpkg -s $1 1>/dev/null; then sudo apt -y install $1; fi
-      fi
-    elif [ "$#" = 2 ]; then
-      if [ -e /etc/lsb-release ]; then
-          if ! dpkg -s $2 1>/dev/null; then sudo apt -y install $1; fi
-      fi
-    fi
-}
-
-# Install brew
-if [ "$(uname)" = 'Darwin' ] && ! existsCmd brew; then
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
-
 installUbuntu git
 installUbuntu zsh
 installUbuntu tmux
