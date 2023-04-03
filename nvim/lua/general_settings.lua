@@ -47,5 +47,8 @@ vim.cmd([[
 -- perenthesis settings
 vim.opt.matchpairs:append { "<:>" }
 
--- " Disable concealing quatation
+-- Disable concealing quatation
 vim.g.vim_json_conceal  = 0
+
+-- Permanently disable restore dialog
+vim.g.session_autoload = "no"
