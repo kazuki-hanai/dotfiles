@@ -2,6 +2,7 @@
 -- Import plugin
 local Plug = vim.fn["plug#"]
 vim.call("plug#begin", vim.call("stdpath", "data") .. "/plugged")
+
 Plug("scrooloose/nerdtree")
 Plug("yggdroot/indentline")
 Plug("luochen1990/rainbow")
@@ -16,6 +17,7 @@ Plug("flazz/vim-colorschemes")
 Plug("simeji/winresizer")
 Plug("nvim-lua/plenary.nvim")
 Plug("nvim-telescope/telescope.nvim", { tag ="0.1.1" })
+
 vim.call("plug#end")
 
 -- NerdTree
