@@ -2,6 +2,7 @@
 -- Import plugin
 local Plug = vim.fn["plug#"]
 vim.call("plug#begin", vim.call("stdpath", "data") .. "/plugged")
+Plug("scrooloose/nerdtree")
 Plug("yggdroot/indentline")
 Plug("luochen1990/rainbow")
 Plug("itchyny/lightline.vim")
@@ -13,11 +14,11 @@ Plug("jiangmiao/auto-pairs")
 Plug("neoclide/coc.nvim", { ["branch"] = "release"})
 Plug("flazz/vim-colorschemes")
 Plug("simeji/winresizer")
+Plug("nvim-lua/plenary.nvim")
+Plug("nvim-telescope/telescope.nvim", { tag ="0.1.1" })
 vim.call("plug#end")
 
 -- NerdTree
-vim.api.nvim_set_keymap("n", "<leader>n",     ":NERDTreeFind<CR>",    { noremap = true, silent = false })
-vim.api.nvim_set_keymap("n", "<C-n>",         ":NERDTreeToggle<CR>",  { noremap = true, silent = false })
 vim.g.NERDTreeShowHidden = 1
 
 -- indentline
@@ -27,7 +28,7 @@ vim.cmd("autocmd Filetype json let g:indentLine_enabled = 0")
 vim.g.vim_json_syntax_conceal = 0
 
 -- fzf
-fzf_func = function(opts)
+local fzf_func = function(opts)
   vim.fn["fzf#vim#grep"](
     "rg -u --column --line-number --hidden --ignore-case --no-heading --color=always --smart-case "..opts.args,
     1,
@@ -38,11 +39,6 @@ fzf_func = function(opts)
 end
 vim.api.nvim_create_user_command("Rg", fzf_func, { nargs = "*" })
 vim.g.rg_derive_root = "true"
-vim.api.nvim_set_keymap("n", "<C-s>g", ":Rg<Space>",            { noremap = true, silent = false })
-vim.api.nvim_set_keymap("n", "<C-s>f", ":GFiles<Space>",        { noremap = true, silent = false })
-vim.api.nvim_set_keymap("n", "<C-s>h", ":History<CR>",          { noremap = true, silent = false })
-vim.api.nvim_set_keymap("n", "<Leader>b", ":Buffers<CR>",       { noremap = true, silent = false })
-vim.api.nvim_set_keymap("n", "<Leader>s", ":BLines<CR>",        { noremap = true, silent = false })
 
 -- lightline
 -- function! LightlineFilename()
