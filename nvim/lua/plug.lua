@@ -1,8 +1,7 @@
 
+-- Import plugin
 local Plug = vim.fn["plug#"]
 vim.call("plug#begin", vim.call("stdpath", "data") .. "/plugged")
-
-Plug("scrooloose/nerdtree")
 Plug("yggdroot/indentline")
 Plug("luochen1990/rainbow")
 Plug("itchyny/lightline.vim")
@@ -11,11 +10,9 @@ Plug("airblade/vim-gitgutter")
 Plug("junegunn/fzf", { ["do"] = vim.fn["fzf#install()"] })
 Plug("junegunn/fzf.vim")
 Plug("jiangmiao/auto-pairs")
-Plug("jiangmiao/auto-pairs")
 Plug("neoclide/coc.nvim", { ["branch"] = "release"})
 Plug("flazz/vim-colorschemes")
 Plug("simeji/winresizer")
-
 vim.call("plug#end")
 
 -- NerdTree
@@ -30,23 +27,24 @@ vim.cmd("autocmd Filetype json let g:indentLine_enabled = 0")
 vim.g.vim_json_syntax_conceal = 0
 
 -- fzf
--- " {{{ fzf
--- command! -bang -nargs=* Rg
---     \ call fzf#vim#grep(
---     \ "rg -u --column --line-number --hidden --ignore-case --no-heading --color=always --smart-case ". <q-args>, 1,
---     \ <bang>0 ? fzf#vim#with_preview({"options": "--delimiter : --nth 4.."}, "up:60%")
---     \ : fzf#vim#with_preview({"options": "--delimiter : --nth 4.."}, "right:50%", "?"),
---     \ <bang>0)
--- let g:rg_derive_root="true"
--- nnoremap <C-s> :Rg<Space>
--- nnoremap <C-p> :GFiles<CR>
--- " nnoremap <C-h> :History<CR>
--- nnoremap <Leader>b :Buffers<cr>
--- nnoremap <Leader>s :BLines<cr>
--- " }}} fzf
+fzf_func = function(opts)
+  vim.fn["fzf#vim#grep"](
+    "rg -u --column --line-number --hidden --ignore-case --no-heading --color=always --smart-case "..opts.args,
+    1,
+    opts.bang and 
+      vim.fn["fzf#vim#with_preview"]({options = "--delimiter : --nth 4.."}, "up:60%") or
+      vim.fn["fzf#vim#with_preview"]({options = "--delimiter : --nth 4.."}, "right:50%", "?"),
+    opts.bang)
+end
+vim.api.nvim_create_user_command("Rg", fzf_func, { nargs = "*" })
+vim.g.rg_derive_root = "true"
+vim.api.nvim_set_keymap("n", "<C-s>g", ":Rg<Space>",            { noremap = true, silent = false })
+vim.api.nvim_set_keymap("n", "<C-s>f", ":GFiles<Space>",        { noremap = true, silent = false })
+vim.api.nvim_set_keymap("n", "<C-s>h", ":History<CR>",          { noremap = true, silent = false })
+vim.api.nvim_set_keymap("n", "<Leader>b", ":Buffers<CR>",       { noremap = true, silent = false })
+vim.api.nvim_set_keymap("n", "<Leader>s", ":BLines<CR>",        { noremap = true, silent = false })
 
 -- lightline
--- " {{{ lightline
 -- function! LightlineFilename()
 --   " If winwidth is small, return only filename not 
 --   " included whole path.
@@ -121,7 +119,6 @@ vim.g.vim_json_syntax_conceal = 0
 -- \     "filename": "LightlineFilename",
 -- \   },
 -- \ }
--- " }}} lightline
 
 -- rainbow
 vim.g.rainbow_active = 1
