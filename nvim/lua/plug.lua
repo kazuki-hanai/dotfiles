@@ -15,9 +15,6 @@ Plug("jiangmiao/auto-pairs")
 Plug("neoclide/coc.nvim", { ["branch"] = "release"})
 Plug("flazz/vim-colorschemes")
 Plug("simeji/winresizer")
-Plug("xolox/vim-misc")
-Plug("xolox/vim-session")
-Plug("xolox/vim-session")
 
 vim.call("plug#end")
 
@@ -137,4 +134,4 @@ vim.g.gitgutter_sign_modified   = "~"
 vim.g.gitgutter_sign_removed    = "-"
 
 -- winresizer
-vim.g.winresizer_start_key = "<C-Q>"
+vim.g.winresizer_start_key = "<C-W>w"
