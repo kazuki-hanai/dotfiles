@@ -18,7 +18,6 @@ Plug("simeji/winresizer")
 Plug("nvim-lua/plenary.nvim")
 Plug("nvim-telescope/telescope.nvim", { tag ="0.1.1" })
 Plug("neovim/nvim-lspconfig")
-Plug("hrsh7th/nvim-cmp")
 
 vim.call("plug#end")
 
