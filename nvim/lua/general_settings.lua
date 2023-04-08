@@ -56,6 +56,3 @@ vim.g.vim_json_conceal  = 0
 
 -- Permanently disable restore dialog
 vim.g.session_autoload = "no"
-
--- highlight FloatBorder  ctermfg=NONE ctermbg=NONE cterm=NONE
-vim.api.nvim_set_hl(0, "FloatBorder", {fg = "#ffffff", bg = "#ffffff"})
