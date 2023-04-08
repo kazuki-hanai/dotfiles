@@ -7,7 +7,7 @@ Plug("nvim-tree/nvim-tree.lua")
 Plug("nvim-tree/nvim-web-devicons")
 Plug("yggdroot/indentline")
 Plug("luochen1990/rainbow")
-Plug("itchyny/lightline.vim")
+Plug("nvim-lualine/lualine.nvim")
 Plug("tpope/vim-fugitive")
 Plug("airblade/vim-gitgutter")
 Plug("junegunn/fzf", { ["do"] = vim.fn["fzf#install()"] })
@@ -18,6 +18,8 @@ Plug("simeji/winresizer")
 Plug("nvim-lua/plenary.nvim")
 Plug("nvim-telescope/telescope.nvim", { tag ="0.1.1" })
 Plug("neovim/nvim-lspconfig")
+Plug("williamboman/mason.nvim", { ["do"] = vim.fn[":MasonUpdate"] })
+Plug("williamboman/mason-lspconfig.nvim")
 
 vim.call("plug#end")
 
@@ -29,7 +31,7 @@ require("nvim-tree").setup({
     group_empty = true,
   },
   filters = {
-    dotfiles = true,
+    dotfiles = false,
   },
 })
 
@@ -77,7 +79,7 @@ local fzf_func = function(opts)
   vim.fn["fzf#vim#grep"](
     "rg -u --column --line-number --hidden --ignore-case --no-heading --color=always --smart-case "..opts.args,
     1,
-    opts.bang and 
+    opts.bang and
       vim.fn["fzf#vim#with_preview"]({options = "--delimiter : --nth 4.."}, "up:60%") or
       vim.fn["fzf#vim#with_preview"]({options = "--delimiter : --nth 4.."}, "right:50%", "?"),
     opts.bang)
@@ -86,80 +88,62 @@ vim.api.nvim_create_user_command("Rg", fzf_func, { nargs = "*" })
 vim.g.rg_derive_root = "true"
 
 -- lightline
--- function! LightlineFilename()
---   " If winwidth is small, return only filename not 
---   " included whole path.
---   if winwidth(0) < 80
---     return expand("%:t")
---   else
---     let root = fnamemodify(get(b:, "git_dir"), ":h")
---     let path = expand("%:p")
---     if path[:len(root)-1] ==# root
---       return path[len(root)+1:]
---     endif
---     return expand("%")
---   endif
--- endfunction
--- 
--- function! GitStatus()
---   " If winwidth is small, this function doesn"t return
---   " any string
---   if winwidth(0) < 80
---     return printf("%s", FugitiveHead())
---   else
---     let [a,m,r] = GitGutterGetHunkSummary()
---     return printf("%s +%d ~%d -%d", FugitiveHead(), a, m, r)
---   endif
--- endfunction
--- 
--- function! ModeMap()
---   if winwidth(0) < 80
---     let mode_map = {
---     \ "n" : "N",
---     \ "i" : "I",
---     \ "R" : "R",
---     \ "v" : "V",
---     \ "V" : "VL",
---     \ "\<C-v>": "VB",
---     \ "c" : "C",
---     \ "s" : "S",
---     \ "S" : "SL",
---     \ "\<C-s>": "SB",
---     \ "t": "T",
---     \ }
---   else
---     let mode_map = {
---     \ "n" : "NORMAL",
---     \ "i" : "INSERT",
---     \ "R" : "REPLACE",
---     \ "v" : "VISUAL",
---     \ "V" : "V-LINE",
---     \ "\<C-v>": "V-BLOCK",
---     \ "c" : "COMMAND",
---     \ "s" : "SELECT",
---     \ "S" : "S-LINE",
---     \ "\<C-s>": "S-BLOCK",
---     \ "t": "TERMINAL",
---     \ }
---   endif
---   return mode_map
--- endfunction
--- 
--- let g:lightline = {
--- \   "mode_map": ModeMap(),
--- \   "active": {
--- \     "left":[ [ "mode", "paste" ],
--- \              [ "gitbranch", "readonly", "filename", "modified" ]
--- \     ]
--- \   },
--- \   "component": {
--- \     "lineinfo": " %3l:%-2v",
--- \   },
--- \   "component_function": {
--- \     "gitbranch": "GitStatus",
--- \     "filename": "LightlineFilename",
--- \   },
--- \ }
+local unpack = unpack or table.unpack
+table.slice = function(a, start ,_end)
+    return {unpack(a, start, _end)}
+end
+
+-- lualine.nvim
+require('lualine').setup {
+  options = {
+    icons_enabled = true,
+    theme = 'auto',
+    component_separators = { left = '', right = ''},
+    section_separators = { left = '', right = ''},
+    disabled_filetypes = {
+      statusline = {},
+      winbar = {},
+    },
+    ignore_focus = {},
+    always_divide_middle = true,
+    globalstatus = false,
+    refresh = {
+      statusline = 1000,
+      tabline = 1000,
+      winbar = 1000,
+    }
+  },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {'branch', 'diff', 'diagnostics'},
+    lualine_c = {
+      {
+        "filename",
+        path = 1,
+      }
+    },
+    lualine_x = {'encoding', 'fileformat', 'filetype'},
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {
+      {
+        "filename",
+        path = 1,
+      }
+    },
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {},
+  winbar = {},
+  inactive_winbar = {},
+  extensions = {}
+}
 
 -- rainbow
 vim.g.rainbow_active = 1
@@ -175,33 +159,43 @@ vim.g.gitgutter_sign_removed    = "-"
 vim.g.winresizer_start_key = "<C-W>w"
 
 -- nvim-lspconfig
-local lspconfig = require('lspconfig')
-local on_attach = function(client, bufnr)
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-  --Enable completion triggered by <c-x><c-o>
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-  -- Mappings.
-  local opts = { noremap = true, silent = true }
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-  buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.format { async = true }<CR>", opts)
-end
+-- Global mappings.
+-- See `:help vim.diagnostic.*` for documentation on any of the below functions
+vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
+
+-- Use LspAttach autocommand to only map the following keys
+-- after the language server attaches to the current buffer
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+  callback = function(ev)
+    -- Enable completion triggered by <c-x><c-o>
+    vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+
+    -- Buffer local mappings.
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    local opts = { buffer = ev.buf }
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+    vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
+    vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
+    vim.keymap.set('n', '<space>wl', function()
+      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    end, opts)
+    vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
+    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
+    vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, opts)
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+    vim.keymap.set('n', '<space>f', function()
+      vim.lsp.buf.format { async = true }
+    end, opts)
+  end,
+})
 
 local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
 function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
@@ -211,18 +205,21 @@ function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
   return orig_util_open_floating_preview(contents, syntax, opts, ...)
 end
 
--- rust-analyzer
-lspconfig.rust_analyzer.setup {
-  on_attach = on_attach,
-  settings = {
-    ['rust-analyzer'] = {}
+-- mason
+require("mason").setup()
+require("mason-lspconfig").setup {
+  ensure_installed = {
+    "lua_ls",
+    "rust_analyzer",
+    "gopls",
+    "tsserver",
+    "yamlls",
   }
 }
--- yamlls
-lspconfig.yamlls.setup{
-  settings = {
-    yaml = {
-      schemas = { kubernetes = "globPattern" },
-    }
-  }
-}
+
+local lspconfig = require('lspconfig')
+lspconfig.lua_ls.setup {}
+lspconfig.rust_analyzer.setup {}
+lspconfig.gopls.setup {}
+lspconfig.tsserver.setup {}
+lspconfig.yamlls.setup {}
