@@ -1,3 +1,17 @@
+-- mason
+require("mason").setup()
+require("mason-lspconfig").setup {
+  ensure_installed = {
+    "lua_ls",
+    "rust_analyzer",
+    "gopls",
+    "tsserver",
+    "yamlls",
+    "terraformls",
+  },
+  automatic_installation = true,
+}
+
 -- Border settings
 vim.cmd [[autocmd! ColorScheme * highlight NormalFloat guibg=#1f2335]]
 vim.cmd [[autocmd! ColorScheme * highlight FloatBorder guifg=#777777]]
@@ -68,8 +82,31 @@ function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
 end
 
 local lspconfig = require('lspconfig')
-lspconfig.lua_ls.setup {}
+lspconfig.lua_ls.setup {
+    settings = {
+        Lua = {
+            diagnostics = {
+                globals = { 'vim' }
+            }
+        }
+    }
+}
 lspconfig.rust_analyzer.setup {}
 lspconfig.gopls.setup {}
 lspconfig.tsserver.setup {}
-lspconfig.yamlls.setup {}
+lspconfig.yamlls.setup {
+  settings = {
+    yaml = {
+      trace = {
+        server = "verbose"
+      },
+      schemas = {
+        ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+        kubernetes = "*.yaml",
+      },
+      schemaDownload = {  enable = true },
+      validate = true,
+    }
+  },
+}
+lspconfig.terraformls.setup {}
