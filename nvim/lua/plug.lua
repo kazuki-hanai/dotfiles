@@ -5,6 +5,7 @@ vim.call("plug#begin", vim.call("stdpath", "data") .. "/plugged")
 
 Plug("nvim-tree/nvim-tree.lua")
 Plug("nvim-tree/nvim-web-devicons")
+Plug("crispgm/nvim-tabline")
 Plug("yggdroot/indentline")
 Plug("luochen1990/rainbow")
 Plug("nvim-lualine/lualine.nvim")
@@ -76,6 +77,16 @@ require'nvim-web-devicons'.setup {
  };
 }
 
+-- tabline
+require('tabline').setup({
+    show_index = true,        -- show tab index
+    show_modify = true,       -- show buffer modification indicator
+    show_icon = false,        -- show file extension icon
+    modify_indicator = '[+]', -- modify indicator
+    no_name = 'No name',      -- no name buffer name
+    brackets = { '[', ']' },  -- file name brackets surrounding
+})
+
 -- indentline
 vim.g.indentLine_enabled = 1
 -- TODO: replace embeded func
@@ -122,27 +133,27 @@ require('lualine').setup {
     }
   },
   sections = {
-    lualine_a = {'mode'},
-    lualine_b = {'branch', 'diff', 'diagnostics'},
-    lualine_c = {
+    lualine_a = {'diff', 'diagnostics'},
+    lualine_b = {
       {
         "filename",
         path = 1,
       }
     },
+    lualine_c = {},
     lualine_x = {'encoding', 'fileformat', 'filetype'},
     lualine_y = {'progress'},
     lualine_z = {'location'}
   },
   inactive_sections = {
     lualine_a = {},
-    lualine_b = {},
-    lualine_c = {
+    lualine_b = {
       {
         "filename",
         path = 1,
       }
     },
+    lualine_c = {},
     lualine_x = {'location'},
     lualine_y = {},
     lualine_z = {}
