@@ -56,3 +56,9 @@ vim.g.vim_json_conceal  = 0
 
 -- Permanently disable restore dialog
 vim.g.session_autoload = "no"
+
+-- Detect cue file
+vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
+  pattern = { "*.cue" },
+  command = "set filetype=cue"
+})
