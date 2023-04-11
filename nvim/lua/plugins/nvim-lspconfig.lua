@@ -8,6 +8,7 @@ require("mason-lspconfig").setup {
     "tsserver",
     "yamlls",
     "terraformls",
+    "dagger",
   },
   automatic_installation = true,
 }
@@ -110,3 +111,4 @@ lspconfig.yamlls.setup {
   },
 }
 lspconfig.terraformls.setup {}
+lspconfig.dagger.setup {}
