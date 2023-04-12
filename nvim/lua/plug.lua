@@ -15,7 +15,7 @@ Plug("junegunn/fzf", { ["do"] = vim.fn["fzf#install()"] })
 Plug("junegunn/fzf.vim")
 Plug("jiangmiao/auto-pairs")
 Plug("simeji/winresizer")
-Plug("nvim-lua/plenary.nvim")
+Plug("nvim-lua/plenary.nvim") --
 Plug("nvim-telescope/telescope.nvim")
 Plug("neovim/nvim-lspconfig")
 Plug("hrsh7th/cmp-nvim-lsp")
