@@ -5,10 +5,10 @@ vim.call("plug#begin", vim.call("stdpath", "data") .. "/plugged")
 
 Plug("nvim-tree/nvim-tree.lua")
 Plug("nvim-tree/nvim-web-devicons")
+Plug("nvim-lualine/lualine.nvim")
 Plug("crispgm/nvim-tabline")
 Plug("yggdroot/indentline")
 Plug("luochen1990/rainbow")
-Plug("nvim-lualine/lualine.nvim")
 Plug("tpope/vim-fugitive")
 Plug("airblade/vim-gitgutter")
 Plug("junegunn/fzf", { ["do"] = vim.fn["fzf#install()"] })
@@ -79,12 +79,15 @@ require'nvim-web-devicons'.setup {
 
 -- tabline
 require('tabline').setup({
-    show_index = true,        -- show tab index
-    show_modify = true,       -- show buffer modification indicator
-    show_icon = false,        -- show file extension icon
-    modify_indicator = '[+]', -- modify indicator
-    no_name = 'No name',      -- no name buffer name
-    brackets = { '[', ']' },  -- file name brackets surrounding
+  show_index = true,   -- show tab index
+  show_modify = true,  -- show buffer modification indicator
+  show_icon = true,    -- show file extension icon
+  show_bufnr = true,   -- this appends [bufnr] to buffer section,
+  modify_indicator = '[+]', -- modify indicator
+  section_separators = {'', ''},
+  component_separators = {'', ''},
+  no_name = 'No name',      -- no name buffer name
+  brackets = { '[ ', ' ]' },  -- file name brackets surrounding
 })
 
 -- indentline
