@@ -6,9 +6,9 @@ vim.opt.clipboard:append { "unnamedplus" }
 vim.opt.hls             = true
 vim.opt.number          = true
 vim.opt.title           = true
-vim.opt.ambiwidth       = "double"
+vim.opt.ambiwidth       = "single"
 vim.opt.expandtab       = true
-vim.opt.tabstop         = 8
+vim.opt.tabstop         = 2
 vim.opt.shiftwidth      = 2
 vim.opt.nrformats:remove { "octal" }
 vim.opt.hidden          = true
@@ -31,7 +31,6 @@ vim.opt.encoding        = "utf-8"
 vim.opt.fileformats     = { "unix","dos","mac" }
 vim.opt.fileencodings   = "utf-8"
 vim.opt.termguicolors   = true
-vim.opt.ambiwidth       = "double"
 vim.opt.mouse           = ""
 vim.opt.syntax          = "on"
 vim.opt.filetype        = "on"
