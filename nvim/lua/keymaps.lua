@@ -16,9 +16,3 @@ map("i", "<C-h>", "<Esc>:tabprev<CR>",  { noremap = true, silent = false })
 -- nvim-tree
 map("n", "<C-b>f", ":NvimTreeFindFile<cr>",   { noremap = true, silent = false })
 map("n", "<C-b>n", ":NvimTreeToggle<cr>", { noremap = true, silent = false })
-
--- Telescope
-map("n", "<C-s>f", "<cmd>Telescope find_files<cr>",  { noremap = true, silent = false })
-map("n", "<C-s>g", "<cmd>Telescope live_grep<cr>",   { noremap = true, silent = false })
-map("n", "<C-s>b", "<cmd>Telescope buffers<cr>",     { noremap = true, silent = false })
-map("n", "<C-s>h", "<cmd>Telescope help_tags<cr>",   { noremap = true, silent = false })
