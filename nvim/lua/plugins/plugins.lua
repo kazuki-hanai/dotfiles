@@ -205,6 +205,11 @@ return {
             },
         },
       }
+      -- Telescope
+      vim.api.nvim_set_keymap("n", "<C-s>f", "<cmd>Telescope find_files<cr>",  { noremap = true, silent = false })
+      vim.api.nvim_set_keymap("n", "<C-s>g", "<cmd>Telescope live_grep<cr>",   { noremap = true, silent = false })
+      vim.api.nvim_set_keymap("n", "<C-s>b", "<cmd>Telescope buffers<cr>",     { noremap = true, silent = false })
+      vim.api.nvim_set_keymap("n", "<C-s>h", "<cmd>Telescope help_tags<cr>",   { noremap = true, silent = false })
     end,
   },
   {
