@@ -11,6 +11,7 @@ Plug("yggdroot/indentline")
 Plug("luochen1990/rainbow")
 Plug("tpope/vim-fugitive")
 Plug("airblade/vim-gitgutter")
+Plug("ruifm/gitlinker.nvim")
 Plug("jiangmiao/auto-pairs")
 Plug("simeji/winresizer")
 Plug("nvim-lua/plenary.nvim") --
