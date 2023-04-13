@@ -141,7 +141,7 @@ return {
     config = function()
       require("nvim-treesitter.configs").setup {
         ensure_installed = {
-          "c", "lua", "go", "cue", "json", "terraform",
+          "c", "lua", "go", "cue", "json", "terraform", "vim",
         },
         auto_install = true,
         highlight = {
@@ -216,23 +216,57 @@ return {
   },
   {
     "nvim-telescope/telescope.nvim",
-    lazy = true,
-    cmd = "Telescope",
+    dependencies = {
+      "tsakirist/telescope-lazy.nvim",
+    },
+    config = function()
+    end,
+  },
+  {
+    "nvim-telescope/telescope.nvim",
     config = function()
       require("telescope").setup {
         defaults = {
+          mappings = {
+            i = {
+              ["<C-f>"] = "results_scrolling_down",
+              ["<C-b>"] = "results_scrolling_up",
+            }
+          }
         },
         pickers = {
             find_files = {
                 hidden = true,
             },
         },
+        extensions = {
+          lazy = {
+            -- Optional theme (the extension doesn't set a default theme)
+            -- theme = "ivy",
+            -- Whether or not to show the icon in the first column
+            show_icon = true,
+            -- Mappings for the actions
+            mappings = {
+              open_in_browser = "<C-o>",
+              open_in_file_browser = "<M-b>",
+              open_in_find_files = "<C-f>",
+              open_in_live_grep = "<C-g>",
+              open_plugins_picker = "<C-b>", -- Works only after having called first another action
+              open_lazy_root_find_files = "<C-r>f",
+              open_lazy_root_live_grep = "<C-r>g",
+            },
+          },
+        },
       }
+
+      require("telescope").load_extension("lazy")
       -- Telescope
       vim.api.nvim_set_keymap("n", "<C-s>f", "<cmd>Telescope find_files<cr>",  { noremap = true, silent = false })
       vim.api.nvim_set_keymap("n", "<C-s>g", "<cmd>Telescope live_grep<cr>",   { noremap = true, silent = false })
       vim.api.nvim_set_keymap("n", "<C-s>b", "<cmd>Telescope buffers<cr>",     { noremap = true, silent = false })
       vim.api.nvim_set_keymap("n", "<C-s>h", "<cmd>Telescope help_tags<cr>",   { noremap = true, silent = false })
+      vim.api.nvim_set_keymap("n", "<C-s>k", "<cmd>Telescope keymaps<cr>",   { noremap = true, silent = false })
+      vim.api.nvim_set_keymap("n", "<C-s>l", "<cmd>Telescope lazy<cr>",        { noremap = true, silent = false })
     end,
   },
   {
