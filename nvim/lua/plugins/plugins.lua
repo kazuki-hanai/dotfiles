@@ -79,7 +79,7 @@ return {
             {
               "filename",
               path = 1,
-            }
+            },
           },
           lualine_x = {'encoding', 'fileformat', 'filetype'},
           lualine_y = {'progress'},
@@ -183,12 +183,19 @@ return {
     end,
   },
   {
+    "rhysd/git-messenger.vim",
+    config = function()
+      vim.api.nvim_set_keymap('n', 'gm', '<cmd>GitMessenger<cr>', {silent = true})
+      vim.g.git_messenger_floating_win_opts = { border = "single" }
+    end,
+  },
+  {
     "jiangmiao/auto-pairs",
   },
   {
     "simeji/winresizer",
     config = function()
-      vim.g.winresizer_start_key = "<C-W>w"
+      vim.api.nvim_set_keymap('n', '<C-w>w', '<cmd>WinResizerStartResize<cr>', {silent = true})
     end,
   },
   {
