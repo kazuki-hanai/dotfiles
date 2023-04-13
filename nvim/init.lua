@@ -1,5 +1,4 @@
 require('general_settings')
 require('keymaps')
--- require('plug')
 require('load_lazy')
 require('themes')
