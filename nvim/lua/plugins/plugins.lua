@@ -156,6 +156,9 @@ return {
   },
   {
     "tpope/vim-fugitive",
+    config = function()
+      vim.api.nvim_set_keymap('n', 'gb', '<cmd>Git blame<cr>', {silent = true})
+    end,
   },
   {
     "airblade/vim-gitgutter",
