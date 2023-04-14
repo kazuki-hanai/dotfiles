@@ -274,8 +274,11 @@ return {
   },
   {
     "hrsh7th/cmp-nvim-lsp",
-  },
-  {
+  }, {
+    "hrsh7th/vim-vsnip",
+  }, {
+    "hrsh7th/vim-vsnip-integ",
+  }, {
     "hrsh7th/cmp-buffer",
   },
   {
