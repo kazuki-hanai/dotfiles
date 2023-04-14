@@ -12,6 +12,8 @@ return {
           dotfiles = false,
         },
       })
+      vim.api.nvim_set_keymap("n", "<C-b>f", ":NvimTreeFindFile<cr>",   { noremap = true, silent = false })
+      vim.api.nvim_set_keymap("n", "<C-b>n", ":NvimTreeToggle<cr>",     { noremap = true, silent = false })
     end,
   },
   {

@@ -21,7 +21,3 @@ map("n", "<space>c", "",{
   noremap = true,
   silent = false
 })
-
--- nvim-tree
-map("n", "<C-b>f", ":NvimTreeFindFile<cr>",   { noremap = true, silent = false })
-map("n", "<C-b>n", ":NvimTreeToggle<cr>",     { noremap = true, silent = false })
