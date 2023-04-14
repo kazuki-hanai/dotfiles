@@ -26,6 +26,8 @@
   "vim-colorschemes": { "branch": "master", "commit": "fd8f122cef604330c96a6a6e434682dbdfb878c9" },
   "vim-fugitive": { "branch": "master", "commit": "ef99f1d90cdb33a52931aed5868785b51fb9411d" },
   "vim-gitgutter": { "branch": "master", "commit": "44dbd57dd19e8ec58b2a50c787c8ae7bb231c145" },
+  "vim-vsnip": { "branch": "master", "commit": "7753ba9c10429c29d25abfd11b4c60b76718c438" },
+  "vim-vsnip-integ": { "branch": "master", "commit": "1930f0fc234521945afd48db2bff09d925211571" },
   "vscode.nvim": { "branch": "main", "commit": "34d1ec135319cd260940ce380f1fb73c047920ea" },
   "winresizer": { "branch": "master", "commit": "9bd559a03ccec98a458e60c705547119eb5350f3" }
 }
