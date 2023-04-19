@@ -57,7 +57,15 @@ return {
               }
           }
       }
-      lspconfig.rust_analyzer.setup {}
+      lspconfig.rust_analyzer.setup {
+        settings = {
+          ['rust-analyzer'] = {
+            diagnostics = {
+              enable = false;
+            }
+          }
+        }
+      }
       lspconfig.gopls.setup {}
       lspconfig.tsserver.setup {}
       lspconfig.yamlls.setup {
@@ -67,7 +75,7 @@ return {
               server = "verbose"
             },
             schemas = {
-              ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*.(yaml|yml)",
+              -- ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
               kubernetes = "*.yaml",
             },
             schemaDownload = {  enable = true },
