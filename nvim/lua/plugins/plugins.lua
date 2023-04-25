@@ -108,22 +108,6 @@ return {
     end,
   },
   {
-    "crispgm/nvim-tabline",
-    config = function()
-      require('tabline').setup({
-        show_index = true,   -- show tab index
-        show_modify = true,  -- show buffer modification indicator
-        show_icon = true,    -- show file extension icon
-        show_bufnr = true,   -- this appends [bufnr] to buffer section,
-        modify_indicator = '[+]', -- modify indicator
-        section_separators = {'', ''},
-        component_separators = {'', ''},
-        no_name = 'No name',      -- no name buffer name
-        brackets = { '[ ', ' ]' },  -- file name brackets surrounding
-      })
-    end,
-  },
-  {
     "yggdroot/indentline",
     config = function()
       vim.g.indentLine_enabled = 1
@@ -224,11 +208,6 @@ return {
       "tsakirist/telescope-lazy.nvim",
     },
     config = function()
-    end,
-  },
-  {
-    "nvim-telescope/telescope.nvim",
-    config = function()
       require("telescope").setup {
         defaults = {
           mappings = {
@@ -236,7 +215,8 @@ return {
               ["<C-f>"] = "results_scrolling_down",
               ["<C-b>"] = "results_scrolling_up",
             }
-          }
+          },
+          file_sorter = require("telescope.sorters").get_fuzzy_file,
         },
         pickers = {
             find_files = {
