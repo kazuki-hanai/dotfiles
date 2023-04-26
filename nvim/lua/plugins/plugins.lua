@@ -12,43 +12,43 @@ return {
           dotfiles = false,
         },
       })
-      vim.api.nvim_set_keymap("n", "<C-b>f", ":NvimTreeFindFile<cr>",   { noremap = true, silent = false })
-      vim.api.nvim_set_keymap("n", "<C-b>n", ":NvimTreeToggle<cr>",     { noremap = true, silent = false })
+      vim.api.nvim_set_keymap("n", "<C-b>f", ":NvimTreeFindFile<cr>", { noremap = true, silent = false })
+      vim.api.nvim_set_keymap("n", "<C-b>n", ":NvimTreeToggle<cr>", { noremap = true, silent = false })
     end,
   },
   {
     "nvim-tree/nvim-web-devicons",
     config = function()
-      require'nvim-web-devicons'.setup {
-       -- globally enable different highlight colors per icon (default to true)
-       -- if set to false all icons will have the default icon's color
-       color_icons = true;
-       -- globally enable default icons (default to false)
-       -- will get overriden by `get_icons` option
-       default = true;
-       -- globally enable "strict" selection of icons - icon will be looked up in
-       -- different tables, first by filename, and if not found by extension; this
-       -- prevents cases when file doesn't have any extension but still gets some icon
-       -- because its name happened to match some extension (default to false)
-       strict = true;
-       -- same as `override` but specifically for overrides by filename
-       -- takes effect when `strict` is true
-       override_by_filename = {
-        [".gitignore"] = {
-          icon = "",
-          color = "#f1502f",
-          name = "Gitignore"
-        }
-       };
-       -- same as `override` but specifically for overrides by extension
-       -- takes effect when `strict` is true
-       override_by_extension = {
-        ["log"] = {
-          icon = "",
-          color = "#81e043",
-          name = "Log"
-        }
-       };
+      require 'nvim-web-devicons'.setup {
+        -- globally enable different highlight colors per icon (default to true)
+        -- if set to false all icons will have the default icon's color
+        color_icons = true,
+        -- globally enable default icons (default to false)
+        -- will get overriden by `get_icons` option
+        default = true,
+        -- globally enable "strict" selection of icons - icon will be looked up in
+        -- different tables, first by filename, and if not found by extension; this
+        -- prevents cases when file doesn't have any extension but still gets some icon
+        -- because its name happened to match some extension (default to false)
+        strict = true,
+        -- same as `override` but specifically for overrides by filename
+        -- takes effect when `strict` is true
+        override_by_filename = {
+          [".gitignore"] = {
+            icon = "",
+            color = "#f1502f",
+            name = "Gitignore"
+          }
+        },
+        -- same as `override` but specifically for overrides by extension
+        -- takes effect when `strict` is true
+        override_by_extension = {
+          ["log"] = {
+            icon = "",
+            color = "#81e043",
+            name = "Log"
+          }
+        },
       }
     end,
   },
@@ -59,8 +59,8 @@ return {
         options = {
           icons_enabled = true,
           theme = 'auto',
-          component_separators = { left = '', right = ''},
-          section_separators = { left = '', right = ''},
+          component_separators = { left = '', right = '' },
+          section_separators = { left = '', right = '' },
           disabled_filetypes = {
             statusline = {},
             winbar = {},
@@ -76,16 +76,16 @@ return {
         },
         sections = {
           lualine_a = {},
-          lualine_b = {'diff', 'diagnostics'},
+          lualine_b = { 'diff', 'diagnostics' },
           lualine_c = {
             {
               "filename",
               path = 1,
             },
           },
-          lualine_x = {'encoding', 'fileformat', 'filetype'},
-          lualine_y = {'progress'},
-          lualine_z = {'location'}
+          lualine_x = { 'encoding', 'fileformat', 'filetype' },
+          lualine_y = { 'progress' },
+          lualine_z = { 'location' }
         },
         inactive_sections = {
           lualine_a = {},
@@ -96,7 +96,7 @@ return {
             }
           },
           lualine_c = {},
-          lualine_x = {'location'},
+          lualine_x = { 'location' },
           lualine_y = {},
           lualine_z = {}
         },
@@ -143,17 +143,17 @@ return {
   {
     "tpope/vim-fugitive",
     config = function()
-      vim.api.nvim_set_keymap('n', 'gb', '<cmd>Git blame<cr>', {silent = true})
+      vim.api.nvim_set_keymap('n', 'gb', '<cmd>Git blame<cr>', { silent = true })
     end,
   },
   {
     "airblade/vim-gitgutter",
     config = function()
-      vim.opt.signcolumn              = "yes:1"
-      vim.opt.numberwidth             = 3
-      vim.g.gitgutter_sign_added      = "+"
-      vim.g.gitgutter_sign_modified   = "~"
-      vim.g.gitgutter_sign_removed    = "-"
+      vim.opt.signcolumn            = "yes:1"
+      vim.opt.numberwidth           = 3
+      vim.g.gitgutter_sign_added    = "+"
+      vim.g.gitgutter_sign_modified = "~"
+      vim.g.gitgutter_sign_removed  = "-"
     end,
   },
   {
@@ -167,14 +167,18 @@ return {
           action_callback = require("gitlinker.actions").copy_to_clipboard,
         }
       })
-      vim.api.nvim_set_keymap('n', 'gy', '<cmd>lua require"gitlinker".get_buf_range_url("n", {action_callback = require"gitlinker.actions".copy_to_clipboard})<cr>', {silent = true})
-      vim.api.nvim_set_keymap('v', 'gy', '<cmd>lua require"gitlinker".get_buf_range_url("v", {action_callback = require"gitlinker.actions".copy_to_clipboard})<cr>', {})
+      vim.api.nvim_set_keymap('n', 'gy',
+      '<cmd>lua require"gitlinker".get_buf_range_url("n", {action_callback = require"gitlinker.actions".copy_to_clipboard})<cr>',
+      { silent = true })
+      vim.api.nvim_set_keymap('v', 'gy',
+      '<cmd>lua require"gitlinker".get_buf_range_url("v", {action_callback = require"gitlinker.actions".copy_to_clipboard})<cr>',
+      {})
     end,
   },
   {
     "rhysd/git-messenger.vim",
     config = function()
-      vim.api.nvim_set_keymap("n", "gm", "<cmd>GitMessenger<cr>", {silent = true})
+      vim.api.nvim_set_keymap("n", "gm", "<cmd>GitMessenger<cr>", { silent = true })
       vim.g.git_messenger_floating_win_opts = { border = "single" }
     end,
   },
@@ -187,8 +191,8 @@ return {
     },
     lazy = true,
     cmd = "Octo",
-    config = function ()
-      require"octo".setup()
+    config = function()
+      require "octo".setup()
     end
   },
   {
@@ -199,7 +203,7 @@ return {
     config = function()
       vim.g.winresizer_start_key = '<C-w>w'
       vim.g.winresizer_gui_start_key = '<C-w>w'
-      vim.api.nvim_set_keymap('n', '<C-w>w', '<cmd>WinResizerStartResize<cr>', {silent = true})
+      vim.api.nvim_set_keymap('n', '<C-w>w', '<cmd>WinResizerStartResize<cr>', { silent = true })
     end,
   },
   {
@@ -219,9 +223,9 @@ return {
           file_sorter = require("telescope.sorters").get_fuzzy_file,
         },
         pickers = {
-            find_files = {
-                hidden = true,
-            },
+          find_files = {
+            hidden = true,
+          },
         },
         extensions = {
           lazy = {
@@ -245,12 +249,12 @@ return {
 
       require("telescope").load_extension("lazy")
       -- Telescope
-      vim.api.nvim_set_keymap("n", "<C-s>f", "<cmd>Telescope find_files<cr>",  { noremap = true, silent = false })
-      vim.api.nvim_set_keymap("n", "<C-s>g", "<cmd>Telescope live_grep<cr>",   { noremap = true, silent = false })
-      vim.api.nvim_set_keymap("n", "<C-s>b", "<cmd>Telescope buffers<cr>",     { noremap = true, silent = false })
-      vim.api.nvim_set_keymap("n", "<C-s>h", "<cmd>Telescope help_tags<cr>",   { noremap = true, silent = false })
-      vim.api.nvim_set_keymap("n", "<C-s>k", "<cmd>Telescope keymaps<cr>",   { noremap = true, silent = false })
-      vim.api.nvim_set_keymap("n", "<C-s>l", "<cmd>Telescope lazy<cr>",        { noremap = true, silent = false })
+      vim.api.nvim_set_keymap("n", "<C-s>f", "<cmd>Telescope find_files<cr>", { noremap = true, silent = false })
+      vim.api.nvim_set_keymap("n", "<C-s>g", "<cmd>Telescope live_grep<cr>", { noremap = true, silent = false })
+      vim.api.nvim_set_keymap("n", "<C-s>b", "<cmd>Telescope buffers<cr>", { noremap = true, silent = false })
+      vim.api.nvim_set_keymap("n", "<C-s>h", "<cmd>Telescope help_tags<cr>", { noremap = true, silent = false })
+      vim.api.nvim_set_keymap("n", "<C-s>k", "<cmd>Telescope keymaps<cr>", { noremap = true, silent = false })
+      vim.api.nvim_set_keymap("n", "<C-s>l", "<cmd>Telescope lazy<cr>", { noremap = true, silent = false })
     end,
   },
   {
@@ -259,12 +263,12 @@ return {
   {
     "hrsh7th/cmp-nvim-lsp",
   }, {
-    "hrsh7th/vim-vsnip",
-  }, {
-    "hrsh7th/vim-vsnip-integ",
-  }, {
-    "hrsh7th/cmp-buffer",
-  },
+  "hrsh7th/vim-vsnip",
+}, {
+  "hrsh7th/vim-vsnip-integ",
+}, {
+  "hrsh7th/cmp-buffer",
+},
   {
     "hrsh7th/cmp-path",
   },
@@ -337,26 +341,26 @@ return {
       registry.update()
     end,
   },
-  -- Hop is an EasyMotion-like plugin allowing you to jump anywhere 
+  -- Hop is an EasyMotion-like plugin allowing you to jump anywhere
   -- in a document with as few keystrokes as possible.
   {
     "phaazon/hop.nvim",
     config = function()
       local hop = require('hop')
       local directions = require('hop.hint').HintDirection
-      hop.setup{}
+      hop.setup {}
       vim.keymap.set('', 'f', function()
         hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true })
-      end, {remap=true})
+      end, { remap = true })
       vim.keymap.set('', 'F', function()
         hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true })
-      end, {remap=true})
+      end, { remap = true })
       vim.keymap.set('', 't', function()
         hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })
-      end, {remap=true})
+      end, { remap = true })
       vim.keymap.set('', 'T', function()
         hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })
-      end, {remap=true})
+      end, { remap = true })
       vim.keymap.set('', 'gh', ":HopWord<CR>", {})
     end,
   },
