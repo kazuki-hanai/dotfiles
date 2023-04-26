@@ -218,15 +218,6 @@ return {
             i = {
               ["<C-f>"] = "results_scrolling_down",
               ["<C-b>"] = "results_scrolling_up",
-              ["<C-h>"] = require("telescope").extensions.hop.hop,  -- hop.hop_toggle_selection
-              -- custom hop loop to multi selects and sending selected entries to quickfix list 
-              ["<C-space>"] = function(prompt_bufnr)
-                local opts = {
-                  callback = actions.toggle_selection,
-                  loop_callback = actions.send_selected_to_qflist,
-                }
-                require("telescope").extensions.hop._hop_loop(prompt_bufnr, opts)
-              end,
             }
           },
           file_sorter = require("telescope.sorters").get_fuzzy_file,
@@ -265,39 +256,6 @@ return {
       vim.api.nvim_set_keymap("n", "<C-s>k", "<cmd>Telescope keymaps<cr>", { noremap = true, silent = false })
       vim.api.nvim_set_keymap("n", "<C-s>l", "<cmd>Telescope lazy<cr>", { noremap = true, silent = false })
     end,
-  },
-  {
-    "nvim-telescope/telescope-hop.nvim",
-    dependencies = {
-      "tsakirist/telescope-lazy.nvim",
-    },
-    config = function ()
-      require("telescope").load_extension("hop")
-    end,
-    options = {
-      extensions = {
-        hop = {
-          -- the shown `keys` are the defaults, no need to set `keys` if defaults work for you ;)
-          keys = {"a", "s", "d", "f", "g", "h", "j", "k", "l", ";",
-                  "q", "w", "e", "r", "t", "y", "u", "i", "o", "p",
-                  "A", "S", "D", "F", "G", "H", "J", "K", "L", ":",
-                  "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", },
-      -- Highlight groups to link to signs and lines; the below configuration refers to demo
-          -- sign_hl typically only defines foreground to possibly be combined with line_hl
-          sign_hl = { "WarningMsg", "Title" },
-          -- optional, typically a table of two highlight groups that are alternated between
-          line_hl = { "CursorLine", "Normal" },
-      -- options specific to `hop_loop`
-          -- true temporarily disables Telescope selection highlighting
-          clear_selection_hl = false,
-          -- highlight hopped to entry with telescope selection highlight
-          -- note: mutually exclusive with `clear_selection_hl`
-          trace_entry = true,
-          -- jump to entry where hoop loop was started from
-          reset_selection = true,
-        },
-      }
-    }
   },
   {
     "neovim/nvim-lspconfig",
