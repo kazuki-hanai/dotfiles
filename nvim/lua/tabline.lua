@@ -41,9 +41,10 @@ local function tabline(options)
             icon = M.devicons.get_icon(bufname, ext, { default = true }) .. ' '
         end
         -- buf name
-        local path_split = vim.fn.split(fn.fnamemodify(bufname, ":p"), "/")
-        local path =
-          path_split[#path_split-2] .. "/".. path_split[#path_split-1] .. "/" .. path_split[#path_split]
+        local path = fn.fnamemodify(fn.fnamemodify(bufname, ":p"), ":~:.")
+        -- local path_split = vim.fn.split(fn.fnamemodify(fn.fnamemodify(bufname, ":p"), ":~:."), "/")
+        -- local path =
+        --   path_split[#path_split-2] .. "/".. path_split[#path_split-1] .. "/" .. path_split[#path_split]
         s = s .. options.brackets[1]
         if bufname ~= '' then
             -- s = s .. icon .. fn.fnamemodify(bufname, ':t')
