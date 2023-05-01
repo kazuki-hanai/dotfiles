@@ -78,8 +78,9 @@ return {
               server = "verbose"
             },
             schemas = {
-              -- ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
-              kubernetes = "*.yaml",
+              ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+              ["https://json.schemastore.org/cloudbuild.json"] = "cloudbuild.*",
+              kubernetes = "*.(yaml|yml)",
             },
             schemaDownload = {  enable = true },
             validate = true,
