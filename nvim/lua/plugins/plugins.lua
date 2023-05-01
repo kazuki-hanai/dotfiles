@@ -155,8 +155,11 @@ return {
   },
   {
     "tpope/vim-fugitive",
+    dependencies = {
+      "MunifTanjim/nui.nvim"
+    },
     config = function()
-      vim.api.nvim_set_keymap('n', 'gb', '<cmd>Git blame<cr>', { silent = true })
+      vim.api.nvim_set_keymap("n", "gb", "<cmd>Git blame<cr>", { silent = true })
     end,
   },
   {
@@ -275,13 +278,16 @@ return {
   },
   {
     "hrsh7th/cmp-nvim-lsp",
-  }, {
-  "hrsh7th/vim-vsnip",
-}, {
-  "hrsh7th/vim-vsnip-integ",
-}, {
-  "hrsh7th/cmp-buffer",
-},
+  },
+  {
+    "hrsh7th/vim-vsnip",
+  },
+  {
+    "hrsh7th/vim-vsnip-integ",
+  },
+  {
+    "hrsh7th/cmp-buffer",
+  },
   {
     "hrsh7th/cmp-path",
   },
