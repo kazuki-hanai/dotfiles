@@ -71,6 +71,7 @@ return {
       }
       lspconfig.gopls.setup {}
       lspconfig.tsserver.setup {}
+      lspconfig.denols.setup {}
       lspconfig.yamlls.setup {
         settings = {
           yaml = {

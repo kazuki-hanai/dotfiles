@@ -63,10 +63,20 @@ return {
       { "<C-s>k", function() require("telescope.builtin").keymaps() end,    mode = "n", desc = "Telescope buffers" },
       { "<C-s>l", function() require("telescope.builtin").lazy() end,       mode = "n", desc = "Telescope buffers" },
       {
+        "<C-s>a",
+        function()
+          require("telescope.builtin").quickfix({
+            show_line = false,
+          })
+        end,
+        mode = "n",
+        desc = "Telescope quickfix"
+      },
+      {
         "<C-s>s",
         function()
           require("telescope.builtin").lsp_document_symbols({
-            show_line = true,
+            show_line = false,
           })
         end,
         mode = "n",
@@ -76,7 +86,20 @@ return {
         "<C-s>S",
         function()
           require("telescope.builtin").lsp_workspace_symbols({
-            show_line = true,
+            show_line = false,
+          })
+        end,
+        mode = "n",
+        desc = "Telescope buffers"
+      },
+      {
+        "<C-s>r",
+        function()
+          require("telescope.builtin").lsp_references({
+            include_declaration = true,
+            include_current_line = true,
+            jump_type = "tab",
+            show_line = false,
           })
         end,
         mode = "n",
