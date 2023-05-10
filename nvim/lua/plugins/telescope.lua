@@ -56,12 +56,22 @@ return {
       require("telescope").load_extension("lazy")
     end,
     keys = {
+      -- [TODO] Use ripgrep
       { "<C-s>f", function() require("telescope.builtin").find_files() end, mode = "n", desc = "Telescope find_files" },
       { "<C-s>g", function() require("telescope.builtin").live_grep() end,  mode = "n", desc = "Telescope live_grep" },
-      { "<C-s>b", function() require("telescope.builtin").buffers() end,    mode = "n", desc = "Telescope buffers" },
-      { "<C-s>h", function() require("telescope.builtin").help_tags() end,  mode = "n", desc = "Telescope buffers" },
-      { "<C-s>k", function() require("telescope.builtin").keymaps() end,    mode = "n", desc = "Telescope buffers" },
-      { "<C-s>l", function() require("telescope.builtin").lazy() end,       mode = "n", desc = "Telescope buffers" },
+      {
+        "<C-s>b",
+        function()
+          require("telescope.builtin").buffers({
+            sort_lastused = true,
+          })
+        end,
+        mode = "n",
+        desc = "Telescope buffers"
+      },
+      { "<C-s>h", function() require("telescope.builtin").help_tags() end, mode = "n", desc = "Telescope buffers" },
+      { "<C-s>k", function() require("telescope.builtin").keymaps() end,   mode = "n", desc = "Telescope buffers" },
+      { "<C-s>l", function() require("telescope.builtin").lazy() end,      mode = "n", desc = "Telescope buffers" },
       {
         "<C-s>a",
         function()
