@@ -2,6 +2,10 @@ local map = vim.api.nvim_set_keymap
 
 -- Common keymap
 map("i", "<S-Tab>", "<C-d>", { noremap = true, silent = false })
+map("i", "<C-f>", "<right>", { noremap = true, silent = false })
+map("i", "<C-b>", "<left>", { noremap = true, silent = false })
+-- TODO Explore better way
+map("i", "<C-w>", "<Esc>vbxi", { noremap = true, silent = false })
 
 -- Tab mappings
 map("n", "<C-t>t", ":tabnew<CR>",           { noremap = true, silent = false })
