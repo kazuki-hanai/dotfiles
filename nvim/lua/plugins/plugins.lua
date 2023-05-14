@@ -97,8 +97,8 @@ return {
             },
           },
           lualine_x = { charscount, 'encoding', 'fileformat', 'filetype', 'location', 'progress' },
-          lualine_y = { },
-          lualine_z = { }
+          lualine_y = {},
+          lualine_z = {}
         },
         inactive_sections = {
           lualine_a = {},
@@ -152,6 +152,28 @@ return {
   },
   {
     "nvim-lua/plenary.nvim",
+  },
+  {
+    "VonHeikemen/fine-cmdline.nvim",
+    config = function()
+      vim.api.nvim_set_keymap("n", "<CR>", "<cmd>FineCmdline<CR>", { noremap = true })
+      require("fine-cmdline").setup({
+        hooks = {
+          set_keymaps = function(imap, feedkeys)
+            local fn = require('fine-cmdline').fn
+
+            imap('<Esc>', fn.close)
+            imap('<C-c>', fn.close)
+            imap('<C-p>', fn.up_search_history)
+            imap('<C-n>', fn.down_search_history)
+          end,
+          after_mount = function(input)
+            -- make escape go to normal mode
+            vim.keymap.set('i', '<Esc>', '<cmd>stopinsert<cr>', {buffer = input.bufnr})
+          end
+        }
+      })
+    end
   },
   {
     "tpope/vim-fugitive",
