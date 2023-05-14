@@ -27,6 +27,15 @@ return {
             }
           },
           file_sorter = require("telescope.sorters").get_fuzzy_file,
+          vimgrep_arguments = {
+            "rg",
+            "--color=never",
+            "--no-heading",
+            "--with-filename",
+            "--line-number",
+            "--column",
+            "--smart-case"
+          },
         },
         pickers = {
           find_files = {
