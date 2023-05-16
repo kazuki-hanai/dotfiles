@@ -78,11 +78,7 @@ return {
             trace = {
               server = "verbose"
             },
-            schemas = {
-              ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
-              ["https://json.schemastore.org/cloudbuild.json"] = "cloudbuild.*",
-              kubernetes = "*.(yaml|yml)",
-            },
+            schemas = require("schemastore").yaml.schemas(),
             schemaDownload = {  enable = true },
             validate = true,
           }
@@ -90,6 +86,7 @@ return {
       }
       lspconfig.terraformls.setup {}
       lspconfig.dagger.setup {}
+      -- lspconfig.markdownlint.setup {}
     end
   }
 }
