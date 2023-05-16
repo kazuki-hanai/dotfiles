@@ -140,18 +140,22 @@ return {
     config = function()
       require("nvim-treesitter.configs").setup {
         ensure_installed = {
-          "c", "lua", "go", "cue", "json", "terraform", "vim",
+          "c", "lua", "go", "cue", "json", "terraform", "vim", "markdown"
         },
         auto_install = true,
         highlight = {
           enable = true,
           additional_vim_regex_highlighting = false,
+          disabled = { "markdown", },
         }
       }
     end,
   },
   {
     "nvim-lua/plenary.nvim",
+  },
+  {
+    "b0o/schemastore.nvim",
   },
   {
     "VonHeikemen/fine-cmdline.nvim",
@@ -221,7 +225,10 @@ return {
     end,
   },
   {
-    "jiangmiao/auto-pairs",
+    "windwp/nvim-autopairs",
+    config = function ()
+      require("nvim-autopairs").setup{}
+    end
   },
   {
     "simeji/winresizer",
