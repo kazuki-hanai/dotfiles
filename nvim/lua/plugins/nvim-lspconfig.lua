@@ -1,6 +1,9 @@
 return {
   {
     "neovim/nvim-lspconfig",
+    dependencies = {
+      "b0o/schemastore.nvim",
+    },
     config = function()
       -- See `:help vim.diagnostic.*` for documentation on any of the below functions
       vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
@@ -57,9 +60,8 @@ return {
               }
           }
       }
-      lspconfig.clangd.setup {
-
-      }
+      lspconfig.clangd.setup {}
+      lspconfig.pylsp.setup {}
       lspconfig.rust_analyzer.setup {
         settings = {
           ['rust-analyzer'] = {
