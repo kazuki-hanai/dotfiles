@@ -18,7 +18,7 @@ map("i", "<C-l>", "<Esc>:tabnext<CR>",      { noremap = true, silent = false })
 map("i", "<C-h>", "<Esc>:tabprev<CR>",      { noremap = true, silent = false })
 
 -- Copy filepath to clipboard
-map("n", "<space>c", "",{
+map("n", "<space>cf", "",{
   callback = function()
     vim.fn.setreg("+", vim.fn.expand('%'))
   end,

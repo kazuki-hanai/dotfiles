@@ -88,6 +88,7 @@ return {
       }
       lspconfig.terraformls.setup {}
       lspconfig.dagger.setup {}
+      lspconfig.graphql.setup {}
       -- lspconfig.markdownlint.setup {}
     end
   }
