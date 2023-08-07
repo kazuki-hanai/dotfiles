@@ -11,6 +11,11 @@ return {
         filters = {
           dotfiles = false,
         },
+        actions = {
+          open_file = {
+            resize_window = false,
+          },
+        },
       })
       vim.api.nvim_set_keymap("n", "<C-f>", ":NvimTreeFindFile<cr>", { noremap = true, silent = false })
       vim.api.nvim_set_keymap("n", "<C-n>", ":NvimTreeToggle<cr>", { noremap = true, silent = false })
