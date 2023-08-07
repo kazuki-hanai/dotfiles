@@ -13,7 +13,12 @@ return {
     end
   },
   {
+    "nvim-telescope/telescope-file-browser.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
+  },
+  {
     "nvim-telescope/telescope.nvim",
+    version = "v0.1.2",
     dependencies = {
       "tsakirist/telescope-lazy.nvim",
     },
@@ -63,6 +68,7 @@ return {
       }
 
       require("telescope").load_extension("lazy")
+      require("telescope").load_extension("file_browser")
     end,
     keys = {
       -- [TODO] Use ripgrep
@@ -78,9 +84,10 @@ return {
         mode = "n",
         desc = "Telescope buffers"
       },
-      { "<C-s>h", function() require("telescope.builtin").help_tags() end, mode = "n", desc = "Telescope buffers" },
-      { "<C-s>k", function() require("telescope.builtin").keymaps() end,   mode = "n", desc = "Telescope buffers" },
-      { "<C-s>l", function() require("telescope.builtin").lazy() end,      mode = "n", desc = "Telescope buffers" },
+      { "<C-s>h", function() require("telescope.builtin").help_tags() end, mode = "n", desc = "Telescope help" },
+      { "<C-s>k", function() require("telescope.builtin").keymaps() end,   mode = "n", desc = "Telescope key" },
+      { "<C-s>l", ":Telescope lazy<CR>",      mode = "n", desc = "Telescope lazy" },
+      { "<C-s>n", ":Telescope file_browser path=%:p:h select_buffer=true<CR>",      mode = "n", desc = "Telescope file browser" },
       {
         "<C-s>a",
         function()
@@ -99,7 +106,7 @@ return {
           })
         end,
         mode = "n",
-        desc = "Telescope buffers"
+        desc = "Telescope symbols"
       },
       {
         "<C-s>S",
@@ -109,7 +116,7 @@ return {
           })
         end,
         mode = "n",
-        desc = "Telescope buffers"
+        desc = "Telescope Symbols"
       },
       {
         "<C-s>r",
@@ -122,7 +129,7 @@ return {
           })
         end,
         mode = "n",
-        desc = "Telescope buffers"
+        desc = "Telescope references"
       },
     }
   },
