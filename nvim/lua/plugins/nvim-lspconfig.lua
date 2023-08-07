@@ -61,7 +61,7 @@ return {
           }
       }
       lspconfig.clangd.setup {}
-      lspconfig.pylsp.setup {}
+      lspconfig.pylyzer.setup{}
       lspconfig.rust_analyzer.setup {
         settings = {
           ['rust-analyzer'] = {
@@ -90,6 +90,8 @@ return {
       lspconfig.dagger.setup {}
       lspconfig.graphql.setup {}
       -- lspconfig.markdownlint.setup {}
+      lspconfig.tailwindcss.setup {}
+      -- lspconfig.prettier.setup {}
     end
   }
 }
