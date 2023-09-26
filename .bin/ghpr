@@ -1,0 +1,41 @@
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    -c|--checkout)
+      checkout="true"
+      shift # past argument
+      # shift # past value
+      ;;
+    -o|--open)
+      open="true"
+      shift # past argument
+      # shift # past value
+      ;;
+    -*|--*)
+      echo "Unknown option $1"
+      exit 1
+      ;;
+    *)
+      POSITIONAL_ARGS+=("$1") # save positional arg
+      shift # past argument
+      ;;
+  esac
+done
+
+pr_line=$(GH_FORCE_TTY='500%' gh pr list -L 100 --json number,title,headRefName,updatedAt,author,reviewRequests \
+  --template '{{range .}}{{tablerow (printf "#%v" .number | autocolor "green") (truncate 60 .title) (.author.login | autocolor "blue") (truncate 30 .headRefName) (join "," (pluck "name" .reviewRequests)) (timeago .updatedAt)}}{{end}}' | fzf --ansi \
+  --preview 'GH_FORCE_TTY=$FZF_PREVIEW_COLUMNS gh pr view {1}' --preview-window=up --no-hscroll)
+pr_id=$(echo ${pr_line:1} | awk '{print $1}')
+
+if [ -z "$pr_id" ]; then
+  exit 0
+fi
+
+if [ "$checkout" = "true" ]; then
+  gh pr checkout $pr_id
+  exit 0
+elif [ "$open" = "true" ]; then
+  gh pr view --web $pr_id
+  exit 0
+else
+  exit 0
+fi
