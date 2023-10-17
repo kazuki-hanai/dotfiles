@@ -16,6 +16,9 @@ return {
             resize_window = false,
           },
         },
+        view = {
+          preserve_window_proportions = true,
+        },
       })
       vim.api.nvim_set_keymap("n", "<C-f>", ":NvimTreeFindFile<cr>", { noremap = true, silent = false })
       vim.api.nvim_set_keymap("n", "<C-n>", ":NvimTreeToggle<cr>", { noremap = true, silent = false })
