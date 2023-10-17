@@ -24,6 +24,9 @@ loadsh ~/.dotfiles/zsh/tools/poetry.sh
 loadsh ~/.dotfiles/zsh/tools/deno.sh
 loadsh ~/.dotfiles/zsh/tools/nvim.sh
 loadsh ~/.dotfiles/zsh/tools/kubectl.sh
+loadsh ~/.dotfiles/zsh/tools/krew.sh
+loadsh ~/.dotfiles/zsh/tools/zoxide.sh
+
 
 # Import local settings
 loadsh ~/.dotfiles/zsh/localconfig.sh

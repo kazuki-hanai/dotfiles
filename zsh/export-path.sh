@@ -11,7 +11,7 @@ check_and_export_dir () {
 
 # local binary
 check_and_export_dir $HOME/.bin
-check_and_export_dir $HOME/.dotfiles/.bin
+check_and_export_dir $HOME/.dotfiles/bin
 check_and_export_dir $HOME/.local/bin
 export PATH="$HOME/.localbin:$PATH"
 

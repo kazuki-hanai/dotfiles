@@ -1,3 +1,7 @@
+
+# default value
+state="open"
+
 while [[ $# -gt 0 ]]; do
   case $1 in
     -c|--checkout)
@@ -10,6 +14,11 @@ while [[ $# -gt 0 ]]; do
       shift # past argument
       # shift # past value
       ;;
+    -s|--state)
+      shift # past argument
+      state=$1
+      shift # past value
+      ;;
     -*|--*)
       echo "Unknown option $1"
       exit 1
@@ -21,9 +30,9 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-pr_line=$(GH_FORCE_TTY='500%' gh pr list -L 100 --json number,title,headRefName,updatedAt,author,reviewRequests \
+pr_line=$(GH_FORCE_TTY='500%' gh pr list -s $state -L 100 --json number,title,headRefName,updatedAt,author,reviewRequests \
   --template '{{range .}}{{tablerow (printf "#%v" .number | autocolor "green") (truncate 60 .title) (.author.login | autocolor "blue") (truncate 30 .headRefName) (join "," (pluck "name" .reviewRequests)) (timeago .updatedAt)}}{{end}}' | fzf --ansi \
-  --preview 'GH_FORCE_TTY=$FZF_PREVIEW_COLUMNS gh pr view {1}' --preview-window=up --no-hscroll)
+  --preview 'GH_FORCE_TTY=$FZF_PREVIEW_COLUMNS gh pr view {1}' --preview-window=up --no-hscroll --no-sort)
 pr_id=$(echo ${pr_line:1} | awk '{print $1}')
 
 if [ -z "$pr_id" ]; then
