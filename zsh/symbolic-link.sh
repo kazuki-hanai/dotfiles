@@ -12,4 +12,4 @@ mkdir -p ~/.config && link ~/.dotfiles/nvim ~/.config/nvim
 mkdir -p ~/.config && link ~/.dotfiles/starship.toml ~/.config/starship.toml
 
 # .bin
-link ~/.dotfiles/.bin ~/.bin
+link ~/.dotfiles/bin ~/.bin
