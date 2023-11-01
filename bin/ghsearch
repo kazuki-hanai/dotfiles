@@ -1,0 +1,67 @@
+command_type=$1
+limit=100
+help=false
+
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    -o|--open)
+      OPEN=true
+      shift # past argument
+      ;;
+    -L|--limit)
+      limit=$2
+      shift # past argument
+      shift # past value
+      ;;
+    -h|--help)
+      help=true
+      shift # past argument
+      ;;
+    *)
+      POSITIONAL_ARGS="$POSITIONAL_ARGS $1" # save positional arg
+      shift # past argument
+      ;;
+  esac
+done
+
+print_help(){
+  echo "Usage: ghsearch [gh search options]"
+  gh search $POSITIONAL_ARGS --help
+}
+
+if [ $help = "true" ]; then
+  print_help
+  exit 0
+fi
+
+if [ "$command_type" = "prs" ]; then
+  result_line=$(GH_FORCE_TTY='200%' gh search -L $limit $POSITIONAL_ARGS --json repository,number,title,url,state,updatedAt --template '{{range .}}{{tablerow (.repository.nameWithOwner | color "white+b") (printf "#%v" .number | autocolor "green") .title (.state | autocolor "blue") (timeago .updatedAt) (.url) }}{{end}}' | fzf --ansi --no-mouse)
+elif [ "$command_type" = "repos" ]; then
+  result_line=$(GH_FORCE_TTY='100%' gh search -L $limit $POSITIONAL_ARGS --json fullName,description,updatedAt,url --template '{{range .}}{{tablerow (.fullName | color "white+b") ((truncate 60 .description) | autocolor "blue") (timeago .updatedAt)}}{{end}}'| fzf --ansi --no-mouse)
+elif [ "$command_type" = "issues" ]; then
+  result_line=$(GH_FORCE_TTY='200%' gh search -L $limit $POSITIONAL_ARGS --json assignees,author,number,repository,state,title,updatedAt --template '{{range .}}{{tablerow (.repository.nameWithOwner | color "white+b") (printf "#%v" .number | autocolor "green") (truncate 60 .title) (.state | autocolor "blue") (truncate 40 (join "," (pluck "login" .assignees))) (timeago .updatedAt)}}{{end}}'| fzf --ansi --no-mouse)
+else
+  print_help
+  exit 0
+fi
+
+echo $result_line
+
+if [ -z "$OPEN" ] || [ -z "$result_line" ]; then
+  exit 0
+fi
+
+if [ $command_type = "prs" ]; then
+  owner_repo_name=$(echo $result_line | awk '{print $1}')
+  pr_number=$(echo $result_line | awk '{print $2}')
+  pr_number=$(echo ${pr_number:1})
+  gh pr view $pr_number -R $owner_repo_name --web
+elif [ $command_type = "repos" ]; then
+  owner_repo_name=$(echo $result_line | awk '{print $1}')
+  gh repo view --web $owner_repo_name
+elif [ $command_type = "issues" ]; then
+  owner_repo_name=$(echo $result_line | awk '{print $1}')
+  issue_number=$(echo $result_line | awk '{print $2}')
+  issue_number=$(echo ${issue_number:1})
+  gh issue view -R $owner_repo_name $issue_number --web
+fi
