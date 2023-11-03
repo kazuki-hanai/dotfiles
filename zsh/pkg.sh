@@ -19,8 +19,6 @@ installUbuntu tk-dev
 installUbuntu llvm
 installUbuntu clang
 installUbuntu ca-certificates
-installUbuntu exa
-installUbuntu bat
 installUbuntu ripgrep rg
 installUbuntu git-delta
 
@@ -28,12 +26,3 @@ installMac gomi b4b4r07/tap/gomi
 installMac gh
 installMac reattach-to-user-namespace
 installMac tmux
-installMac exa
-installMac bat
-installMac rg
-installMac delta git-delta
-
-# alias
-alias cat=bat
-alias ls=exa
-alias git-delta=delta
