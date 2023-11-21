@@ -13,9 +13,30 @@ M.options = {
     modify_indicator = ' [+]',
 }
 
+M.tablist = {}
+
+local function get_second_level_path(bufname)
+    local paths = {}
+    for p in string.gmatch(fn.fnamemodify(bufname, ":~:."), "[^/]+") do
+        table.insert(paths, p)
+    end
+
+    local path = paths[#paths]
+    for i=1, 2 do
+        if #paths-i < 1 then
+            break
+        end
+        path = paths[#paths-i] .. '/' .. path
+    end
+
+    return path
+end
+
 local function tabline(options)
     local s = ''
-    for index = 1, fn.tabpagenr('$') do
+    local tabnr = fn.tabpagenr('$')
+    local tablen = 0
+    for index = 1, tabnr do
         local winnr = fn.tabpagewinnr(index)
         local buflist = fn.tabpagebuflist(index)
         local bufnr = buflist[winnr]
@@ -40,17 +61,16 @@ local function tabline(options)
             local ext = fn.fnamemodify(bufname, ':e')
             icon = M.devicons.get_icon(bufname, ext, { default = true }) .. ' '
         end
-        -- buf name
-        local path = fn.fnamemodify(fn.fnamemodify(bufname, ":p"), ":~:.")
-        -- local path_split = vim.fn.split(fn.fnamemodify(fn.fnamemodify(bufname, ":p"), ":~:."), "/")
-        -- local path =
-        --   path_split[#path_split-2] .. "/".. path_split[#path_split-1] .. "/" .. path_split[#path_split]
+
+        local path = get_second_level_path(bufname)
+
         s = s .. options.brackets[1]
         if bufname ~= '' then
-            -- s = s .. icon .. fn.fnamemodify(bufname, ':t')
             s = s .. icon .. path
+            tablen = tablen + string.len(icon .. path)
         else
             s = s .. options.no_name
+            tablen = tablen + string.len(options.no_name)
         end
         s = s .. options.brackets[2]
         -- modify indicator
@@ -63,7 +83,13 @@ local function tabline(options)
         end
         -- additional space at the end of each tab segment
         s = s .. ' '
+
+        -- spaces
+        tablen = tablen + 6
     end
+
+    s = s .. '%#TabLine#' .. tablen .. ''
+    tablen = tablen + 4
 
     s = s .. '%#TabLineFill#'
     return s

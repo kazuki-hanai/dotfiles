@@ -9,12 +9,30 @@ return {
     lazy = true,
     cmd = "Octo",
     config = function()
-      require "octo".setup()
+      require("octo").setup()
     end
   },
   {
     "nvim-telescope/telescope-file-browser.nvim",
-    dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
+    dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+    config = function()
+      require("telescope-tabs").setup({
+        entry_formatter = function(tab_id, buffer_ids, file_names, file_paths, is_current)
+          local cwd_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':t')
+          local entry_strings = {}
+          for _, file_path in ipairs(file_paths) do
+            local i, j = string.find(file_path, cwd_name .. ".*")
+            table.insert(entry_strings, string.sub(file_path, i or 0, j or 0))
+          end
+          local entry_string = table.concat(entry_strings, ', ')
+          return string.format('%d: %s%s', tab_id, entry_string, is_current and ' *' or '')
+        end,
+      })
+    end
+  },
+  {
+    "LukasPietzschmann/telescope-tabs",
+    dependencies = { "nvim-telescope/telescope.nvim" }
   },
   {
     "nvim-telescope/telescope.nvim",
@@ -69,6 +87,7 @@ return {
 
       require("telescope").load_extension("lazy")
       require("telescope").load_extension("file_browser")
+      require("telescope").load_extension("telescope-tabs")
     end,
     keys = {
       -- [TODO] Use ripgrep
@@ -84,10 +103,12 @@ return {
         mode = "n",
         desc = "Telescope buffers"
       },
-      { "<C-s>h", function() require("telescope.builtin").help_tags() end, mode = "n", desc = "Telescope help" },
-      { "<C-s>k", function() require("telescope.builtin").keymaps() end,   mode = "n", desc = "Telescope key" },
-      { "<C-s>l", ":Telescope lazy<CR>",      mode = "n", desc = "Telescope lazy" },
-      { "<C-s>n", ":Telescope file_browser path=%:p:h select_buffer=true<CR>",      mode = "n", desc = "Telescope file browser" },
+      { "<C-s>h", function() require("telescope.builtin").help_tags() end,     mode = "n", desc = "Telescope help" },
+      { "<C-s>k", function() require("telescope.builtin").keymaps() end,       mode = "n", desc = "Telescope key" },
+      { "<C-s>l", ":Telescope lazy<CR>",                                       mode = "n", desc = "Telescope lazy" },
+      { "<C-s>n", ":Telescope file_browser path=%:p:h select_buffer=true<CR>", mode = "n",
+                                                                                             desc =
+        "Telescope file browser" },
       {
         "<C-s>a",
         function()
