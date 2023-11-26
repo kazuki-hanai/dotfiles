@@ -120,6 +120,15 @@ return {
         desc = "Telescope quickfix"
       },
       {
+        "<C-s>e",
+        function()
+          require("telescope.builtin").diagnostics({
+          })
+        end,
+        mode = "n",
+        desc = "Telescope quickfix"
+      },
+      {
         "<C-s>s",
         function()
           require("telescope.builtin").lsp_document_symbols({
