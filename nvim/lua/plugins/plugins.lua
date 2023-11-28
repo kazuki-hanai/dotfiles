@@ -103,5 +103,8 @@ return {
         css = true,
       }
     end,
-  }
+  },
+  {
+    "uga-rosa/utf8.nvim"
+  },
 }

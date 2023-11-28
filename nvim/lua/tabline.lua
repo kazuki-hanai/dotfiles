@@ -1,6 +1,8 @@
 -- nvim-tabline
 -- David Zhang <https://github.com/crispgm>
 
+local utf8 = require("utf8")
+
 local M = {}
 local fn = vim.fn
 
@@ -13,66 +15,43 @@ M.options = {
   modify_indicator = ' [+]',
 }
 
-M.tablist = {}
+local start_i = 1
 
-local function get_second_level_path(bufname)
-  local paths = {}
-  for p in string.gmatch(fn.fnamemodify(bufname, ":~:."), "[^/]+") do
-    table.insert(paths, p)
-  end
+local WINBUF = 0
 
-  local path = paths[#paths]
-  for i = 1, 2 do
-    if #paths - i < 1 then
-      break
-    end
-    path = paths[#paths - i] .. '/' .. path
-  end
-
-  return path
-end
-
-local function tabline(options)
-  local s = ''
+local function get_filename_list(options)
   local tabnr = fn.tabpagenr('$')
-  local tablen = 0
+  local filename_list = {}
+
   for index = 1, tabnr do
     local winnr = fn.tabpagewinnr(index)
-    local buflist = fn.tabpagebuflist(index)
-    local bufnr = buflist[winnr]
+    local bufnr = fn.tabpagebuflist(index)[winnr]
     local bufname = fn.bufname(bufnr)
     local bufmodified = fn.getbufvar(bufnr, '&mod')
 
-    s = s .. '%' .. index .. 'T'
-    if index == fn.tabpagenr() then
-      s = s .. '%#TabLineSel#'
-    else
-      s = s .. '%#TabLine#'
-    end
-    -- tab index
-    s = s .. ' '
+    local s = ''
+
     -- index
     if options.show_index then
       s = s .. index .. ':'
     end
+
     -- icon
-    local icon = ''
     if options.show_icon and M.has_devicons then
       local ext = fn.fnamemodify(bufname, ':e')
-      icon = M.devicons.get_icon(bufname, ext, { default = true }) .. ' '
+      local icon = M.devicons.get_icon(bufname, ext, { default = true })
+      s = s .. icon .. ' '
     end
 
-    local path = get_second_level_path(bufname)
-
+    -- bracket
     s = s .. options.brackets[1]
+
     if bufname ~= '' then
-      s = s .. icon .. path
-      tablen = tablen + string.len(icon .. path)
+      s = s .. bufname
     else
       s = s .. options.no_name
-      tablen = tablen + string.len(options.no_name)
     end
-    s = s .. options.brackets[2]
+
     -- modify indicator
     if
         bufmodified == 1
@@ -81,17 +60,143 @@ local function tabline(options)
     then
       s = s .. options.modify_indicator
     end
-    -- additional space at the end of each tab segment
-    s = s .. ' '
 
-    -- spaces
-    tablen = tablen + 6
+    -- bracket
+    s = s .. options.brackets[2]
+
+    table.insert(filename_list, {
+      index = index,
+      name = s
+    })
   end
 
-  s = s .. '%#TabLine#' .. tablen .. ''
-  tablen = tablen + 4
+  return filename_list
+end
 
+local function get_tablen(filename_list)
+  local tablen = 0
+  for index = 1, #filename_list do
+    tablen = tablen + utf8.len(filename_list[index].name)
+  end
+  return tablen
+end
+
+local function generate_shown_tab(filename_list)
+  local currtab = fn.tabpagenr()
+  local tabnr = fn.tabpagenr('$')
+  local winlen = vim.opt.columns:get()
+
+  local shown_filename_list = {}
+  local include_currtab = false
+
+  if currtab < start_i then
+    start_i = currtab
+  end
+
+  while true do
+    shown_filename_list = {}
+    local tablen = 0
+    for index = start_i, tabnr do
+      if filename_list[index] == nil then
+        break
+      end
+
+      tablen = tablen + utf8.len(filename_list[index].name)
+
+      if index == currtab then
+        include_currtab = true
+      end
+
+      table.insert(shown_filename_list, filename_list[index])
+
+      if winlen - 2 * (#shown_filename_list) - WINBUF < tablen then
+        break
+      end
+    end
+
+    if include_currtab then
+      break
+    end
+
+    start_i = start_i + 1
+  end
+
+  return shown_filename_list
+end
+
+local function generate_tab_string(filename_list)
+  local currtab = fn.tabpagenr()
+  local winlen = vim.opt.columns:get()
+
+  local s = ''
+
+  local tablen = 0
+  for index = 1, #filename_list do
+    tablen = tablen + utf8.len(filename_list[index].name)
+  end
+
+  if winlen -2 * (#filename_list) - WINBUF < tablen then
+    if #filename_list ~= 0 and filename_list[#filename_list].index ~= currtab then
+      for i = #filename_list, 1, -1 do
+        if tablen - utf8.len(filename_list[i].name) < winlen then
+          local bef_len = utf8.len(filename_list[i].name)
+          local end_offset = utf8.offset(filename_list[i].name, tablen - winlen + 3)
+          filename_list[i].name = string.sub(filename_list[i].name, 1, end_offset) .. '...'
+          tablen = tablen - bef_len + utf8.len(filename_list[i].name)
+          break
+        else
+          tablen = tablen - utf8.len(filename_list[i].name)
+          table.remove(filename_list, i)
+        end
+      end
+    else
+      while #filename_list ~= 1 do
+        local i = 1
+        if tablen - utf8.len(filename_list[i].name) < winlen then
+          local bef_len = utf8.len(filename_list[i].name)
+          local end_offset = utf8.offset(filename_list[i].name, tablen - winlen + 3)
+          filename_list[i].name = string.sub(filename_list[i].name, 1, end_offset) .. '...'
+          tablen = tablen - bef_len + utf8.len(filename_list[i].name)
+          break
+        else
+          tablen = tablen - utf8.len(filename_list[i].name)
+          table.remove(filename_list, i)
+        end
+      end
+    end
+  end
+
+  if #filename_list ~= 0 and filename_list[1].index ~= 1 then
+    filename_list[1].name = '<< ' .. filename_list[1].name
+  end
+
+  if #filename_list ~= 0 and filename_list[#filename_list].index ~= fn.tabpagenr('$') then
+    filename_list[#filename_list].name = filename_list[#filename_list].name .. ' >>'
+  end
+
+  for index = 1, #filename_list do
+    s = s .. '%' .. index .. 'T'
+    if filename_list[index].index == currtab then
+      s = s .. '%#TabLineSel#'
+    else
+      s = s .. '%#TabLine#'
+    end
+    s = s .. ' ' .. filename_list[index].name
+  end
+
+  s = s .. '%#TabLine#'
   s = s .. '%#TabLineFill#'
+
+  print(tablen, "/", winlen)
+
+  return s
+end
+
+local function tabline(options)
+  local filename_list = get_filename_list(options)
+  local shown_filename_list = generate_shown_tab(filename_list)
+  local s = generate_tab_string(shown_filename_list)
+
   return s
 end
 
