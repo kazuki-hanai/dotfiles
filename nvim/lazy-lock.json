@@ -28,6 +28,7 @@
   "telescope-lazy.nvim": { "branch": "main", "commit": "e75a349322db7f695bef2c50c4a85c90b064d031" },
   "telescope-tabs": { "branch": "master", "commit": "a38c8fee471257a0ff233e065c4a0d123f8e67b0" },
   "telescope.nvim": { "branch": "master", "commit": "776b509f80dd49d8205b9b0d94485568236d1192" },
+  "utf8.nvim": { "branch": "main", "commit": "954cbbadabe5cd19f202e918fec191d64eea7766" },
   "vim-colorschemes": { "branch": "master", "commit": "fd8f122cef604330c96a6a6e434682dbdfb878c9" },
   "vim-fugitive": { "branch": "master", "commit": "46eaf8918b347906789df296143117774e827616" },
   "vim-gitgutter": { "branch": "master", "commit": "e2056e54c50c6f3fbf386108eeb013e2a7f14ae3" },
