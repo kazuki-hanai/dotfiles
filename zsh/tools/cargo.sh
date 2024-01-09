@@ -9,9 +9,6 @@ export PATH="$HOME/cargo/.bin:$PATH"
 
 export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/src/
 
-# Install package
-installCargoPackage tokei
-
 if ! type eza > /dev/null 2>&1; then
      cargo install eza
 fi
@@ -43,3 +40,6 @@ if ! type btm > /dev/null 2>&1; then
      cargo install bottom
 fi
 
+if ! type dust > /dev/null 2>&1; then
+     cargo install dust
+fi
