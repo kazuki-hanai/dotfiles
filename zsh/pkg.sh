@@ -19,7 +19,6 @@ installUbuntu tk-dev
 installUbuntu llvm
 installUbuntu clang
 installUbuntu ca-certificates
-installUbuntu git-delta
 
 # gh command
 if [ -e /etc/lsb-release ] && ! type gh > /dev/null 2>&1; then
