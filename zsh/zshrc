@@ -8,12 +8,11 @@ loadsh ~/.dotfiles/zsh/preload.sh
 loadsh ~/.dotfiles/zsh/zsh-configs.sh
 loadsh ~/.dotfiles/zsh/history.sh
 loadsh ~/.dotfiles/zsh/export-path.sh
-loadsh ~/.dotfiles/zsh/pkg.sh
 loadsh ~/.dotfiles/zsh/symbolic-link.sh
 loadsh ~/.dotfiles/zsh/dotfiles-private.sh
-loadsh ~/.dotfiles/zsh/completion.sh
 
 # Import tool settings
+loadsh ~/.dotfiles/zsh/tools/pkg.sh
 loadsh ~/.dotfiles/zsh/tools/tmux.sh
 loadsh ~/.dotfiles/zsh/tools/zinit.sh
 loadsh ~/.dotfiles/zsh/tools/fzf/fzf.sh
@@ -27,6 +26,8 @@ loadsh ~/.dotfiles/zsh/tools/kubectl.sh
 loadsh ~/.dotfiles/zsh/tools/krew.sh
 loadsh ~/.dotfiles/zsh/tools/zoxide.sh
 
+# Completion settings
+loadsh ~/.dotfiles/zsh/completion.sh
 
 # Import local settings
 loadsh ~/.dotfiles/zsh/localconfig.sh
