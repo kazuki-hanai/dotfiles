@@ -41,5 +41,5 @@ if ! type btm > /dev/null 2>&1; then
 fi
 
 if ! type dust > /dev/null 2>&1; then
-     cargo install dust
+     cargo install du-dust
 fi
