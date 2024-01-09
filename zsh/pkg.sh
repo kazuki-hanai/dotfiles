@@ -19,6 +19,7 @@ installUbuntu tk-dev
 installUbuntu llvm
 installUbuntu clang
 installUbuntu cmake
+installUbuntu protobuf-compiler
 installUbuntu ca-certificates
 
 # gh command
