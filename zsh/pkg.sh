@@ -18,6 +18,7 @@ installUbuntu uuid-dev
 installUbuntu tk-dev
 installUbuntu llvm
 installUbuntu clang
+installUbuntu cmake
 installUbuntu ca-certificates
 
 # gh command
