@@ -1,7 +1,7 @@
 [user]
   name = Kazuki Hanai
   email = kazuki-hanai@wan-nyan-wan.net
-	signingKey = C65BDC57ED20745E
+  signingKey = C65BDC57ED20745E
 [alias]
   co = checkout
   cm = commit -S -m
@@ -36,25 +36,33 @@
   commit-decoration-style = bold yellow box ul
   file-style = bold yellow ul
   file-decoration-style = none
+
 [init]
   defaultBranch = main
+
 [commit]
-	gpgSign = true
+  gpgSign = true
+
 [gpg]
   # format = ssh
   program = /opt/homebrew/bin/gpg
-# [url "git@github.com:"]
-#	  insteadOf = https://github.com/
+
+[url "git@github.com:"]
+#  insteadOf = https://github.com/
+#
 [url "org-3324601@github.com:kouzoh/"]
-	insteadOf = git@github.com:kouzoh/
-	signingKey = key::ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBMoZbIwjFHajubA7YsBRMKaeTPS59LrDDzv7LfaKTmrYpLMvpkTDsXa7rf8ypBSRrC00UCAlzUe1IZOM4VYhJ0M= hnkz@mc-L0RMHYXWY9
+  insteadOf = git@github.com:kouzoh/
+  signingKey = key::ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBMoZbIwjFHajubA7YsBRMKaeTPS59LrDDzv7LfaKTmrYpLMvpkTDsXa7rf8ypBSRrC00UCAlzUe1IZOM4VYhJ0M= hnkz@mc-L0RMHYXWY9
+
 [url "org-86212660@github.com:kouzoh-mercoin/"]
-	insteadOf = git@github.com:kouzoh-mercoin/
-	signingKey = key::ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBMoZbIwjFHajubA7YsBRMKaeTPS59LrDDzv7LfaKTmrYpLMvpkTDsXa7rf8ypBSRrC00UCAlzUe1IZOM4VYhJ0M= hnkz@mc-L0RMHYXWY9
+  insteadOf = git@github.com:kouzoh-mercoin/
+  signingKey = key::ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBMoZbIwjFHajubA7YsBRMKaeTPS59LrDDzv7LfaKTmrYpLMvpkTDsXa7rf8ypBSRrC00UCAlzUe1IZOM4VYhJ0M= hnkz@mc-L0RMHYXWY9
 
 [includeIf "gitdir:/Users"]
   path = ~/.dotfiles/gitconfigs/gitconfig-macos
+
 [includeIf "gitdir:C:"]
   path = ~/.dotfiles/gitconfigs/gitconfig-windows
+
 [includeIf "gitdir:/home"]
   path = ~/.dotfiles/gitconfigs/gitconfig-linux
