@@ -114,3 +114,9 @@ require("tabline").setup({
   no_name = 'No name',      -- no name buffer name
   brackets = { ' [ ', ' ]' },  -- file name brackets surrounding
 })
+
+-- Define highlight group
+vim.api.nvim_set_hl(0, 'LocalSearch', { bold = true, underdotted = true,})
+
+-- Change updatetime
+vim.loop.update_time(500)
