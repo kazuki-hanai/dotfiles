@@ -1,47 +1,60 @@
 [user]
-    name = Kazuki Hanai
-    email = kazuki.hanai@wan-nyan-wan.net
+  name = Kazuki Hanai
+  email = kazuki.hanai@wan-nyan-wan.net
 [alias]
-    co = checkout
-    cm = commit -S -m
-    ad = add
-    ap = add -p
-    br = branch
-    ba = branch -a
-    pscb = !git push origin `git rev-parse --abbrev-ref HEAD`
-    ps = push
-    st = status
+  co = checkout
+  cm = commit -S -m
+  ad = add
+  ap = add -p
+  br = branch
+  ba = branch -a
+  pscb = !git push origin `git rev-parse --abbrev-ref HEAD`
+  ps = push
+  st = status
 [merge]
-    tool = vimdiff
-[http]
-    cookiefile = /home/sugerme/.gitcookies
+  tool = vimdiff
 [sendemail]
-    smtpuser = distributed.system.love@gmail.com
-    smtpserver = smtp.googlemail.com
-    smtpencryption = tls
-    smtpserverport = 587
+  smtpuser = kazuki.hanai@wan-nyan-wan.net
+  smtpserver = smtp.googlemail.com
+  smtpencryption = tls
+  smtpserverport = 587
 [core]
-    pager = delta
-    editor = nvim
+  pager = delta
+  editor = nvim
 
 [interactive]
-    diffFilter = delta --color-only
+  diffFilter = delta --color-only
 
 [delta]
-    line-numbers = true
-    decorations = true
+  line-numbers = true
+  decorations = true
 
 [delta "decorations"]
-    commit-decoration-style = bold yellow box ul
-    file-style = bold yellow ul
-    file-decoration-style = none
+  commit-decoration-style = bold yellow box ul
+  file-style = bold yellow ul
+  file-decoration-style = none
+
 [init]
-    defaultBranch = main
+  defaultBranch = main
+
 [commit]
-    gpgsign = true
+	gpgsign = true
+
+[gpg]
+  format = ssh
+  program = /opt/homebrew/bin/gpg
+
+[url "git@github.com:"]
+  insteadOf = https://github.com/
+
 [includeIf "gitdir:/Users"]
-    path = ~/.dotfiles/gitconfigs/gitconfig-macos
+  # path = ~/.dotfiles/gitconfigs/gitconfig-macos
+
 [includeIf "gitdir:C:"]
-    path = ~/.dotfiles/gitconfigs/gitconfig-windows
+  path = ~/.dotfiles/gitconfigs/gitconfig-windows
+
 [includeIf "gitdir:/home"]
-    path = ~/.dotfiles/gitconfigs/gitconfig-linux
+  path = ~/.dotfiles/gitconfigs/gitconfig-linux
+
+[include]
+  path = ~/.dotfiles-private/gitconfig
