@@ -107,4 +107,22 @@ return {
   {
     "uga-rosa/utf8.nvim"
   },
+  {
+    'tzachar/local-highlight.nvim', 
+    config = function()
+
+      require('local-highlight').setup({
+        -- file_types = {'lua'},
+        hlgroup = 'LocalSearch',
+      })
+
+      -- Attach to all buffers
+      vim.api.nvim_create_autocmd('BufRead', {
+        pattern = {'*.*'},
+        callback = function(data)
+          require('local-highlight').attach(data.buf)
+        end
+      })
+    end
+  },
 }
