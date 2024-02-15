@@ -10,23 +10,20 @@ M.options = {
   show_index = true,
   show_modify = true,
   show_icon = false,
-  brackets = { '[', ']' },
+  brackets = { '[ ', ' ]' },
   no_name = 'No Name',
-  modify_indicator = ' [+]',
+  modify_indicator = '[+]',
 }
 
 local start_i = 1
 
-local WINBUF = 0
-
-local function get_filename_list(options)
-  local tabnr = fn.tabpagenr('$')
+local function get_filename_list(options, tabnr)
   local filename_list = {}
 
   for index = 1, tabnr do
     local winnr = fn.tabpagewinnr(index)
     local bufnr = fn.tabpagebuflist(index)[winnr]
-    local bufname = fn.bufname(bufnr)
+    local path = fn.fnamemodify(fn.bufname(bufnr), ":p:~:.")
     local bufmodified = fn.getbufvar(bufnr, '&mod')
 
     local s = ''
@@ -38,16 +35,16 @@ local function get_filename_list(options)
 
     -- icon
     if options.show_icon and M.has_devicons then
-      local ext = fn.fnamemodify(bufname, ':e')
-      local icon = M.devicons.get_icon(bufname, ext, { default = true })
-      s = s .. icon .. ' '
+      local ext = fn.fnamemodify(path, ':e')
+      local icon = M.devicons.get_icon(path, ext, { default = true })
+      s = s .. icon
     end
 
     -- bracket
     s = s .. options.brackets[1]
 
-    if bufname ~= '' then
-      s = s .. bufname
+    if path ~= '' then
+      s = s .. path
     else
       s = s .. options.no_name
     end
@@ -73,19 +70,7 @@ local function get_filename_list(options)
   return filename_list
 end
 
-local function get_tablen(filename_list)
-  local tablen = 0
-  for index = 1, #filename_list do
-    tablen = tablen + utf8.len(filename_list[index].name)
-  end
-  return tablen
-end
-
-local function generate_shown_tab(filename_list)
-  local currtab = fn.tabpagenr()
-  local tabnr = fn.tabpagenr('$')
-  local winlen = vim.opt.columns:get()
-
+local function generate_shown_tab(filename_list, winlen, tabnr, currtab)
   local shown_filename_list = {}
   local include_currtab = false
 
@@ -93,15 +78,16 @@ local function generate_shown_tab(filename_list)
     start_i = currtab
   end
 
+  local tablen = 0
   while true do
     shown_filename_list = {}
-    local tablen = 0
+    tablen = 4
     for index = start_i, tabnr do
       if filename_list[index] == nil then
         break
       end
 
-      tablen = tablen + utf8.len(filename_list[index].name)
+      tablen = tablen + utf8.len(filename_list[index].name) + 1
 
       if index == currtab then
         include_currtab = true
@@ -109,7 +95,7 @@ local function generate_shown_tab(filename_list)
 
       table.insert(shown_filename_list, filename_list[index])
 
-      if winlen - 2 * (#shown_filename_list) - WINBUF < tablen then
+      if winlen < tablen then
         break
       end
     end
@@ -121,50 +107,45 @@ local function generate_shown_tab(filename_list)
     start_i = start_i + 1
   end
 
-  return shown_filename_list
-end
-
-local function generate_tab_string(filename_list)
-  local currtab = fn.tabpagenr()
-  local winlen = vim.opt.columns:get()
-
-  local s = ''
-
-  local tablen = 0
-  for index = 1, #filename_list do
-    tablen = tablen + utf8.len(filename_list[index].name)
-  end
-
-  if winlen -2 * (#filename_list) - WINBUF < tablen then
-    if #filename_list ~= 0 and filename_list[#filename_list].index ~= currtab then
-      for i = #filename_list, 1, -1 do
-        if tablen - utf8.len(filename_list[i].name) < winlen then
-          local bef_len = utf8.len(filename_list[i].name)
-          local end_offset = utf8.offset(filename_list[i].name, tablen - winlen + 3)
-          filename_list[i].name = string.sub(filename_list[i].name, 1, end_offset) .. '...'
-          tablen = tablen - bef_len + utf8.len(filename_list[i].name)
+  if winlen < tablen then
+    if #shown_filename_list ~= 0 and shown_filename_list[#shown_filename_list].index ~= currtab then
+      for i = #shown_filename_list, 1, -1 do
+        if tablen - utf8.len(shown_filename_list[i].name) < winlen then
+          local bef_len = utf8.len(shown_filename_list[i].name)
+          local end_offset = utf8.offset(shown_filename_list[i].name, tablen - winlen - 3)
+          shown_filename_list[i].name = string.sub(shown_filename_list[i].name, 1, end_offset) .. '...'
+          tablen = tablen - bef_len + utf8.len(shown_filename_list[i].name)
           break
         else
-          tablen = tablen - utf8.len(filename_list[i].name)
-          table.remove(filename_list, i)
+          tablen = tablen - utf8.len(shown_filename_list[i].name)
+          table.remove(shown_filename_list, i)
         end
       end
     else
-      while #filename_list ~= 1 do
+      while #shown_filename_list ~= 1 do
         local i = 1
-        if tablen - utf8.len(filename_list[i].name) < winlen then
-          local bef_len = utf8.len(filename_list[i].name)
-          local end_offset = utf8.offset(filename_list[i].name, tablen - winlen + 3)
-          filename_list[i].name = string.sub(filename_list[i].name, 1, end_offset) .. '...'
-          tablen = tablen - bef_len + utf8.len(filename_list[i].name)
+        if tablen - utf8.len(shown_filename_list[i].name) < winlen then
+          local bef_len = utf8.len(shown_filename_list[i].name)
+          local end_offset = utf8.offset(shown_filename_list[i].name, tablen - winlen - 3)
+          shown_filename_list[i].name = string.sub(shown_filename_list[i].name, 1, end_offset) .. '...'
+          tablen = tablen - bef_len + utf8.len(shown_filename_list[i].name)
           break
         else
-          tablen = tablen - utf8.len(filename_list[i].name)
-          table.remove(filename_list, i)
+          tablen = tablen - utf8.len(shown_filename_list[i].name)
+          table.remove(shown_filename_list, i)
         end
       end
     end
   end
+
+  print(tablen, "/", winlen)
+
+  return shown_filename_list
+end
+
+local function generate_tab_string(filename_list, winlen, currtab)
+
+  local s = ''
 
   if #filename_list ~= 0 and filename_list[1].index ~= 1 then
     filename_list[1].name = '<< ' .. filename_list[1].name
@@ -187,15 +168,17 @@ local function generate_tab_string(filename_list)
   s = s .. '%#TabLine#'
   s = s .. '%#TabLineFill#'
 
-  print(tablen, "/", winlen)
-
   return s
 end
 
 local function tabline(options)
-  local filename_list = get_filename_list(options)
-  local shown_filename_list = generate_shown_tab(filename_list)
-  local s = generate_tab_string(shown_filename_list)
+  local winlen = vim.opt.columns:get()
+  local tabnr = fn.tabpagenr('$')
+  local currtab = fn.tabpagenr()
+
+  local filename_list = get_filename_list(options, tabnr)
+  local shown_filename_list = generate_shown_tab(filename_list, winlen, tabnr, currtab)
+  local s = generate_tab_string(shown_filename_list, winlen, currtab)
 
   return s
 end
