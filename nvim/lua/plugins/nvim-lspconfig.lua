@@ -93,6 +93,9 @@ return {
       -- lspconfig.markdownlint.setup {}
       lspconfig.tailwindcss.setup {}
       -- lspconfig.prettier.setup {}
+      lspconfig.dartls.setup({
+        cmd = { "dart", 'language-server', '--protocol=lsp' },
+      })
     end
   }
 }
