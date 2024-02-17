@@ -6,6 +6,7 @@ export PATH="$HOME/.anyenv/bin:$PATH"
 
 eval "$(anyenv init -)"
 
+
 ########### Install nodenv ###########
 local NODE_VERSION=19.6.0
 if [ ! -d ~/.anyenv/envs/nodenv ]; then
@@ -18,6 +19,7 @@ if [[ $(nodenv versions 2>/dev/null | wc -l | awk '{print $1}') = 0 ]];then
   nodenv install $NODE_VERSION
   nodenv global $NODE_VERSION
 fi
+
 
 ########### Install pyenv ###########
 local PYENV_VERSION=3.11.0
@@ -47,6 +49,7 @@ if [ ! type poetry > /dev/null 2>&1 ]; then
     curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
 fi
 
+
 ########### Install tfenv ###########
 local TERRAFORM_VERSION=1.1.0
 
@@ -59,4 +62,16 @@ tfenv init
 if [[ $(tfenv list 2>/dev/null | wc -l | awk '{print $1}') = 0 ]];then
   tfenv install $TERRAFORM_VERSION
   tfenv use $TERRAFORM_VERSION
+fi
+
+
+########### Install tfenv ###########
+local GO_VERSION=1.22.0
+if [ ! -d ~/.anyenv/envs/goenv ]; then
+  ~/.anyenv/bin/anyenv install goenv
+fi
+
+if ! ~/.anyenv/envs/goenv/bin/goenv versions 1>/dev/null 2>&1; then
+  ~/.anyenv/envs/goenv/bin/goenv install $GO_VERSION
+  goenv global $GO_VERSION
 fi
