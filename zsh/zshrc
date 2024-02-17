@@ -1,6 +1,9 @@
 
 source ~/.dotfiles/zsh/lib.sh
 
+# Check if brew is installed
+loadsh ~/.dotfiles/zsh/tools/brew.sh
+
 # Import basic settings before loading others
 loadsh ~/.dotfiles/zsh/preload.sh
 
@@ -16,6 +19,9 @@ loadsh ~/.dotfiles/zsh/tools/pkg.sh
 loadsh ~/.dotfiles/zsh/tools/tmux.sh
 loadsh ~/.dotfiles/zsh/tools/zinit.sh
 loadsh ~/.dotfiles/zsh/tools/fzf/fzf.sh
+loadsh ~/.dotfiles/zsh/tools/gomi.sh
+loadsh ~/.dotfiles/zsh/tools/protobuf.sh
+loadsh ~/.dotfiles/zsh/tools/gh.sh
 loadsh ~/.dotfiles/zsh/tools/cargo.sh
 loadsh ~/.dotfiles/zsh/tools/anyenv/anyenv.sh
 loadsh ~/.dotfiles/zsh/tools/go/go.sh
