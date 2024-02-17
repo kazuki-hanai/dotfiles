@@ -9,6 +9,7 @@
 ```bash
 # Install [raycast](https://www.raycast.com/)
 # Install [karabiner](https://karabiner-elements.pqrs.org/) and setup config
+# Install nerdfont
 zsh # Startup new shell
 ```
 
