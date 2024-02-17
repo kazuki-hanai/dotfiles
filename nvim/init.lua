@@ -119,4 +119,4 @@ require("tabline").setup({
 vim.api.nvim_set_hl(0, 'LocalSearch', { bold = true, underdotted = true,})
 
 -- Change updatetime
-vim.loop.update_time(500)
+vim.opt.updatetime = 100
