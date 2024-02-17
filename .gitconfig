@@ -58,3 +58,6 @@
 
 [include]
   path = ~/.dotfiles-private/gitconfig
+
+[include]
+  path = ~/.gitconfig.local
