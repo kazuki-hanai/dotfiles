@@ -1,0 +1,27 @@
+{
+    "description": "Change ; to right_command if pressed with other keys (Post spacebar when pressed alone)",
+    "manipulators": [
+        {
+            "from": {
+                "key_code": "semicolon",
+                "modifiers": {
+                    "optional": [
+                        "any"
+                    ]
+                }
+            },
+            "to": [
+                {
+                    "key_code": "right_command",
+                    "modifiers": []
+                }
+            ],
+            "to_if_alone": [
+                {
+                    "key_code": "semicolon"
+                }
+            ],
+            "type": "basic"
+        }
+    ]
+}
