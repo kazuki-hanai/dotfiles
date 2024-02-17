@@ -40,10 +40,6 @@
 [commit]
 	gpgsign = true
 
-[gpg]
-  format = ssh
-  program = /opt/homebrew/bin/gpg
-
 [url "git@github.com:"]
   insteadOf = https://github.com/
 
