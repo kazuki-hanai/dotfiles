@@ -125,4 +125,28 @@ return {
       })
     end
   },
+  {
+    'kessejones/term.nvim',
+    config = function()
+      require("term").setup({
+        shell = vim.o.shell,
+        width = 0.8,
+        height = 0.7,
+        anchor = "NW",
+        position = "center",
+        title = {
+          align = "center",
+        },
+        border = {
+          chars = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+          hl = "TermBorder",
+        },
+      })
+
+      -- vim.keymap.set({ 't' }, '<C-\\><C-t>', require('term').new, { silent = true })
+      vim.keymap.set({ 'n', 't' }, '<C-[>', require('term').toggle, { silent = true })
+      -- vim.keymap.set({ 't' }, '<C-\\><C-n>', require('term').next, { silent = true })
+      -- vim.keymap.set({ 't' }, '<C-\\><C-p>', require('term').prev, { silent = true })
+    end
+  }
 }
