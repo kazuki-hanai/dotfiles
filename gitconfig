@@ -43,17 +43,5 @@
 [url "git@github.com:"]
   insteadOf = https://github.com/
 
-[includeIf "gitdir:/Users"]
-  path = ~/.dotfiles/gitconfigs/gitconfig-macos
-
-[includeIf "gitdir:C:"]
-  path = ~/.dotfiles/gitconfigs/gitconfig-windows
-
-[includeIf "gitdir:/home"]
-  path = ~/.dotfiles/gitconfigs/gitconfig-linux
-
-[include]
-  path = ~/.dotfiles-private/gitconfig
-
 [include]
   path = ~/.gitconfig.local
