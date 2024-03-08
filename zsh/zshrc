@@ -1,7 +1,9 @@
 source ~/.dotfiles/zsh/lib.sh
 
 # Import basic settings before loading others
-loadsh ~/.dotfiles/zsh/preload.sh
+source ~/.dotfiles/zsh/preload.sh
+
+source ~/.dotfiles/zsh/plugins/zinit.sh
 
 # Import standard settings
 loadsh ~/.dotfiles/zsh/zsh-configs.sh
@@ -10,24 +12,23 @@ loadsh ~/.dotfiles/zsh/export-path.sh
 loadsh ~/.dotfiles/zsh/symbolic-link.sh
 loadsh ~/.dotfiles/zsh/dotfiles-private.sh
 
-# Import tool settings
-loadsh ~/.dotfiles/zsh/tools/brew.sh
-loadsh ~/.dotfiles/zsh/tools/pkg.sh
-loadsh ~/.dotfiles/zsh/tools/tmux.sh
-loadsh ~/.dotfiles/zsh/tools/zinit.sh
-loadsh ~/.dotfiles/zsh/tools/fzf.sh
-loadsh ~/.dotfiles/zsh/tools/gomi.sh
-loadsh ~/.dotfiles/zsh/tools/protobuf.sh
-loadsh ~/.dotfiles/zsh/tools/gh.sh
-loadsh ~/.dotfiles/zsh/tools/cargo.sh
-loadsh ~/.dotfiles/zsh/tools/anyenv.sh
-loadsh ~/.dotfiles/zsh/tools/go.sh
-loadsh ~/.dotfiles/zsh/tools/poetry.sh
-loadsh ~/.dotfiles/zsh/tools/deno.sh
-loadsh ~/.dotfiles/zsh/tools/nvim.sh
-loadsh ~/.dotfiles/zsh/tools/kubectl.sh
-loadsh ~/.dotfiles/zsh/tools/krew.sh
-loadsh ~/.dotfiles/zsh/tools/zoxide.sh
+# Import plugins settings
+loadsh ~/.dotfiles/zsh/plugins/brew.sh
+loadsh ~/.dotfiles/zsh/plugins/pkg.sh
+loadsh ~/.dotfiles/zsh/plugins/tmux.sh
+loadsh ~/.dotfiles/zsh/plugins/fzf.sh
+loadsh ~/.dotfiles/zsh/plugins/gomi.sh
+loadsh ~/.dotfiles/zsh/plugins/protobuf.sh
+loadsh ~/.dotfiles/zsh/plugins/gh.sh
+loadsh ~/.dotfiles/zsh/plugins/cargo.sh
+loadsh ~/.dotfiles/zsh/plugins/anyenv.sh
+loadsh ~/.dotfiles/zsh/plugins/go.sh
+loadsh ~/.dotfiles/zsh/plugins/poetry.sh
+loadsh ~/.dotfiles/zsh/plugins/deno.sh
+loadsh ~/.dotfiles/zsh/plugins/nvim.sh
+loadsh ~/.dotfiles/zsh/plugins/kubectl.sh
+loadsh ~/.dotfiles/zsh/plugins/krew.sh
+loadsh ~/.dotfiles/zsh/plugins/zoxide.sh
 
 # Completion settings
 loadsh ~/.dotfiles/zsh/completion.sh
