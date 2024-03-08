@@ -26,11 +26,16 @@ async fn main() {
         Err(e) => panic!("Error: {}", e),
     };
 
+    let model_name = match env::var("MODEL_NAME") {
+        Ok(val) => val,
+        Err(e) => panic!("Error: {}", e),
+    };
+
     let question: String = env::args().collect::<Vec<String>>()[1..].join(" ");
 
     let client = ChatGPTClient::new(&openai_api_key, OPENAI_BASE_URL);
     let chat_input = ChatInput {
-        model: Model::Gpt3_5Turbo,
+        model: Model::Gpt_4Turbo,
         messages: vec![
             Message {
                 role: Role::System,
@@ -46,7 +51,7 @@ async fn main() {
 
     let mut sp = Spinner::new(
         Spinners::Dots9,
-        "Waiting for response from OpenAI"
+        "Waiting for response from AI"
             .bright_black()
             .to_string(),
     );
