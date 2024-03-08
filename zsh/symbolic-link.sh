@@ -3,7 +3,7 @@
 link ~/.dotfiles/zsh/.zshrc ~/.zshrc
 
 # .gitconfig
-link ~/.dotfiles/.gitconfig ~/.gitconfig
+link ~/.dotfiles/gitconfig ~/.gitconfig
 
 # nvim
 mkdir -p ~/.config && link ~/.dotfiles/nvim ~/.config/nvim

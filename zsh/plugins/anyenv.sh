@@ -6,7 +6,6 @@ export PATH="$HOME/.anyenv/bin:$PATH"
 
 eval "$(anyenv init -)"
 
-
 ########### Install nodenv ###########
 local NODE_VERSION=19.6.0
 if [ ! -d ~/.anyenv/envs/nodenv ]; then
@@ -65,7 +64,7 @@ if [[ $(tfenv list 2>/dev/null | wc -l | awk '{print $1}') = 0 ]];then
 fi
 
 
-########### Install tfenv ###########
+########### Install goenv ###########
 local GO_VERSION=1.22.0
 if [ ! -d ~/.anyenv/envs/goenv ]; then
   ~/.anyenv/bin/anyenv install goenv
@@ -75,3 +74,4 @@ if ! ~/.anyenv/envs/goenv/bin/goenv versions 1>/dev/null 2>&1; then
   ~/.anyenv/envs/goenv/bin/goenv install $GO_VERSION
   goenv global $GO_VERSION
 fi
+
