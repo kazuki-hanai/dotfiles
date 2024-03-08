@@ -102,6 +102,10 @@ return {
         html = true,
         css = true,
       }
+      vim.keymap.set('i', '<C-c>p', '<Plug>(copilot-previous)')
+      vim.keymap.set('i', '<C-c>n', '<Plug>(copilot-next)')
+      vim.keymap.set('i', '<C-c>w', '<Plug>(copilot-accept-word)')
+      vim.keymap.set('i', '<C-c>l', '<Plug>(copilot-accept-line)')
     end,
   },
   {
@@ -144,9 +148,15 @@ return {
       })
 
       -- vim.keymap.set({ 't' }, '<C-\\><C-t>', require('term').new, { silent = true })
-      vim.keymap.set({ 'n', 't' }, '<C-[>', require('term').toggle, { silent = true })
+      vim.keymap.set({ 'n', 't' }, '<C-\\><C-\\>', require('term').toggle, { silent = true })
       -- vim.keymap.set({ 't' }, '<C-\\><C-n>', require('term').next, { silent = true })
       -- vim.keymap.set({ 't' }, '<C-\\><C-p>', require('term').prev, { silent = true })
     end
-  }
+  },
+  {
+    'mbbill/undotree',
+    config = function ()
+      vim.keymap.set({ 'n' }, '<leader>u', ':UndotreeToggle<CR>', { noremap = true, silent = true })
+    end
+  },
 }
