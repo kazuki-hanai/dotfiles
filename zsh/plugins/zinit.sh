@@ -9,13 +9,10 @@ source "${ZINIT_HOME}/zinit.zsh"
 zinit load "zsh-users/zsh-syntax-highlighting"
 zinit load "zsh-users/zsh-autosuggestions"
 zinit load "zsh-users/zsh-completions"
-# zinit load "chrissicool/zsh-256color"
-# zinit load "mollifier/anyframe"
-# zinit load "darvid/zsh-poetry"
-zinit ice pick"async.zsh"
 
 # Load pure theme
-zinit ice pick"async.zsh" src"pure.zsh" # with zsh-async library that's bundled with it.
+# with zsh-async library that's bundled with it.
+zinit ice pick"async.zsh" src"pure.zsh"
 zinit light sindresorhus/pure
 
 zstyle :prompt:pure:git:stash show yes

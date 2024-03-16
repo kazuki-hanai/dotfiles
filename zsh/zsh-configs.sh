@@ -1,7 +1,7 @@
 # zsh configs
 
 # completions
-fpath=(/usr/local/share/zsh-completions $fpath)
+fpath=(~/.local/share/zsh-completions $fpath)
 fpath+=~/.zfunc
 
 # bashcompinit
