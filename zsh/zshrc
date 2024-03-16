@@ -1,18 +1,20 @@
+# Import basic settings before loading others
+
+if [ "$ZPROF" = true ]; then
+  zmodload zsh/zprof && zprof > ~/.local/share/zprof.log
+fi
+
+source ~/.dotfiles/zsh/preload.sh
 source ~/.dotfiles/zsh/lib.sh
 
-# Import basic settings before loading others
-source ~/.dotfiles/zsh/preload.sh
-
-source ~/.dotfiles/zsh/plugins/zinit.sh
-
-# Import standard settings
 loadsh ~/.dotfiles/zsh/zsh-configs.sh
+loadsh ~/.dotfiles/zsh/plugins/zinit.sh
+
 loadsh ~/.dotfiles/zsh/history.sh
 loadsh ~/.dotfiles/zsh/export-path.sh
 loadsh ~/.dotfiles/zsh/symbolic-link.sh
 loadsh ~/.dotfiles/zsh/dotfiles-private.sh
 
-# Import plugins settings
 loadsh ~/.dotfiles/zsh/plugins/brew.sh
 loadsh ~/.dotfiles/zsh/plugins/pkg.sh
 loadsh ~/.dotfiles/zsh/plugins/tmux.sh
@@ -30,8 +32,9 @@ loadsh ~/.dotfiles/zsh/plugins/kubectl.sh
 loadsh ~/.dotfiles/zsh/plugins/krew.sh
 loadsh ~/.dotfiles/zsh/plugins/zoxide.sh
 
-# Completion settings
-loadsh ~/.dotfiles/zsh/completion.sh
-
 # Import local settings
-loadsh ~/.dotfiles/zsh/localconfig.sh
+source ~/.dotfiles/zsh/localconfig.sh
+
+if [[ "$ZPROF" = true && ! `which zprof > /dev/null` ]] ;then
+  zprof >> ~/.local/share/zprof.log
+fi

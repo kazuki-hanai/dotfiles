@@ -5,3 +5,8 @@ if ! exists kubectl; then
 fi
 
 alias k=kubectl
+
+# If _kubectl completions exists in fpath, skip set completions
+if type _kubectl &>/dev/null; then
+  source <(kubectl completion zsh)
+fi
