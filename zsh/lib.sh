@@ -1,4 +1,3 @@
-
 # Reset
 NC='\033[0m'              # Text Reset
 
@@ -73,6 +72,9 @@ On_IPurple='\033[0;105m'  # Purple
 On_ICyan='\033[0;106m'    # Cyan
 On_IWhite='\033[0;107m'   # White
 
+# Constants
+UNAME=$(uname -s)
+
 # Load script. When $ENV = true, show how long time to execute script.
 loadsh() {
   if [ "$DEBUG" = true ]; then
@@ -86,7 +88,7 @@ loadsh() {
 }
 
 isMac() {
-  [ "$(uname)" = 'Darwin' ]
+  [ "$UNAME" = 'Darwin' ]
 }
 
 isUbuntu() {
@@ -103,7 +105,7 @@ install() {
 }
 
 installMac() {
-  if [ "$(uname)" = 'Darwin' ]; then
+  if [ "$UNAME" = 'Darwin' ]; then
     if ! which $1 1>/dev/null; then
       if [ "$#" = 1 ]; then
         brew install $1;

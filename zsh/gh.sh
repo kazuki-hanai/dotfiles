@@ -9,3 +9,5 @@ if isUbuntu && ! exists gh; then
 elif isMac && ! exists gh; then
   brew install gh
 fi
+
+source <(gh completion -s zsh)
