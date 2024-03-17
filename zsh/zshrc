@@ -1,5 +1,3 @@
-# Import basic settings before loading others
-
 if [ "$ZPROF" = true ]; then
   zmodload zsh/zprof && zprof > ~/.local/share/zprof.log
 fi
@@ -7,30 +5,32 @@ fi
 source ~/.dotfiles/zsh/preload.sh
 source ~/.dotfiles/zsh/lib.sh
 
+loadsh ~/.dotfiles/zsh/zinit.sh
 loadsh ~/.dotfiles/zsh/zsh-configs.sh
-loadsh ~/.dotfiles/zsh/plugins/zinit.sh
 
+# Import standard settings
 loadsh ~/.dotfiles/zsh/history.sh
 loadsh ~/.dotfiles/zsh/export-path.sh
 loadsh ~/.dotfiles/zsh/symbolic-link.sh
 loadsh ~/.dotfiles/zsh/dotfiles-private.sh
 
-loadsh ~/.dotfiles/zsh/plugins/brew.sh
-loadsh ~/.dotfiles/zsh/plugins/pkg.sh
-loadsh ~/.dotfiles/zsh/plugins/tmux.sh
-loadsh ~/.dotfiles/zsh/plugins/fzf.sh
-loadsh ~/.dotfiles/zsh/plugins/gomi.sh
-loadsh ~/.dotfiles/zsh/plugins/protobuf.sh
-loadsh ~/.dotfiles/zsh/plugins/gh.sh
-loadsh ~/.dotfiles/zsh/plugins/cargo.sh
-loadsh ~/.dotfiles/zsh/plugins/anyenv.sh
-loadsh ~/.dotfiles/zsh/plugins/go.sh
-loadsh ~/.dotfiles/zsh/plugins/poetry.sh
-loadsh ~/.dotfiles/zsh/plugins/deno.sh
-loadsh ~/.dotfiles/zsh/plugins/nvim.sh
-loadsh ~/.dotfiles/zsh/plugins/kubectl.sh
-loadsh ~/.dotfiles/zsh/plugins/krew.sh
-loadsh ~/.dotfiles/zsh/plugins/zoxide.sh
+loadsh ~/.dotfiles/zsh/brew.sh
+loadsh ~/.dotfiles/zsh/pkg.sh
+loadsh ~/.dotfiles/zsh/tmux.sh
+loadsh ~/.dotfiles/zsh/fzf.sh
+loadsh ~/.dotfiles/zsh/gomi.sh
+loadsh ~/.dotfiles/zsh/protobuf.sh
+loadsh ~/.dotfiles/zsh/gh.sh
+loadsh ~/.dotfiles/zsh/cargo.sh
+# loadsh ~/.dotfiles/zsh/anyenv.sh
+loadsh ~/.dotfiles/zsh/go.sh
+loadsh ~/.dotfiles/zsh/poetry.sh
+loadsh ~/.dotfiles/zsh/deno.sh
+loadsh ~/.dotfiles/zsh/nvim.sh
+loadsh ~/.dotfiles/zsh/kubectl.sh
+loadsh ~/.dotfiles/zsh/krew.sh
+loadsh ~/.dotfiles/zsh/zoxide.sh
+loadsh ~/.dotfiles/zsh/p10k.zsh
 
 # Import local settings
 source ~/.dotfiles/zsh/localconfig.sh

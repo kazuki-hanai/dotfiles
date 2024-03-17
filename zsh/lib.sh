@@ -1,4 +1,3 @@
-
 # Reset
 NC='\033[0m'              # Text Reset
 
