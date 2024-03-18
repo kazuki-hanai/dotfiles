@@ -1,0 +1,14 @@
+
+if [[ -z "$1" ]]; then
+  echo "Usage: $0 <project|cluster>"
+  exit 1
+fi
+
+project=$(kubectl config current-context | awk -F '_' '{ print($2) }')
+cluster=$(kubectl config current-context | awk -F '_' '{ print($4) }')
+
+if [[ "$1" == "project" ]]; then
+  echo $project
+elif [[ "$1" == "cluster" ]]; then
+  echo $cluster
+fi
