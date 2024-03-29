@@ -1,0 +1,28 @@
+diff=$(</dev/stdin)
+
+prompt="
+- Give me a commit message for following Diff.
+- Commit message should:
+  - Be one line.
+  - Be easy to understand.
+  - Contain the main purpose of the change and what it does.
+- Output format should be JSON.
+  - Do not output codeblocks characters such as \`\`\` or \`\`.
+
+## Diff
+\`\`\`
+$diff
+\`\`\`
+
+## Output format
+- Must only output the JSON object.
+- Must not output as code block.
+
+\`\`\`json
+{
+  \"message\": \"String\"
+}
+\`\`\`
+"
+
+echo "$prompt" | xargs -0 hey
