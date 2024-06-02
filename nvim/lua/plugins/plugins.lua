@@ -134,7 +134,7 @@ return {
     config = function()
       require("term").setup({
         shell = vim.o.shell,
-        width = 0.8,
+        width = 0.9,
         height = 0.7,
         anchor = "NW",
         position = "center",

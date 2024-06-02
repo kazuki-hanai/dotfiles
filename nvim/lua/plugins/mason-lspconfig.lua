@@ -14,6 +14,7 @@ return {
           "yamlls",
           "terraformls",
           "dagger",
+          "markdownlint",
         },
         automatic_installation = true,
       }
