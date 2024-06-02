@@ -61,8 +61,7 @@ return {
         }
       }
       lspconfig.clangd.setup {}
-      lspconfig.pylsp.setup {}
-      -- lspconfig.pyright.setup {}
+      lspconfig.basedpyright.setup {}
       lspconfig.rust_analyzer.setup {
         settings = {
           ['rust-analyzer'] = {
@@ -73,8 +72,26 @@ return {
         }
       }
       lspconfig.gopls.setup {}
-      lspconfig.tsserver.setup {}
-      lspconfig.denols.setup {}
+      lspconfig.tsserver.setup {
+        root_dir = lspconfig.util.root_pattern("package.json"),
+      }
+      lspconfig.denols.setup {
+        root_dir = lspconfig.util.root_pattern("deno.json"),
+        init_options = {
+          lint = true,
+          unstable = true,
+          suggest = {
+            imports = {
+              hosts = {
+                ["https://deno.land"] = true,
+                ["https://cdn.nest.land"] = true,
+                ["https://crux.land"] = true,
+              },
+            },
+          },
+        },
+      }
+      lspconfig.biome.setup{}
       lspconfig.yamlls.setup {
         settings = {
           yaml = {
@@ -90,8 +107,8 @@ return {
       lspconfig.terraformls.setup {}
       lspconfig.dagger.setup {}
       lspconfig.graphql.setup {}
-      -- lspconfig.markdownlint.setup {}
-      lspconfig.tailwindcss.setup {}
+      lspconfig.markdownlint.setup {}
+      -- lspconfig.tailwindcss.setup {}
       -- lspconfig.prettier.setup {}
       lspconfig.dartls.setup({
         cmd = { "dart", 'language-server', '--protocol=lsp' },

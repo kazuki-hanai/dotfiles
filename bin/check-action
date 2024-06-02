@@ -1,0 +1,19 @@
+
+workflow_path=$1
+
+# Check if the workflow file exists
+if [ ! -f $workflow_path ]; then
+  echo "Workflow file not found: $workflow_path"
+  exit 1
+fi
+
+prompt="
+
+Please review following github_action workflow.
+
+\`\`\`
+`cat $workflow_path`
+\`\`\`
+"
+
+echo "$prompt" | xargs -0 hey
