@@ -1,0 +1,3 @@
+#!/bin/bash
+
+python -c "import csv,json;print(json.dumps(list(csv.DictReader(open('/dev/stdin')))))"

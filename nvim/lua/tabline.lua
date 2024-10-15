@@ -1,5 +1,4 @@
 -- nvim-tabline
--- David Zhang <https://github.com/crispgm>
 
 local utf8 = require("utf8")
 
@@ -34,11 +33,11 @@ local function get_filename_list(options, tabnr)
     end
 
     -- icon
-    if options.show_icon and M.has_devicons then
-      local ext = fn.fnamemodify(path, ':e')
-      local icon = M.devicons.get_icon(path, ext, { default = true })
-      s = s .. icon
-    end
+    -- if options.show_icon and M.has_devicons then
+    --   local ext = fn.fnamemodify(path, ':e')
+    --   local icon = M.devicons.get_icon(path, ext, { default = true })
+    --   s = s .. icon
+    -- end
 
     -- bracket
     s = s .. options.brackets[1]
@@ -81,13 +80,17 @@ local function generate_shown_tab(filename_list, winlen, tabnr, currtab)
   local tablen = 0
   while true do
     shown_filename_list = {}
-    tablen = 4
+    -- "<< " and " >>" are 6 characters
+    tablen = 10
+
     for index = start_i, tabnr do
       if filename_list[index] == nil then
         break
       end
 
-      tablen = tablen + utf8.len(filename_list[index].name) + 1
+      -- +3 is for the space and the two brackets?
+      -- TODO: Fix 
+      tablen = tablen + utf8.len(filename_list[index].name) + 2
 
       if index == currtab then
         include_currtab = true
@@ -105,37 +108,6 @@ local function generate_shown_tab(filename_list, winlen, tabnr, currtab)
     end
 
     start_i = start_i + 1
-  end
-
-  if winlen < tablen then
-    if #shown_filename_list ~= 0 and shown_filename_list[#shown_filename_list].index ~= currtab then
-      for i = #shown_filename_list, 1, -1 do
-        if tablen - utf8.len(shown_filename_list[i].name) < winlen then
-          local bef_len = utf8.len(shown_filename_list[i].name)
-          local end_offset = utf8.offset(shown_filename_list[i].name, tablen - winlen - 3)
-          shown_filename_list[i].name = string.sub(shown_filename_list[i].name, 1, end_offset) .. '...'
-          tablen = tablen - bef_len + utf8.len(shown_filename_list[i].name)
-          break
-        else
-          tablen = tablen - utf8.len(shown_filename_list[i].name)
-          table.remove(shown_filename_list, i)
-        end
-      end
-    else
-      while #shown_filename_list ~= 1 do
-        local i = 1
-        if tablen - utf8.len(shown_filename_list[i].name) < winlen then
-          local bef_len = utf8.len(shown_filename_list[i].name)
-          local end_offset = utf8.offset(shown_filename_list[i].name, tablen - winlen - 3)
-          shown_filename_list[i].name = string.sub(shown_filename_list[i].name, 1, end_offset) .. '...'
-          tablen = tablen - bef_len + utf8.len(shown_filename_list[i].name)
-          break
-        else
-          tablen = tablen - utf8.len(shown_filename_list[i].name)
-          table.remove(shown_filename_list, i)
-        end
-      end
-    end
   end
 
   print(tablen, "/", winlen)
@@ -173,6 +145,8 @@ end
 
 local function tabline(options)
   local winlen = vim.opt.columns:get()
+
+  -- Get the number of tabs
   local tabnr = fn.tabpagenr('$')
   local currtab = fn.tabpagenr()
 
@@ -191,6 +165,7 @@ function M.setup(user_options)
     return tabline(M.options)
   end
 
+  -- Always show tabline
   vim.o.showtabline = 2
   vim.o.tabline = '%!v:lua.nvim_tabline()'
 

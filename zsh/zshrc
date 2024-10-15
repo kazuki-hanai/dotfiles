@@ -30,6 +30,7 @@ loadsh ~/.dotfiles/zsh/kubectl.sh
 loadsh ~/.dotfiles/zsh/krew.sh
 loadsh ~/.dotfiles/zsh/zoxide.sh
 loadsh ~/.dotfiles/zsh/p10k.zsh
+loadsh ~/.dotfiles/zsh/jq.sh
 
 # Import local settings
 source ~/.dotfiles/zsh/localconfig.sh
