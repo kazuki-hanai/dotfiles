@@ -1,6 +1,7 @@
 [user]
   name = Kazuki Hanai
-  email = kazuki.hanai@wan-nyan-wan.net
+  email = hnkz.64@gmail.com
+	signingkey = 8847710B96801282
 [alias]
   co = checkout
   cm = commit -S -m
@@ -14,7 +15,7 @@
 [merge]
   tool = vimdiff
 [sendemail]
-  smtpuser = kazuki.hanai@wan-nyan-wan.net
+  smtpuser = hnkz.64@gmail.com
   smtpserver = smtp.googlemail.com
   smtpencryption = tls
   smtpserverport = 587
