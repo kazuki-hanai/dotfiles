@@ -26,3 +26,4 @@ installMac reattach-to-user-namespace
 installMac tmux
 installMac cmake
 installMac gpg
+installMac pipx
