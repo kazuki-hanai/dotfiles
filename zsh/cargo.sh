@@ -28,10 +28,6 @@ if ! type rg > /dev/null 2>&1; then
      cargo install ripgrep
 fi
 
-if ! type zoxide > /dev/null 2>&1; then
-     cargo install zoxide
-fi
-
 if ! type tokei > /dev/null 2>&1; then
      cargo install tokei
 fi
