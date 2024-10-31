@@ -6,6 +6,9 @@ if [ ! -d $ZINIT_HOME ]; then
 fi
 source "${ZINIT_HOME}/zinit.zsh"
 
+# To avoid zi rewritten by zinit
+zinit ice atload'unalias zi'
+
 zinit load "zsh-users/zsh-syntax-highlighting"
 zinit load "zsh-users/zsh-autosuggestions"
 zinit load "zsh-users/zsh-completions"

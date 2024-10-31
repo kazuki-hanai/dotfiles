@@ -1,42 +1,42 @@
 [user]
-  name = Kazuki Hanai
-  email = hnkz.64@gmail.com
-	signingkey = 8847710B96801282
+	name = Kazuki Hanai
+	email = hnkz.64@gmail.com
+	signingKey = 8847710B96801282
 [alias]
-  co = checkout
-  cm = commit -S -m
-  ad = add
-  ap = add -p
-  br = branch
-  ba = branch -a
-  pscb = !git push origin `git rev-parse --abbrev-ref HEAD`
-  ps = push
-  st = status
+	co = checkout
+	cm = commit -S -m
+	ad = add
+	ap = add -p
+	br = branch
+	ba = branch -a
+	pscb = !git push origin `git rev-parse --abbrev-ref HEAD`
+	ps = push
+	st = status
 [merge]
-  tool = vimdiff
+	tool = vimdiff
 [sendemail]
-  smtpuser = hnkz.64@gmail.com
-  smtpserver = smtp.googlemail.com
-  smtpencryption = tls
-  smtpserverport = 587
+	smtpuser = hnkz.64@gmail.com
+	smtpserver = smtp.googlemail.com
+	smtpencryption = tls
+	smtpserverport = 587
 [core]
-  pager = delta
-  editor = nvim
+	pager = delta
+	editor = nvim
 
 [interactive]
-  diffFilter = delta --color-only
+	diffFilter = delta --color-only
 
 [delta]
-  line-numbers = true
-  decorations = true
+	line-numbers = true
+	decorations = true
 
 [delta "decorations"]
-  commit-decoration-style = bold yellow box ul
-  file-style = bold yellow ul
-  file-decoration-style = none
+	commit-decoration-style = bold yellow box ul
+	file-style = bold yellow ul
+	file-decoration-style = none
 
 [init]
-  defaultBranch = main
+	defaultBranch = main
 
 [commit]
 	gpgsign = true
@@ -45,6 +45,4 @@
   insteadOf = https://github.com/
 
 [include]
-  path = ~/.gitconfig.local
-[pull]
-	rebase = false
+	path = ~/.gitconfig.local
