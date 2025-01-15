@@ -27,8 +27,8 @@ autoload -U promptinit; promptinit
 
 # bindings
 bindkey "^[[Z" reverse-menu-complete
-bindkey ^Y backward-word
-bindkey ^O forward-word
+bindkey "^Y" backward-word
+bindkey "^O" forward-word
 
 # esc delay
 KEYTIMEOUT=1

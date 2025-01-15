@@ -1,1 +1,0 @@
-alias jq='jq -C'

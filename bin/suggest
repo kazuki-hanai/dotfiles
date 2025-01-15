@@ -1,0 +1,7 @@
+#!/bin/bash
+
+desc="$@"
+
+res=$(afa new -script -j command_suggestion -u command_suggestion -p "$desc" | jq -r ".suggested_command")
+echo "$res"
+echo "$res" | pbcopy
