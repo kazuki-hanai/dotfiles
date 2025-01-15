@@ -32,6 +32,8 @@ loadsh ~/.dotfiles/zsh/zoxide.sh
 loadsh ~/.dotfiles/zsh/p10k.zsh
 loadsh ~/.dotfiles/zsh/jq.sh
 
+loadsh ~/.dotfiles/zsh/zle.sh
+
 # Import local settings
 source ~/.dotfiles/zsh/localconfig.sh
 
