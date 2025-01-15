@@ -1,5 +1,5 @@
 [user]
-	name = Kazuki Hanai
+	name = hnkz
 	email = hnkz.64@gmail.com
 	signingKey = 8847710B96801282
 [alias]
@@ -46,3 +46,8 @@
 
 [include]
 	path = ~/.gitconfig.local
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
