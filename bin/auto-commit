@@ -1,5 +1,0 @@
-set -e
-
-message=`git diff --staged | generate-commit-message-with-hey | jq -r ".message"`
-git cm "$message"
-git commit --amend

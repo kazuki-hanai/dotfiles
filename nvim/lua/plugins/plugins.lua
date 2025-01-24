@@ -167,7 +167,9 @@ return {
       vim.opt.termguicolors = true
       require("bufferline").setup{
         options = {
-          mode = "tabs"
+          mode = "tabs",
+          truncate_names = false,
+          show_duplicate_prefix = false,
         }
       }
     end
