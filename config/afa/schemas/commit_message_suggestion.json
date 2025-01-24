@@ -1,12 +1,12 @@
 {
   "type": "object",
   "properties": {
-    "suggested_command": {
+    "suggested_commit_message": {
       "type": "string"
     }
   },
   "additionalProperties": false,
   "required": [
-    "suggested_command"
+    "suggested_commit_message"
   ]
 }
