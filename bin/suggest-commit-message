@@ -11,4 +11,4 @@ res=$(afa new -script -j commit_message_suggestion -u commit_message_suggestion 
 suggested_commit_messag=$(echo $res | jq -r ".suggested_commit_message")
 
 echo "$suggested_commit_messag"
-echo "$suggested_commit_messag" | pbcopy
+echo -n "$suggested_commit_messag" | pbcopy
