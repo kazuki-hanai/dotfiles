@@ -1,7 +1,6 @@
 [user]
-	name = hnkz
-	email = hnkz.64@gmail.com
-	signingKey = 8847710B96801282
+  name = Kazuki Hanai
+  email = hnkz.64@gmail.com
 [alias]
 	co = checkout
 	cm = commit -S -m
@@ -15,10 +14,10 @@
 [merge]
 	tool = vimdiff
 [sendemail]
-	smtpuser = hnkz.64@gmail.com
-	smtpserver = smtp.googlemail.com
-	smtpencryption = tls
-	smtpserverport = 587
+  smtpuser = hnkz.64@gmail.com
+  smtpserver = smtp.googlemail.com
+  smtpencryption = tls
+  smtpserverport = 587
 [core]
 	pager = delta
 	editor = nvim
