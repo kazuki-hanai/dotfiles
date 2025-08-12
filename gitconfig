@@ -8,7 +8,7 @@
 	ap = add -p
 	br = branch
 	ba = branch -a
-	pscb = !git push origin `git rev-parse --abbrev-ref HEAD`
+  pscb = !git push origin HEAD
 	ps = push
 	st = status
 [merge]
