@@ -11,16 +11,14 @@
       "Bash(git init:*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(git push origin*:*)",
       "Bash(git status:*)",
       "Bash(git diff:*)",
       "Bash(git log:*)",
       "Bash(gh:*)",
       "Bash(npm install:*)",
       "Bash(pnpm install:*)",
-      "Bash(rm *)",
       "Bash(ls:*)",
-      "Bash(cat **)",
+      "Bash(cat:*)",
       "Bash(head:*)",
       "Bash(tail:*)",
       "Bash(pwd:*)",
@@ -34,17 +32,24 @@
       "Bash(docker compose up -d --build:*)",
       "Bash(osascript -e:*)"
     ],
+    "ask": [
+      "Bash(echo test > /tmp/test.txt:*)"
+    ],
     "deny": [
       "Bash(sudo:*)",
       "Bash(rm:*)",
       "Bash(rm -rf:*)",
       "Bash(git reset:*)",
-      "Read(.env.*)",
-      "Read(id_rsa)",
-      "Read(id_ed25519)",
+      "Bash(git push:*)",
+      "Read(.env*)",
+      "Read(**/.env*)",
+      "Read(**/id_rsa)",
+      "Read(**/id_ed25519)",
       "Read(**/*token*)",
       "Read(**/*key*)",
+      "Read(**/*secret*)",
       "Write(.env*)",
+      "Write(**/.env*)",
       "Write(**/secrets/**)",
       "Bash(curl:*)",
       "Bash(wget:*)",
@@ -111,15 +116,6 @@
             "command": "echo \"[$(date)] $USER: Task - $(jq -r '.tool_input.description')\" >> ~/.claude/command_history.log"
           }
         ]
-      },
-      {
-        "matcher": "Write|Edit|MultiEdit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "jq -r '.tool_input.file_path | select(endswith(\".js\") or endswith(\".ts\") or endswith(\".json\") or endswith(\".tsx\"))' | xargs -r npx prettier --write"
-          }
-        ]
       }
     ],
     "Notification": [
@@ -128,7 +124,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "cat | jq -r '\"display notification \\\"\" + .message + \"\\\" with title \\\"\" + .title + \"\\\" sound name \\\"Submarine\\\" activateApplication \\\"com.todesktop.230313mzl4w4u92\\\"\"' | xargs -I {} osascript -e '{}'"
+            "command": "msg=$(jq -r '.message'); title=$(jq -r '.title'); osascript -e \"display notification \\\"$msg\\\" with title \\\"$title\\\" sound name \\\"Submarine\\\"\""
           }
         ]
       }
@@ -146,4 +142,12 @@
     ]
   },
   "skipDangerousModePermissionPrompt": true
+  "statusLine": {
+    "type": "command",
+    "command": "input=$(cat); current_dir=$(echo \"$input\" | jq -r '.workspace.current_dir'); model=$(echo \"$input\" | jq -r '.model.display_name'); printf '\\033[2m%s\\033[0m \\033[34m%s\\033[0m' \"$model\" \"$(basename \"$current_dir\")\""
+  },
+  "enabledPlugins": {
+    "asdd-kit@asdd-kit": true
+  },
+  "alwaysThinkingEnabled": false
 }
