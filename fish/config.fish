@@ -24,8 +24,8 @@ end
 
 # symbolic link
 function link
-  if test ! -e $argv[1]
-    # ln -s $argv[1] $argv[2]
+  if test ! -e $argv[2]
+    ln -s $argv[1] $argv[2]
   end
 end
 

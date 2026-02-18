@@ -1,6 +1,6 @@
 # symbolic link
 # .zshrc
-link ~/.dotfiles/zsh/.zshrc ~/.zshrc
+link ~/.dotfiles/zsh/zshrc ~/.zshrc
 
 # .gitconfig
 link ~/.dotfiles/gitconfig ~/.gitconfig
