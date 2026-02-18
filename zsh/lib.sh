@@ -79,11 +79,11 @@ UNAME=$(uname -s)
 loadsh() {
   if [ "$DEBUG" = true ]; then
     start=`python -c "import time; print(time.time_ns())"`
-    source $1
+    source "$1"
     end=`python -c "import time; print(time.time_ns())"`
     echo "${Bold}[${BIGreen}INFO${NC}${Bold}] Load $1 in $(($(($end - $start))/1000000)) ms${NC}"
   else
-    source $1
+    source "$1"
   fi
 }
 
@@ -96,7 +96,7 @@ isUbuntu() {
 }
 
 exists() {
-  which $1 1>/dev/null
+  command -v "$1" 1>/dev/null
 }
 
 install() {
@@ -106,11 +106,11 @@ install() {
 
 installMac() {
   if [ "$UNAME" = 'Darwin' ]; then
-    if ! which $1 1>/dev/null; then
+    if ! command -v "$1" 1>/dev/null; then
       if [ "$#" = 1 ]; then
-        brew install $1;
+        brew install "$1";
       elif [ "$#" = 2 ]; then
-        brew install $2;
+        brew install "$2";
       fi
     fi
   fi
@@ -119,18 +119,17 @@ installMac() {
 installUbuntu() {
   if [ "$#" = 1 ]; then
     if isUbuntu; then
-      if ! dpkg -s $1 1>/dev/null; then sudo apt -y install $1; fi
+      if ! dpkg -s "$1" 1>/dev/null; then sudo apt -y install "$1"; fi
     fi
   elif [ "$#" = 2 ]; then
     if isUbuntu; then
-      if ! dpkg -s $2 1>/dev/null; then sudo apt -y install $1; fi
+      if ! dpkg -s "$2" 1>/dev/null; then sudo apt -y install "$2"; fi
     fi
   fi
 }
 
 link() {
-  if [ ! -e $2 ]; then
-    ln -s $1 $2
+  if [ ! -e "$2" ]; then
+    ln -s "$1" "$2"
   fi
 }
-
