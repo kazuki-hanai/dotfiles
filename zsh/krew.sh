@@ -1,7 +1,7 @@
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 # Install krew
-if ! kubectl krew 2>&1 >/dev/null; then
+if exists kubectl && ! kubectl krew >/dev/null 2>&1 && [ "${DOTFILES_BOOTSTRAP:-false}" = "true" ]; then
   (
     set -x; cd "$(mktemp -d)" &&
     OS="$(uname | tr '[:upper:]' '[:lower:]')" &&
