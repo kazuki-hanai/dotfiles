@@ -1,41 +1,50 @@
 ## Rust
-if [ ! -d ~/.cargo ]; then
+if [ ! -d ~/.cargo ] && [ "${DOTFILES_BOOTSTRAP:-false}" = "true" ]; then
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 fi
 
-source ~/.cargo/bin
-source ~/.cargo/env
-export PATH="$HOME/cargo/.bin:$PATH"
+if [ -f ~/.cargo/env ]; then
+  source ~/.cargo/env
+fi
+export PATH="$HOME/.cargo/bin:$PATH"
 
-export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/src/
+if exists rustc; then
+  export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src/"
+fi
 
-if ! type eza > /dev/null 2>&1; then
+if ! exists eza && [ "${DOTFILES_BOOTSTRAP:-false}" = "true" ]; then
      cargo install eza
 fi
-alias ls=eza
+if exists eza; then
+  alias ls=eza
+fi
 
-if ! type bat > /dev/null 2>&1; then
+if ! exists bat && [ "${DOTFILES_BOOTSTRAP:-false}" = "true" ]; then
      cargo install bat
 fi
-alias cat=bat
+if exists bat; then
+  alias cat=bat
+fi
 
-if ! type delta > /dev/null 2>&1; then
+if ! exists delta && [ "${DOTFILES_BOOTSTRAP:-false}" = "true" ]; then
      cargo install git-delta
 fi
-alias git-delta=delta
+if exists delta; then
+  alias git-delta=delta
+fi
 
-if ! type rg > /dev/null 2>&1; then
+if ! exists rg && [ "${DOTFILES_BOOTSTRAP:-false}" = "true" ]; then
      cargo install ripgrep
 fi
 
-if ! type tokei > /dev/null 2>&1; then
+if ! exists tokei && [ "${DOTFILES_BOOTSTRAP:-false}" = "true" ]; then
      cargo install tokei
 fi
 
-if ! type btm > /dev/null 2>&1; then
+if ! exists btm && [ "${DOTFILES_BOOTSTRAP:-false}" = "true" ]; then
      cargo install bottom
 fi
 
-if ! type dust > /dev/null 2>&1; then
+if ! exists dust && [ "${DOTFILES_BOOTSTRAP:-false}" = "true" ]; then
      cargo install du-dust
 fi

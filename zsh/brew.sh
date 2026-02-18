@@ -5,8 +5,11 @@ elif isUbuntu; then
   brew_path="/home/linuxbrew/.linuxbrew/bin/brew"
 fi
 
-if $brew_path >/dev/null 2>&1; then
+if [ -x "$brew_path" ]; then
+  eval "$("$brew_path" shellenv)"
+elif [ "${DOTFILES_BOOTSTRAP:-false}" = "true" ]; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  if [ -x "$brew_path" ]; then
+    eval "$("$brew_path" shellenv)"
+  fi
 fi
-
-eval "$($brew_path shellenv)"
