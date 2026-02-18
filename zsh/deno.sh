@@ -1,4 +1,6 @@
-if [ ! -x "`which deno`" ]; then
+if ! exists deno && [ "${DOTFILES_BOOTSTRAP:-false}" = "true" ]; then
   # curl -fsSL https://deno.land/x/install/install.sh | sh
-  cargo install deno --locked
+  if exists cargo; then
+    cargo install deno --locked
+  fi
 fi
