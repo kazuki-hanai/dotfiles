@@ -1,0 +1,3 @@
+#!/bin/bash
+
+python -m uuid | tee /dev/stderr | tr -d '\n' | pbcopy
