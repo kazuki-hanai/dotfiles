@@ -14,7 +14,11 @@
       "Bash(git status:*)",
       "Bash(git diff:*)",
       "Bash(git log:*)",
+<<<<<<< Updated upstream
       "Bash(gh:*)",
+=======
+      "Bash(git checkout:*)",
+>>>>>>> Stashed changes
       "Bash(npm install:*)",
       "Bash(pnpm install:*)",
       "Bash(ls:*)",
@@ -31,9 +35,6 @@
       "Bash(gemini google_web_search:*)",
       "Bash(docker compose up -d --build:*)",
       "Bash(osascript -e:*)"
-    ],
-    "ask": [
-      "Bash(echo test > /tmp/test.txt:*)"
     ],
     "deny": [
       "Bash(sudo:*)",
@@ -59,6 +60,9 @@
       "Bash(psql:*)",
       "Bash(mysql:*)",
       "Bash(mongod:*)"
+    ],
+    "ask": [
+      "Bash(echo test > /tmp/test.txt:*)"
     ]
   },
   "hooks": {
@@ -149,5 +153,6 @@
   "enabledPlugins": {
     "asdd-kit@asdd-kit": true
   },
-  "alwaysThinkingEnabled": false
+  "alwaysThinkingEnabled": true,
+  "skipDangerousModePermissionPrompt": true
 }
