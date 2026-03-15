@@ -31,7 +31,8 @@
       "Bash(mv:*)",
       "Bash(gemini google_web_search:*)",
       "Bash(docker compose up -d --build:*)",
-      "Bash(osascript -e:*)"
+      "Bash(osascript -e:*)",
+      "mcp__pencil"
     ],
     "deny": [
       "Bash(sudo:*)",

@@ -40,7 +40,6 @@ source ~/.dotfiles/zsh/localconfig.sh
 if [[ "$ZPROF" = true && ! `which zprof > /dev/null` ]] ;then
   zprof >> ~/.local/share/zprof.log
 fi
-
 # pnpm
 export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
