@@ -3,6 +3,7 @@ return {
     "neovim/nvim-lspconfig",
     dependencies = {
       "b0o/schemastore.nvim",
+      "hrsh7th/cmp-nvim-lsp",
     },
     config = function()
       -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -50,69 +51,79 @@ return {
         return orig_util_open_floating_preview(contents, syntax, opts, ...)
       end
 
-      local lspconfig = require('lspconfig')
-      lspconfig.lua_ls.setup {
-        settings = {
-          Lua = {
-            diagnostics = {
-              globals = { 'vim' }
+      local ok_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+      if ok_cmp then
+        vim.lsp.config('*', {
+          capabilities = cmp_nvim_lsp.default_capabilities(),
+        })
+      end
+
+      local servers = {
+        lua_ls = {
+          settings = {
+            Lua = {
+              diagnostics = {
+                globals = { 'vim' }
+              }
             }
           }
-        }
-      }
-      lspconfig.clangd.setup {}
-      lspconfig.basedpyright.setup {}
-      lspconfig.rust_analyzer.setup {
-        settings = {
-          ['rust-analyzer'] = {
-            diagnostics = {
-              enable = false,
+        },
+        clangd = {},
+        basedpyright = {},
+        rust_analyzer = {
+          settings = {
+            ['rust-analyzer'] = {
+              diagnostics = {
+                enable = false,
+              }
             }
           }
-        }
-      }
-      lspconfig.gopls.setup {}
-      lspconfig.tsserver.setup {
-        root_dir = lspconfig.util.root_pattern("package.json"),
-      }
-      lspconfig.denols.setup {
-        root_dir = lspconfig.util.root_pattern("deno.json"),
-        init_options = {
-          lint = true,
-          unstable = true,
-          suggest = {
-            imports = {
-              hosts = {
-                ["https://deno.land"] = true,
-                ["https://cdn.nest.land"] = true,
-                ["https://crux.land"] = true,
+        },
+        gopls = {},
+        ts_ls = {},
+        denols = {
+          init_options = {
+            lint = true,
+            unstable = true,
+            suggest = {
+              imports = {
+                hosts = {
+                  ["https://deno.land"] = true,
+                  ["https://cdn.nest.land"] = true,
+                  ["https://crux.land"] = true,
+                },
               },
             },
           },
         },
-      }
-      lspconfig.biome.setup{}
-      lspconfig.yamlls.setup {
-        settings = {
-          yaml = {
-            trace = {
-              server = "verbose"
-            },
-            schemas = require("schemastore").yaml.schemas(),
-            schemaDownload = { enable = true },
-            validate = true,
-          }
+        biome = {},
+        yamlls = {
+          settings = {
+            yaml = {
+              trace = {
+                server = "verbose"
+              },
+              schemas = require("schemastore").yaml.schemas(),
+              schemaDownload = { enable = true },
+              validate = true,
+            }
+          },
+        },
+        terraformls = {},
+        dagger = {},
+        graphql = {},
+        -- tailwindcss = {},
+        -- prettier = {},
+        dartls = {
+          cmd = { "dart", 'language-server', '--protocol=lsp' },
         },
       }
-      lspconfig.terraformls.setup {}
-      lspconfig.dagger.setup {}
-      lspconfig.graphql.setup {}
-      lspconfig.markdownlint.setup {}
-      -- lspconfig.tailwindcss.setup {}
-      -- lspconfig.prettier.setup {}
-      lspconfig.dartls.setup({
-        cmd = { "dart", 'language-server', '--protocol=lsp' },
-      })
+
+      for name, config in pairs(servers) do
+        vim.lsp.config(name, config)
+      end
+
+      vim.lsp.enable(vim.tbl_keys(servers))
     end
   }
 }

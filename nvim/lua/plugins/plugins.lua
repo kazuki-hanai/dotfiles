@@ -118,6 +118,9 @@ return {
       require('local-highlight').setup({
         -- file_types = {'lua'},
         hlgroup = 'LocalSearch',
+        animate = {
+          enabled = false,
+        },
       })
 
       -- Attach to all buffers
