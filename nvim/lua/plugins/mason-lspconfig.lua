@@ -10,11 +10,10 @@ return {
           "lua_ls",
           "rust_analyzer",
           "gopls",
-          "tsserver",
+          "ts_ls",
           "yamlls",
           "terraformls",
           "dagger",
-          "markdownlint",
         },
         automatic_installation = true,
       }
