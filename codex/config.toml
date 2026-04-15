@@ -1,0 +1,74 @@
+approval_policy = "never"
+notify = [
+    "bash",
+    "/Users/hnkz/.codex/notify_macos.sh",
+]
+sandbox_mode = "workspace-write"
+personality = "pragmatic"
+model_reasoning_effort = "medium"
+model = "gpt-5.4"
+
+[features]
+view_image_tool = true
+web_search_request = true
+multi_agent = true
+prevent_idle_sleep = true
+
+[agents]
+max_threads = 20
+
+[mcp_servers.playwright]
+command = "npx"
+args = ["@playwright/mcp@latest"]
+
+[mcp_servers.pencil]
+url = "http://100.84.198.3:18080/mcp"
+
+[mcp_servers.notion]
+url = "https://mcp.notion.com/mcp"
+
+[mcp_servers.linear]
+url = "https://mcp.linear.app/mcp"
+
+[notice]
+hide_full_access_warning = true
+
+[projects."/Users/hnkz/kazuki-hanai/startup"]
+trust_level = "trusted"
+
+[projects."/home/hnkz/kazuki-hanai"]
+trust_level = "trusted"
+
+[projects."/home/hnkz/kazuki-hanai/tsukamu"]
+trust_level = "trusted"
+
+[projects."/home/hnkz/kazuki-hanai/codex"]
+trust_level = "trusted"
+
+[projects."/home/hnkz"]
+trust_level = "trusted"
+
+[projects."/home/hnkz/kazuki-hanai/kowai"]
+trust_level = "trusted"
+
+[projects."/home/hnkz/kazuki-hanai/sakana-ai-exam"]
+trust_level = "trusted"
+
+[sandbox_workspace_write]
+network_access = true
+
+[tui]
+notifications = [
+    "agent-turn-complete",
+    "approval-requested",
+]
+
+[profiles.safe]
+sandbox = "workspace-write"
+ask_for_approval = "on-request"
+
+[plugins."gmail@openai-curated"]
+enabled = true
+
+[plugins."github@openai-curated"]
+enabled = true
