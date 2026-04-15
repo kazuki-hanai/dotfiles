@@ -42,7 +42,7 @@ if [[ "$ZPROF" = true && ! `which zprof > /dev/null` ]] ;then
 fi
 
 # pnpm
-export PNPM_HOME="/Users/hnkz/Library/pnpm"
+export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
