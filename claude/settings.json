@@ -14,11 +14,8 @@
       "Bash(git status:*)",
       "Bash(git diff:*)",
       "Bash(git log:*)",
-<<<<<<< Updated upstream
       "Bash(gh:*)",
-=======
       "Bash(git checkout:*)",
->>>>>>> Stashed changes
       "Bash(npm install:*)",
       "Bash(pnpm install:*)",
       "Bash(ls:*)",
@@ -145,7 +142,7 @@
       }
     ]
   },
-  "skipDangerousModePermissionPrompt": true
+  "skipDangerousModePermissionPrompt": true,
   "statusLine": {
     "type": "command",
     "command": "input=$(cat); current_dir=$(echo \"$input\" | jq -r '.workspace.current_dir'); model=$(echo \"$input\" | jq -r '.model.display_name'); printf '\\033[2m%s\\033[0m \\033[34m%s\\033[0m' \"$model\" \"$(basename \"$current_dir\")\""
@@ -153,6 +150,5 @@
   "enabledPlugins": {
     "asdd-kit@asdd-kit": true
   },
-  "alwaysThinkingEnabled": true,
-  "skipDangerousModePermissionPrompt": true
+  "alwaysThinkingEnabled": true
 }
