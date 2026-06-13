@@ -2,7 +2,7 @@ return {
   -- Hop is an EasyMotion-like plugin allowing you to jump anywhere
   -- in a document with as few keystrokes as possible.
   {
-    "phaazon/hop.nvim",
+    "smoka7/hop.nvim",
     config = function()
       local hop = require('hop')
       local directions = require('hop.hint').HintDirection
