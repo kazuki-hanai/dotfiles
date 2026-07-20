@@ -1,20 +1,5 @@
 ## nvim
 
-# install neovim
-if ! command -v nvim >/dev/null 2>&1; then
-  mkdir -p ~/github/neovim
-  pushd ~/github/neovim
-
-  git clone git@github.com:neovim/neovim.git
-  pushd neovim
-
-  make CMAKE_BUILD_TYPE=RelWithDebInfo
-  sudo make install
-
-  popd
-  popd
-fi
-
 # vim-plug
 if [ ! -e "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim ] && [ "${DOTFILES_BOOTSTRAP:-false}" = "true" ]; then
     sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
