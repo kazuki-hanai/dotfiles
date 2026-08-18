@@ -37,7 +37,6 @@ brew "reattach-to-user-namespace"   # tmux clipboard helper on macOS
 
 # --- Casks (GUI apps) ---
 cask "aqua-app"
-cask "gcloud-cli"
 cask "raycast"
 
 # --- Fonts ---

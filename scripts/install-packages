@@ -28,18 +28,6 @@ install_macos() {
       "$DOTFILES_PATH/Brewfile"
   )
 
-  # The gcloud-cli cask runs `gcloud config virtualenv create`, which needs a
-  # `virtualenv` executable on PATH and otherwise fails the whole bundle. When
-  # the Brewfile installs that cask, provision virtualenv via pipx up front and
-  # make sure pipx's bin dir is on PATH so the cask's postinstall can find it.
-  if grep -qE '^[[:space:]]*cask[[:space:]]+"gcloud-cli"' "$DOTFILES_PATH/Brewfile"; then
-    export PATH="$HOME/.local/bin:$PATH"
-    if ! command -v virtualenv >/dev/null 2>&1; then
-      command -v pipx >/dev/null 2>&1 || brew install pipx
-      pipx install virtualenv >/dev/null 2>&1 || true
-    fi
-  fi
-
   brew bundle --no-upgrade --file "$DOTFILES_PATH/Brewfile"
 }
 
