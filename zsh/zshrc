@@ -21,6 +21,7 @@ loadsh ~/.dotfiles/zsh/tmux.sh
 loadsh ~/.dotfiles/zsh/fzf.sh
 loadsh ~/.dotfiles/zsh/gomi.sh
 loadsh ~/.dotfiles/zsh/gh.sh
+loadsh ~/.dotfiles/zsh/codex.sh
 loadsh ~/.dotfiles/zsh/cargo.sh
 loadsh ~/.dotfiles/zsh/go.sh
 loadsh ~/.dotfiles/zsh/nvim.sh

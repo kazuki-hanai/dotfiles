@@ -1,2 +1,4 @@
-#!/bin/bash
-source <(codex completion zsh)
+# codex CLI shell completion
+if exists codex; then
+  source <(codex completion zsh)
+fi
