@@ -16,6 +16,17 @@ install_macos() {
     echo "Homebrew not found; run install.sh / up first." >&2
     exit 1
   fi
+
+  # Recent Homebrew refuses to load formulae from third-party taps until they
+  # are explicitly trusted, which aborts `brew bundle`. Trust any taps declared
+  # in the Brewfile up front. This is idempotent once trusted and a harmless
+  # no-op on older Homebrew that lacks the `trust` subcommand.
+  grep -E '^[[:space:]]*tap[[:space:]]+"' "$DOTFILES_PATH/Brewfile" \
+    | sed -E 's/^[[:space:]]*tap[[:space:]]+"([^"]+)".*/\1/' \
+    | while IFS= read -r tap_name; do
+        [ -n "$tap_name" ] && brew trust "$tap_name" 2>/dev/null || true
+      done
+
   brew bundle --no-upgrade --file "$DOTFILES_PATH/Brewfile"
 }
 

@@ -29,10 +29,11 @@ dust = "latest"
 bottom = "latest"
 zoxide = "latest"
 fzf = "latest"
-# eza uses its default (vfox) backend, which pulls a cargo-quickinstall prebuilt
-# on both macOS and Linux (aqua's eza entry is cargo-only on macOS, and eza has
-# no macOS binary in its own GitHub releases).
-eza = "latest"
+# eza's former default (vfox) backend is broken on recent mise: its Lua plugin
+# fails under vfox "safe mode" (can't load C modules / missing metadata.lua).
+# Pin the aqua backend instead -- prebuilt binaries on Linux/Windows, and a
+# cargo/source build on macOS via the rust toolchain declared below.
+"aqua:eza-community/eza" = "latest"
 # tokei has no linux-arm64 prebuilt, so it is built via cargo. The Rust
 # toolchain below is declared so a clean machine can build it.
 rust = { version = "stable", profile = "minimal" }
