@@ -33,11 +33,9 @@ dust = "latest"
 bottom = "latest"
 zoxide = "latest"
 fzf = "latest"
-# eza's former default (vfox) backend is broken on recent mise: its Lua plugin
-# fails under vfox "safe mode" (can't load C modules / missing metadata.lua).
-# Pin the aqua backend instead -- prebuilt binaries on Linux/Windows, and a
-# cargo/source build on macOS via the rust toolchain declared below.
-"aqua:eza-community/eza" = "latest"
+# The aqua registry falls back to its unsupported `cargo` package type on
+# macOS. Use mise's native cargo backend directly on every platform instead.
+"cargo:eza" = "latest"
 # tokei has no linux-arm64 prebuilt, so it is built via cargo. The Rust
 # toolchain below is declared so a clean machine can build it.
 rust = { version = "stable", profile = "minimal" }
