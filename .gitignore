@@ -1,2 +1,6 @@
 .DS_Store
 .handovers/
+
+# machine-local agent configs (not tracked; live files live in ~/.codex, ~/.claude)
+codex/config.toml
+claude/settings.json
