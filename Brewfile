@@ -32,6 +32,7 @@ brew "luajit"
 # --- Build dependencies (tmux) ---
 brew "libevent"
 brew "ncurses"
+brew "jemalloc"
 brew "automake"
 brew "autoconf"
 brew "bison"

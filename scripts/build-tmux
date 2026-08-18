@@ -28,13 +28,17 @@ git fetch --tags --force origin
 TMUX_REF="${TMUX_REF:-$(git tag -l --sort=-v:refname | grep -Ev 'rc' | head -1)}"
 git checkout "$TMUX_REF"
 
-# Point pkg-config at Homebrew keg-only libs on macOS.
+# Point pkg-config at Homebrew keg-only libs on macOS. macOS tmux also requires
+# an explicit jemalloc choice (its calloc can mis-zero allocations), so enable
+# jemalloc as tmux recommends.
+CONFIGURE_FLAGS=""
 if [ "$(uname -s)" = "Darwin" ] && command -v brew >/dev/null 2>&1; then
-  export PKG_CONFIG_PATH="$(brew --prefix libevent)/lib/pkgconfig:$(brew --prefix ncurses)/lib/pkgconfig:${PKG_CONFIG_PATH:-}"
+  export PKG_CONFIG_PATH="$(brew --prefix libevent)/lib/pkgconfig:$(brew --prefix ncurses)/lib/pkgconfig:$(brew --prefix jemalloc)/lib/pkgconfig:${PKG_CONFIG_PATH:-}"
+  CONFIGURE_FLAGS="--enable-jemalloc"
 fi
 
 sh autogen.sh
-./configure --prefix="$TMUX_PREFIX"
+./configure --prefix="$TMUX_PREFIX" $CONFIGURE_FLAGS
 make
 make install
 
