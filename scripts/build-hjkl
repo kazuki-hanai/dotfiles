@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+# =============================================================================
+# build-hjkl - build & install hjkl (keyboard remapper, replaces Karabiner).
+#
+# https://github.com/kazuki-hanai/hjkl
+# macOS-only: uses CGEventTap and installs a per-user LaunchAgent. The repo's
+# own mise.toml pins the Rust toolchain, so we build through `mise exec`.
+# Installs the binary to ~/.local/bin/hjkl and enables the LaunchAgent.
+#
+# Env overrides:
+#   HJKL_SRC  source checkout dir (default: ~/github/hjkl)
+#   HJKL_REF  git ref to build    (default: main)
+# =============================================================================
+set -euo pipefail
+
+if [ "$(uname -s)" != "Darwin" ]; then
+  echo "build-hjkl: skipping (macOS-only)."
+  exit 0
+fi
+
+HJKL_SRC="${HJKL_SRC:-$HOME/github/hjkl}"
+HJKL_REF="${HJKL_REF:-main}"
+
+if [ ! -d "$HJKL_SRC/.git" ]; then
+  mkdir -p "$(dirname "$HJKL_SRC")"
+  git clone https://github.com/kazuki-hanai/hjkl.git "$HJKL_SRC"
+fi
+
+cd "$HJKL_SRC"
+git fetch --tags --force origin
+git checkout "$HJKL_REF"
+git pull --ff-only origin "$HJKL_REF" 2>/dev/null || true
+
+# Provide the pinned Rust toolchain from hjkl's own mise.toml.
+mise trust >/dev/null 2>&1 || true
+mise install
+
+# install.sh builds the release binary, installs it to ~/.local/bin, and
+# enables the LaunchAgent via the binary's own `enable` subcommand.
+mise exec -- sh scripts/install.sh
+
+echo "hjkl installed. Grant Accessibility permission to ~/.local/bin/hjkl if keys are not remapped yet."

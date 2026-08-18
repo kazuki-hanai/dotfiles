@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+# =============================================================================
+# build-tmux - build tmux from source and install into ~/.local.
+#
+# Installs to $HOME/.local (no sudo needed; ~/.local/bin is already on PATH via
+# zsh/export-path.sh). Build dependencies (libevent, ncurses, autotools, bison)
+# are provided by the `packages` task (Brewfile on macOS, apt.txt on Ubuntu).
+#
+# Env overrides:
+#   TMUX_SRC     source checkout dir  (default: ~/github/tmux/tmux)
+#   TMUX_REF     git ref/tag to build (default: latest release tag)
+#   TMUX_PREFIX  install prefix       (default: ~/.local)
+# =============================================================================
+set -euo pipefail
+
+TMUX_SRC="${TMUX_SRC:-$HOME/github/tmux/tmux}"
+TMUX_PREFIX="${TMUX_PREFIX:-$HOME/.local}"
+
+if [ ! -d "$TMUX_SRC/.git" ]; then
+  mkdir -p "$(dirname "$TMUX_SRC")"
+  git clone https://github.com/tmux/tmux.git "$TMUX_SRC"
+fi
+
+cd "$TMUX_SRC"
+git fetch --tags --force origin
+
+# Default to the latest release tag (skip -rc pre-releases).
+TMUX_REF="${TMUX_REF:-$(git tag -l --sort=-v:refname | grep -Ev 'rc' | head -1)}"
+git checkout "$TMUX_REF"
+
+# Point pkg-config at Homebrew keg-only libs on macOS.
+if [ "$(uname -s)" = "Darwin" ] && command -v brew >/dev/null 2>&1; then
+  export PKG_CONFIG_PATH="$(brew --prefix libevent)/lib/pkgconfig:$(brew --prefix ncurses)/lib/pkgconfig:${PKG_CONFIG_PATH:-}"
+fi
+
+sh autogen.sh
+./configure --prefix="$TMUX_PREFIX"
+make
+make install
+
+echo "tmux ($TMUX_REF) installed to $TMUX_PREFIX/bin/tmux"
+"$TMUX_PREFIX/bin/tmux" -V

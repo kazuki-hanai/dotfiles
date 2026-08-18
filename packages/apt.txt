@@ -1,0 +1,47 @@
+# =============================================================================
+# packages/apt.txt - Ubuntu system packages.
+#
+# One package per line (comments and blank lines ignored). Installed on Ubuntu
+# via scripts/install-packages (the `packages` mise task). Language runtimes and
+# dev tools come from mise.toml ([tools]); Neovim and tmux are built from source
+# (scripts/build-neovim, scripts/build-tmux), so their build deps live here.
+# =============================================================================
+
+# --- Base tooling ---
+git
+zsh
+curl
+wget
+ca-certificates
+build-essential
+unzip
+
+# --- System CLIs ---
+gnupg
+protobuf-compiler
+
+# --- Build dependencies (Neovim) ---
+cmake
+ninja-build
+gettext
+pkg-config
+
+# --- Build dependencies (tmux) ---
+libevent-dev
+libncurses-dev
+automake
+autoconf
+bison
+
+# --- Common dev headers ---
+libssl-dev
+libffi-dev
+libreadline-dev
+libsqlite3-dev
+libbz2-dev
+liblzma-dev
+zlib1g-dev
+llvm
+clang
+uuid-dev
+tk-dev

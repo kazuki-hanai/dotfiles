@@ -12,7 +12,6 @@ zinit ice atload'unalias zi'
 zinit load "zsh-users/zsh-syntax-highlighting"
 zinit load "zsh-users/zsh-autosuggestions"
 zinit load "zsh-users/zsh-completions"
-zinit light asdf-vm/asdf
 
 # Load pure theme
 # with zsh-async library that's bundled with it.
@@ -21,4 +20,3 @@ zinit light asdf-vm/asdf
 # zstyle :prompt:pure:git:stash show yes
 zinit ice depth=1
 zinit light romkatv/powerlevel10k
-

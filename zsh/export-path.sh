@@ -14,9 +14,7 @@ check_and_export_dir $HOME/.bin
 check_and_export_dir $HOME/.dotfiles/bin
 check_and_export_dir $HOME/.local/bin
 
-# deno
-export DENO_INSTALL="$HOME/.deno"
-export PATH="$DENO_INSTALL/bin:$PATH"
+# deno is provided by mise ([tools] deno).
 
 # poetry
 export PATH="$HOME/.poetry/bin:$PATH"

@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+# =============================================================================
+# install-packages - install system packages for the current OS.
+#
+#   macOS  -> brew bundle (Brewfile)
+#   Ubuntu -> apt-get install (packages/apt.txt)
+#
+# Invoked by the `packages` mise task.
+# =============================================================================
+set -euo pipefail
+
+DOTFILES_PATH="${DOTFILES_PATH:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
+
+install_macos() {
+  if ! command -v brew >/dev/null 2>&1; then
+    echo "Homebrew not found; run install.sh / up first." >&2
+    exit 1
+  fi
+  brew bundle --no-upgrade --file "$DOTFILES_PATH/Brewfile"
+}
+
+install_ubuntu() {
+  local list="$DOTFILES_PATH/packages/apt.txt"
+  # Strip comments/blank lines into a package array.
+  local pkgs=()
+  while IFS= read -r line; do
+    line="${line%%#*}"
+    line="$(echo "$line" | xargs)"
+    [ -n "$line" ] && pkgs+=("$line")
+  done < "$list"
+
+  # Use sudo only when not already root (e.g. inside containers).
+  local SUDO=""
+  if [ "$(id -u)" -ne 0 ]; then
+    command -v sudo >/dev/null 2>&1 || { echo "need root or sudo to install apt packages" >&2; exit 1; }
+    SUDO="sudo"
+  fi
+  $SUDO apt-get update
+  DEBIAN_FRONTEND=noninteractive $SUDO apt-get install -y "${pkgs[@]}"
+}
+
+case "$(uname -s)" in
+  Darwin) install_macos ;;
+  Linux)
+    if [ -e /etc/lsb-release ] || command -v apt-get >/dev/null 2>&1; then
+      install_ubuntu
+    else
+      echo "Unsupported Linux distro (expected Ubuntu/apt)." >&2
+      exit 1
+    fi
+    ;;
+  *)
+    echo "Unsupported OS: $(uname -s)" >&2
+    exit 1
+    ;;
+esac

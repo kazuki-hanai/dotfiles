@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+# =============================================================================
+# build-aizu - build & install Aizu (Codex/Claude notification menu-bar app).
+#
+# https://github.com/kazuki-hanai/aizu
+# macOS-only. The repo's own mise.toml pins rust/node/pnpm, so we build through
+# `mise exec`. Builds the dev app bundle and installs it to /Applications.
+#
+# Env overrides:
+#   AIZU_SRC  source checkout dir (default: ~/github/aizu)
+#   AIZU_REF  git ref to build    (default: main)
+# =============================================================================
+set -euo pipefail
+
+if [ "$(uname -s)" != "Darwin" ]; then
+  echo "build-aizu: skipping (macOS-only)."
+  exit 0
+fi
+
+AIZU_SRC="${AIZU_SRC:-$HOME/github/aizu}"
+AIZU_REF="${AIZU_REF:-main}"
+
+if [ ! -d "$AIZU_SRC/.git" ]; then
+  mkdir -p "$(dirname "$AIZU_SRC")"
+  git clone https://github.com/kazuki-hanai/aizu.git "$AIZU_SRC"
+fi
+
+cd "$AIZU_SRC"
+git fetch --tags --force origin
+git checkout "$AIZU_REF"
+git pull --ff-only origin "$AIZU_REF" 2>/dev/null || true
+
+# Provide the pinned rust/node/pnpm toolchain from aizu's own mise.toml.
+mise trust >/dev/null 2>&1 || true
+mise install
+mise exec -- pnpm install --frozen-lockfile
+
+# Build the debug .app bundle, then install it to /Applications.
+sh scripts/build-dev-dmg.sh
+sh scripts/install-dev-app.sh
+
+echo "Aizu installed to /Applications/Aizu.app. Open it to finish first-run setup."

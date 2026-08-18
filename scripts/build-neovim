@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+# =============================================================================
+# build-neovim - build Neovim from source and install into ~/.local.
+#
+# Installs to $HOME/.local (no sudo needed; ~/.local/bin is already on PATH via
+# zsh/export-path.sh). Build dependencies are provided by the `packages` task
+# (Brewfile on macOS, packages/apt.txt on Ubuntu).
+#
+# Env overrides:
+#   NVIM_SRC        source checkout dir  (default: ~/github/neovim/neovim)
+#   NVIM_REF        git ref to build     (default: stable)
+#   NVIM_BUILD_TYPE CMake build type     (default: RelWithDebInfo)
+#   NVIM_PREFIX     install prefix       (default: ~/.local)
+# =============================================================================
+set -euo pipefail
+
+NVIM_SRC="${NVIM_SRC:-$HOME/github/neovim/neovim}"
+NVIM_REF="${NVIM_REF:-stable}"
+NVIM_BUILD_TYPE="${NVIM_BUILD_TYPE:-RelWithDebInfo}"
+NVIM_PREFIX="${NVIM_PREFIX:-$HOME/.local}"
+
+if [ ! -d "$NVIM_SRC/.git" ]; then
+  mkdir -p "$(dirname "$NVIM_SRC")"
+  git clone https://github.com/neovim/neovim.git "$NVIM_SRC"
+fi
+
+cd "$NVIM_SRC"
+git fetch --tags --force origin
+git checkout "$NVIM_REF"
+# Fast-forward when tracking a branch; ignore for detached tags.
+git pull --ff-only origin "$NVIM_REF" 2>/dev/null || true
+
+# Clean previous build so CMAKE_* changes take effect.
+make distclean >/dev/null 2>&1 || true
+make CMAKE_BUILD_TYPE="$NVIM_BUILD_TYPE" CMAKE_INSTALL_PREFIX="$NVIM_PREFIX"
+make CMAKE_INSTALL_PREFIX="$NVIM_PREFIX" install
+
+echo "Neovim installed to $NVIM_PREFIX/bin/nvim"
+"$NVIM_PREFIX/bin/nvim" --version | head -1

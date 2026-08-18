@@ -1,0 +1,126 @@
+# =============================================================================
+# mise.toml - dotfiles provisioning entry point
+#
+# Declares runtimes, dev tools, dotfile symlinks, macOS settings, and the
+# tasks that provision a machine. `./up` runs `mise run setup`, which executes
+# the sub-tasks below in order.
+# =============================================================================
+
+[settings]
+# Trust nested configs under this repo without prompting.
+experimental = true
+# Prefer the lockfile when present so installs are reproducible.
+lockfile = true
+
+# -----------------------------------------------------------------------------
+# Runtimes & developer tools (replaces anyenv / asdf / `cargo install`)
+# -----------------------------------------------------------------------------
+[tools]
+node = "lts"
+go = "latest"
+deno = "latest"
+bun = "latest"
+
+# CLI tools formerly installed via `cargo install`
+ripgrep = "latest"
+bat = "latest"
+delta = "latest"
+dust = "latest"
+bottom = "latest"
+zoxide = "latest"
+fzf = "latest"
+# Prebuilt (aqua) backend so eza needs no Rust/cargo toolchain.
+"aqua:eza-community/eza" = "latest"
+# tokei has no linux-arm64 prebuilt, so it is built via cargo. The Rust
+# toolchain below is declared so a clean machine can build it.
+rust = { version = "stable", profile = "minimal" }
+"cargo:tokei" = "latest"
+
+# LSP / codegen helpers
+"go:golang.org/x/tools/gopls" = "latest"
+protoc-gen-go = "latest"
+
+# -----------------------------------------------------------------------------
+# Dotfile symlinks (replaces zsh/symbolic-link.sh)
+# Applied with `mise bootstrap dotfiles apply` via the `link` task below.
+# -----------------------------------------------------------------------------
+[dotfiles]
+"~/.zshrc" = { source = "zsh/zshrc", mode = "symlink" }
+"~/.gitconfig" = { source = "gitconfig", mode = "symlink" }
+"~/.tmux.conf" = { source = "tmux.conf", mode = "symlink" }
+"~/.tigrc" = { source = ".tigrc", mode = "symlink" }
+"~/.config/nvim" = { source = "nvim", mode = "symlink" }
+"~/.config/starship.toml" = { source = "starship.toml", mode = "symlink" }
+"~/.claude/CLAUDE.md" = { source = "claude/CLAUDE.md", mode = "symlink" }
+"~/.claude/commands/handover.md" = { source = "claude/commands/handover.md", mode = "symlink" }
+"~/.codex/AGENTS.md" = { source = "codex/AGENTS.md", mode = "symlink" }
+"~/.codex/skills/handover" = { source = "codex/skills/handover", mode = "symlink" }
+
+# -----------------------------------------------------------------------------
+# Machine bootstrap: login shell & macOS defaults
+# Applied with `mise bootstrap ... apply` via the `defaults` task below.
+# -----------------------------------------------------------------------------
+[bootstrap.user]
+login_shell = "/bin/zsh"
+
+[bootstrap.macos.defaults]
+# Fast key repeat (handy with vim / karabiner-driven navigation).
+"NSGlobalDomain" = { KeyRepeat = 2, InitialKeyRepeat = 15, AppleShowAllExtensions = true }
+# Show hidden files in Finder.
+"com.apple.finder" = { AppleShowAllFiles = true }
+
+# -----------------------------------------------------------------------------
+# Tasks
+# -----------------------------------------------------------------------------
+[tasks.setup]
+description = "Provision this machine end-to-end (macOS & Ubuntu)"
+run = [
+  { task = "packages" },
+  { task = "tools" },
+  { task = "nvim-build" },
+  { task = "tmux-build" },
+  { task = "hjkl" },
+  { task = "aizu" },
+  { task = "link" },
+  { task = "defaults" },
+  { task = "vim" },
+]
+
+[tasks.packages]
+description = "Install system packages (Brewfile on macOS / apt on Ubuntu)"
+run = "{{config_root}}/scripts/install-packages"
+
+[tasks.tools]
+description = "Install runtimes & dev tools ([tools])"
+run = "mise install"
+
+[tasks.nvim-build]
+description = "Build Neovim from source into ~/.local"
+run = "{{config_root}}/scripts/build-neovim"
+
+[tasks.tmux-build]
+description = "Build tmux from source into ~/.local"
+run = "{{config_root}}/scripts/build-tmux"
+
+[tasks.hjkl]
+description = "Build & install hjkl keyboard remapper (macOS; replaces Karabiner)"
+run = "{{config_root}}/scripts/build-hjkl"
+
+[tasks.aizu]
+description = "Build & install Aizu notification app (macOS)"
+run = "{{config_root}}/scripts/build-aizu"
+
+[tasks.link]
+description = "Symlink dotfiles ([dotfiles])"
+run = "mise bootstrap dotfiles apply --yes"
+
+[tasks.defaults]
+description = "Apply login shell (Unix) & macOS defaults (macOS only)"
+run = [
+  "mise bootstrap user apply --yes",
+  "if [ \"$(uname -s)\" = Darwin ]; then mise bootstrap macos defaults apply --yes; fi",
+]
+
+[tasks.vim]
+description = "Install Neovim plugins (lazy.nvim)"
+run = "{{config_root}}/scripts/setup-vim"

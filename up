@@ -1,0 +1,84 @@
+#!/usr/bin/env bash
+# =============================================================================
+# up - bootstrap mise, then hand off provisioning to mise tasks.
+#
+#   ./up            # run the full `setup` task
+#   ./up link       # run a single task (e.g. re-apply dotfile symlinks)
+#
+# Supported: macOS (Homebrew) and Ubuntu (apt). Assumes the base package
+# manager exists (install.sh handles a fresh machine).
+# =============================================================================
+set -euo pipefail
+
+DOTFILES_PATH="${DOTFILES_PATH:-$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)}"
+export DOTFILES_PATH
+cd "$DOTFILES_PATH"
+
+# mise merges config files from ancestor directories; cap the search at $HOME so
+# stray ~/.tool-versions or ~/mise.toml do not leak into this repo's config.
+export MISE_CEILING_PATHS="${MISE_CEILING_PATHS:-$HOME}"
+
+# Run the provisioning tasks in their declared order. Without this, `mise run`
+# auto-installs every [tools] entry up front -- before the `packages` task has
+# installed compilers/build deps -- which breaks tools that build from source
+# (e.g. cargo:tokei needs a C compiler). Scoped to this run only.
+export MISE_TASK_RUN_AUTO_INSTALL=false
+
+OS="$(uname -s)"
+
+ensure_mise_macos() {
+  if ! command -v brew >/dev/null 2>&1 && [ -x /opt/homebrew/bin/brew ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  fi
+  if ! command -v brew >/dev/null 2>&1; then
+    echo "Homebrew not found. Run install.sh first." >&2
+    exit 1
+  fi
+  if command -v mise >/dev/null 2>&1; then
+    brew upgrade mise >/dev/null 2>&1 || true
+  else
+    brew install mise
+  fi
+}
+
+ensure_mise_ubuntu() {
+  local SUDO=""
+  if [ "$(id -u)" -ne 0 ]; then
+    command -v sudo >/dev/null 2>&1 || { echo "need root or sudo on Ubuntu" >&2; exit 1; }
+    SUDO="sudo"
+  fi
+  if ! command -v curl >/dev/null 2>&1 || ! command -v git >/dev/null 2>&1; then
+    $SUDO apt-get update
+    DEBIAN_FRONTEND=noninteractive $SUDO apt-get install -y curl git ca-certificates
+  fi
+  export PATH="$HOME/.local/bin:$PATH"
+  if ! command -v mise >/dev/null 2>&1; then
+    curl -fsSL https://mise.run | sh
+  fi
+}
+
+case "$OS" in
+  Darwin) ensure_mise_macos ;;
+  Linux)
+    if [ -e /etc/lsb-release ] || command -v apt-get >/dev/null 2>&1; then
+      ensure_mise_ubuntu
+    else
+      echo "Unsupported Linux distro (expected Ubuntu/apt)." >&2
+      exit 1
+    fi
+    ;;
+  *) echo "Unsupported OS: $OS" >&2; exit 1 ;;
+esac
+
+if ! command -v mise >/dev/null 2>&1; then
+  echo "mise is still not on PATH; aborting." >&2
+  exit 1
+fi
+
+mise trust "$DOTFILES_PATH/mise.toml"
+
+if [ "$#" -gt 0 ]; then
+  mise run "$@"
+else
+  mise run setup
+fi

@@ -1,5 +1,4 @@
-if [ ! -x "`which zoxide`" ]; then
-  cargo install zoxide --locked
+# zoxide is provided by mise ([tools] zoxide).
+if exists zoxide; then
+  eval "$(zoxide init zsh)"
 fi
-
-eval "$(zoxide init zsh)"

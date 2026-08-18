@@ -11,19 +11,18 @@ loadsh ~/.dotfiles/zsh/zsh-configs.sh
 # Import standard settings
 loadsh ~/.dotfiles/zsh/history.sh
 loadsh ~/.dotfiles/zsh/export-path.sh
-loadsh ~/.dotfiles/zsh/symbolic-link.sh
 loadsh ~/.dotfiles/zsh/dotfiles-private.sh
 
+# Activate mise (runtimes & dev tools). Replaces anyenv / asdf.
+source ~/.dotfiles/shell/env.sh
+
 loadsh ~/.dotfiles/zsh/brew.sh
-loadsh ~/.dotfiles/zsh/pkg.sh
 loadsh ~/.dotfiles/zsh/tmux.sh
 loadsh ~/.dotfiles/zsh/fzf.sh
 loadsh ~/.dotfiles/zsh/gomi.sh
-loadsh ~/.dotfiles/zsh/protobuf.sh
 loadsh ~/.dotfiles/zsh/gh.sh
 loadsh ~/.dotfiles/zsh/cargo.sh
 loadsh ~/.dotfiles/zsh/go.sh
-loadsh ~/.dotfiles/zsh/deno.sh
 loadsh ~/.dotfiles/zsh/nvim.sh
 loadsh ~/.dotfiles/zsh/kubectl.sh
 loadsh ~/.dotfiles/zsh/krew.sh
@@ -39,10 +38,3 @@ source ~/.dotfiles/zsh/localconfig.sh
 if [[ "$ZPROF" = true && ! `which zprof > /dev/null` ]] ;then
   zprof >> ~/.local/share/zprof.log
 fi
-# pnpm
-export PNPM_HOME="$HOME/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end

@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# =============================================================================
+# setup-vim - install/sync Neovim plugins headlessly.
+#
+# The Neovim config (nvim/init.lua) bootstraps lazy.nvim on first launch, so we
+# just need to run it once headlessly to install and sync plugins from
+# lazy-lock.json. LSP/formatter CLIs (gopls, prettier, etc.) come from mise.
+# =============================================================================
+set -euo pipefail
+
+if ! command -v nvim >/dev/null 2>&1; then
+  echo "nvim not found; build it first (scripts/build-neovim / \`mise run nvim-build\`)." >&2
+  exit 1
+fi
+
+# Pass 1: first launch bootstraps lazy.nvim (git clone in init.lua). The :Lazy
+# command may not be registered yet on a brand-new machine, so tolerate errors.
+nvim --headless +qa >/dev/null 2>&1 || true
+
+# Pass 2: lazy.nvim is present now; sync synchronously via its Lua API (avoids
+# relying on the :Lazy user command) and wait for installs to finish.
+nvim --headless -c "lua require('lazy').sync({ wait = true, show = false })" -c "qa!"
+
+echo "Neovim plugins synced."
