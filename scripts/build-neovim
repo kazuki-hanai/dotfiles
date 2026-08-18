@@ -19,6 +19,11 @@ NVIM_REF="${NVIM_REF:-stable}"
 NVIM_BUILD_TYPE="${NVIM_BUILD_TYPE:-RelWithDebInfo}"
 NVIM_PREFIX="${NVIM_PREFIX:-$HOME/.local}"
 
+if [ "${FORCE:-0}" != "1" ] && [ -x "$NVIM_PREFIX/bin/nvim" ]; then
+  echo "build-neovim: $NVIM_PREFIX/bin/nvim already installed ($("$NVIM_PREFIX/bin/nvim" --version | head -1)); skipping. Use FORCE=1 to rebuild."
+  exit 0
+fi
+
 if [ ! -d "$NVIM_SRC/.git" ]; then
   mkdir -p "$(dirname "$NVIM_SRC")"
   git clone https://github.com/neovim/neovim.git "$NVIM_SRC"

@@ -20,6 +20,11 @@ fi
 AIZU_SRC="${AIZU_SRC:-$HOME/github/aizu}"
 AIZU_REF="${AIZU_REF:-main}"
 
+if [ "${FORCE:-0}" != "1" ] && [ -d "/Applications/Aizu.app" ]; then
+  echo "build-aizu: /Applications/Aizu.app already installed; skipping. Use FORCE=1 to rebuild."
+  exit 0
+fi
+
 if [ ! -d "$AIZU_SRC/.git" ]; then
   mkdir -p "$(dirname "$AIZU_SRC")"
   git clone https://github.com/kazuki-hanai/aizu.git "$AIZU_SRC"

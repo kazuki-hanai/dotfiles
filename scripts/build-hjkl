@@ -21,6 +21,11 @@ fi
 HJKL_SRC="${HJKL_SRC:-$HOME/github/hjkl}"
 HJKL_REF="${HJKL_REF:-main}"
 
+if [ "${FORCE:-0}" != "1" ] && command -v hjkl >/dev/null 2>&1; then
+  echo "build-hjkl: hjkl already installed ($(command -v hjkl)); skipping. Use FORCE=1 to rebuild."
+  exit 0
+fi
+
 if [ ! -d "$HJKL_SRC/.git" ]; then
   mkdir -p "$(dirname "$HJKL_SRC")"
   git clone https://github.com/kazuki-hanai/hjkl.git "$HJKL_SRC"

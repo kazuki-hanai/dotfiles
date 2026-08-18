@@ -16,6 +16,11 @@ set -euo pipefail
 TMUX_SRC="${TMUX_SRC:-$HOME/github/tmux/tmux}"
 TMUX_PREFIX="${TMUX_PREFIX:-$HOME/.local}"
 
+if [ "${FORCE:-0}" != "1" ] && [ -x "$TMUX_PREFIX/bin/tmux" ]; then
+  echo "build-tmux: $TMUX_PREFIX/bin/tmux already installed ($("$TMUX_PREFIX/bin/tmux" -V)); skipping. Use FORCE=1 to rebuild."
+  exit 0
+fi
+
 if [ ! -d "$TMUX_SRC/.git" ]; then
   mkdir -p "$(dirname "$TMUX_SRC")"
   git clone https://github.com/tmux/tmux.git "$TMUX_SRC"

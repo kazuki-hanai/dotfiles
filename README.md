@@ -88,6 +88,9 @@ A few steps need manual follow-up:
 - Add a macOS package/app: edit `Brewfile`. Add an Ubuntu package: edit `packages/apt.txt`.
 - Add a dotfile symlink: edit `[dotfiles]` in `mise.toml`, then `./up link`.
 - Change a source-build ref: e.g. `NVIM_REF=v0.10.2 ./up nvim-build`, `HJKL_REF=main ./up hjkl`.
+- The source-build tasks (`nvim-build`, `tmux-build`, `hjkl`, `aizu`) skip when
+  the tool is already installed. Force a rebuild with `FORCE=1`, e.g.
+  `FORCE=1 ./up hjkl` or `FORCE=1 ./up nvim-build`.
 - Machine-local, untracked overrides: `~/.localconfig.sh` (env/PATH) and
   `~/.prezshrc` (loaded before everything) are sourced if present.
 
