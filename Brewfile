@@ -8,9 +8,6 @@
 # Ubuntu uses packages/apt.txt instead.
 # =============================================================================
 
-# Taps
-tap "openclaw/tap"
-
 # --- System CLIs ---
 brew "mise"
 brew "gh"
@@ -20,7 +17,7 @@ brew "pipx"
 brew "protobuf"
 brew "zizmor"
 brew "cloudflared"
-brew "openclaw/tap/gogcli"
+brew "gogcli"
 
 # --- Build dependencies (Neovim) ---
 brew "cmake"
@@ -39,7 +36,7 @@ brew "bison"
 brew "reattach-to-user-namespace"   # tmux clipboard helper on macOS
 
 # --- Casks (GUI apps) ---
-cask "aqua"
+cask "aqua-app"
 cask "gcloud-cli"
 cask "raycast"
 

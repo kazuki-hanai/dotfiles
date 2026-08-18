@@ -21,11 +21,12 @@ install_macos() {
   # are explicitly trusted, which aborts `brew bundle`. Trust any taps declared
   # in the Brewfile up front. This is idempotent once trusted and a harmless
   # no-op on older Homebrew that lacks the `trust` subcommand.
-  grep -E '^[[:space:]]*tap[[:space:]]+"' "$DOTFILES_PATH/Brewfile" \
-    | sed -E 's/^[[:space:]]*tap[[:space:]]+"([^"]+)".*/\1/' \
-    | while IFS= read -r tap_name; do
-        [ -n "$tap_name" ] && brew trust "$tap_name" 2>/dev/null || true
-      done
+  while IFS= read -r tap_name; do
+    [ -n "$tap_name" ] && brew trust "$tap_name" 2>/dev/null || true
+  done < <(
+    sed -nE 's/^[[:space:]]*tap[[:space:]]+"([^"]+)".*/\1/p' \
+      "$DOTFILES_PATH/Brewfile"
+  )
 
   # The gcloud-cli cask runs `gcloud config virtualenv create`, which needs a
   # `virtualenv` executable on PATH and otherwise fails the whole bundle. When
