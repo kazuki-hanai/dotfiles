@@ -52,7 +52,6 @@ protoc-gen-go = "latest"
 "~/.tmux.conf" = { source = "tmux.conf", mode = "symlink" }
 "~/.tigrc" = { source = ".tigrc", mode = "symlink" }
 "~/.config/nvim" = { source = "nvim", mode = "symlink" }
-"~/.config/starship.toml" = { source = "starship.toml", mode = "symlink" }
 "~/.claude/CLAUDE.md" = { source = "claude/CLAUDE.md", mode = "symlink" }
 "~/.claude/commands/handover.md" = { source = "claude/commands/handover.md", mode = "symlink" }
 "~/.codex/AGENTS.md" = { source = "codex/AGENTS.md", mode = "symlink" }
