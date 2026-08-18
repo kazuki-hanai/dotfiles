@@ -29,8 +29,10 @@ dust = "latest"
 bottom = "latest"
 zoxide = "latest"
 fzf = "latest"
-# Prebuilt (aqua) backend so eza needs no Rust/cargo toolchain.
-"aqua:eza-community/eza" = "latest"
+# eza uses its default (vfox) backend, which pulls a cargo-quickinstall prebuilt
+# on both macOS and Linux (aqua's eza entry is cargo-only on macOS, and eza has
+# no macOS binary in its own GitHub releases).
+eza = "latest"
 # tokei has no linux-arm64 prebuilt, so it is built via cargo. The Rust
 # toolchain below is declared so a clean machine can build it.
 rust = { version = "stable", profile = "minimal" }
