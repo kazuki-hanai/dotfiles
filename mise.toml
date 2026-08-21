@@ -20,6 +20,7 @@ node = "lts"
 go = "latest"
 deno = "latest"
 bun = "latest"
+terraform = "latest"
 # Install the official Google Cloud SDK archive via mise. The Homebrew
 # gcloud-cli cask currently fails during its Python 3.14 virtualenv postinstall
 # on macOS, before the cask can finish linking the SDK.
