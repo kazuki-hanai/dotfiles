@@ -1,9 +1,47 @@
+#!/bin/sh
 
-workflow_path=$1
+workflow_path=${1:-}
 
-# Check if the workflow file exists
-if [ ! -f $workflow_path ]; then
-  echo "Workflow file not found: $workflow_path"
+if [ -z "$workflow_path" ]; then
+  echo "Usage: $0 .github/workflows/<workflow>.yml|yaml" >&2
+  exit 1
+fi
+
+repo_root=$(git rev-parse --show-toplevel 2>/dev/null) || {
+  echo "Unable to determine repository root" >&2
+  exit 1
+}
+
+workflow_dir="$repo_root/.github/workflows"
+
+case "$workflow_path" in
+  *.yml|*.yaml) ;;
+  *)
+    echo "Workflow path must end in .yml or .yaml: $workflow_path" >&2
+    exit 1
+    ;;
+esac
+
+if [ ! -f "$workflow_path" ]; then
+  echo "Workflow file not found: $workflow_path" >&2
+  exit 1
+fi
+
+if [ -L "$workflow_path" ]; then
+  echo "Workflow path must not be a symlink: $workflow_path" >&2
+  exit 1
+fi
+
+workflow_base=$(basename -- "$workflow_path")
+workflow_parent=$(dirname -- "$workflow_path")
+workflow_parent=$(cd "$workflow_parent" 2>/dev/null && pwd -P) || {
+  echo "Workflow directory not found: $workflow_path" >&2
+  exit 1
+}
+workflow_abs="$workflow_parent/$workflow_base"
+
+if [ "$workflow_parent" != "$workflow_dir" ]; then
+  echo "Workflow file must be under .github/workflows: $workflow_path" >&2
   exit 1
 fi
 
@@ -12,8 +50,8 @@ prompt="
 Please review following github_action workflow.
 
 \`\`\`
-`cat $workflow_path`
+$(cat -- "$workflow_abs")
 \`\`\`
 "
 
-echo "$prompt" | xargs -0 hey
+printf '%s\0' "$prompt" | xargs -0 hey
