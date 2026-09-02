@@ -125,7 +125,7 @@ run = [
   # Only run `chsh` (via bootstrap user) when the login shell differs. This
   # avoids a spurious `chsh: PAM: Authentication failure` in non-interactive
   # shells (agents/CI) where no password can be supplied.
-  "cur=$(getent passwd \"$USER\" 2>/dev/null | cut -d: -f7); [ -n \"$cur\" ] || cur=$(dscl . -read /Users/\"$USER\" UserShell 2>/dev/null | awk '{print $2}'); if [ \"$cur\" != /bin/zsh ]; then mise bootstrap user apply --yes; else echo \"defaults: login shell already $cur; skipping chsh\"; fi",
+  "u=$(id -un); cur=$(getent passwd \"$u\" 2>/dev/null | cut -d: -f7); [ -n \"$cur\" ] || cur=$(dscl . -read /Users/\"$u\" UserShell 2>/dev/null | awk '{print $2}'); if [ \"$cur\" = /bin/zsh ]; then echo \"defaults: login shell already $cur; skipping chsh\"; else mise bootstrap user apply --yes; fi",
   "if [ \"$(uname -s)\" = Darwin ]; then mise bootstrap macos defaults apply --yes; fi",
 ]
 
