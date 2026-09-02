@@ -122,10 +122,10 @@ run = "mise bootstrap dotfiles apply --yes"
 [tasks.defaults]
 description = "Apply login shell (Unix) & macOS defaults (macOS only)"
 run = [
-  # Only run `chsh` (via bootstrap user) when the login shell differs. This
-  # avoids a spurious `chsh: PAM: Authentication failure` in non-interactive
-  # shells (agents/CI) where no password can be supplied.
-  "u=$(id -un); cur=$(getent passwd \"$u\" 2>/dev/null | cut -d: -f7); [ -n \"$cur\" ] || cur=$(dscl . -read /Users/\"$u\" UserShell 2>/dev/null | awk '{print $2}'); if [ \"$cur\" = /bin/zsh ]; then echo \"defaults: login shell already $cur; skipping chsh\"; else mise bootstrap user apply --yes; fi",
+  # Accept any registered zsh path (Ubuntu may report /usr/bin/zsh). When a
+  # change is needed, run chsh via sudo: `curl | bash` leaves stdin at EOF, so
+  # an unprivileged chsh cannot read its PAM password prompt and always fails.
+  "u=$(id -un); cur=$(getent passwd \"$u\" 2>/dev/null | cut -d: -f7); [ -n \"$cur\" ] || cur=$(dscl . -read /Users/\"$u\" UserShell 2>/dev/null | awk '{print $2}'); case \"$cur\" in */zsh) echo \"defaults: login shell already $cur; skipping chsh\" ;; *) if [ \"$(id -u)\" -eq 0 ]; then chsh -s /bin/zsh \"$u\"; elif command -v sudo >/dev/null 2>&1; then sudo chsh -s /bin/zsh \"$u\"; else echo \"defaults: cannot change login shell without sudo; run: chsh -s /bin/zsh\" >&2; exit 1; fi ;; esac",
   "if [ \"$(uname -s)\" = Darwin ]; then mise bootstrap macos defaults apply --yes; fi",
 ]
 
