@@ -46,6 +46,12 @@ rust = { version = "stable", profile = "minimal" }
 "go:golang.org/x/tools/gopls" = "latest"
 protoc-gen-go = "latest"
 
+# AI coding CLIs (installed via npm; depend on the `node` runtime above).
+# claude-code's postinstall downloads a native binary, so it must run install
+# scripts (mise skips them by default). codex ships a self-contained package.
+"npm:@openai/codex" = "latest"
+"npm:@anthropic-ai/claude-code" = { version = "latest", npm_args = "--ignore-scripts=false" }
+
 # -----------------------------------------------------------------------------
 # Dotfile symlinks (replaces zsh/symbolic-link.sh)
 # Applied with `mise bootstrap dotfiles apply` via the `link` task below.
