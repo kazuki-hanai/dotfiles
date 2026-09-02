@@ -11,6 +11,9 @@
 experimental = true
 # Prefer the lockfile when present so installs are reproducible.
 lockfile = true
+# Shorten the supply-chain safety hold on brand-new releases (mise default is
+# 24h) so tools track latest more closely while keeping a small buffer.
+minimum_release_age = "1h"
 
 # -----------------------------------------------------------------------------
 # Runtimes & developer tools (replaces anyenv / asdf / `cargo install`)

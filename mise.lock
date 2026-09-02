@@ -500,14 +500,14 @@ checksum = "sha256:57f71ab3652e797d84acddc79c81cc9ff1c6ddb2a1974cdb83f00fee9bff4
 url = "https://nodejs.org/dist/v24.19.0/node-v24.19.0-win-x64.zip"
 
 [[tools."npm:@anthropic-ai/claude-code"]]
-version = "2.1.252"
+version = "2.1.258"
 backend = "npm:@anthropic-ai/claude-code"
 
 [tools."npm:@anthropic-ai/claude-code".options]
 npm_args = "--ignore-scripts=false"
 
 [[tools."npm:@openai/codex"]]
-version = "0.151.0"
+version = "0.152.1"
 backend = "npm:@openai/codex"
 
 [[tools.protoc-gen-go]]
