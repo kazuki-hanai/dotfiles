@@ -49,6 +49,10 @@ rust = { version = "stable", profile = "minimal" }
 "go:golang.org/x/tools/gopls" = "latest"
 protoc-gen-go = "latest"
 
+# Azure CLI (`az`). No native/aqua build exists, so install the official
+# package via pipx (mise's pipx backend manages the isolated venv).
+"pipx:azure-cli" = "latest"
+
 # -----------------------------------------------------------------------------
 # Dotfile symlinks (replaces zsh/symbolic-link.sh)
 # Applied with `mise bootstrap dotfiles apply` via the `link` task below.
@@ -63,6 +67,8 @@ protoc-gen-go = "latest"
 "~/.claude/commands/handover.md" = { source = "claude/commands/handover.md", mode = "symlink" }
 "~/.codex/AGENTS.md" = { source = "codex/AGENTS.md", mode = "symlink" }
 "~/.codex/skills/handover" = { source = "codex/skills/handover", mode = "symlink" }
+"~/.codex/skills/github-pull-request" = { source = "codex/skills/github-pull-request", mode = "symlink" }
+"~/.claude/skills/github-pull-request" = { source = "codex/skills/github-pull-request", mode = "symlink" }
 
 # -----------------------------------------------------------------------------
 # Machine bootstrap: login shell & macOS defaults

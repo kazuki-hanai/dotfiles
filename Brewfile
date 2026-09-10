@@ -38,6 +38,11 @@ brew "reattach-to-user-namespace"   # tmux clipboard helper on macOS
 # --- Casks (GUI apps) ---
 cask "aqua-app"
 cask "raycast"
+cask "hammerspoon"   # Lua-scriptable macOS automation (see ~/.hammerspoon)
+
+# Note: Codex CLI and Claude Code are intentionally NOT installed here. The
+# dotfiles only ship their shell/config integration (zsh/codex.sh,
+# claude/CLAUDE.md); install those tools manually when needed.
 
 # --- Fonts ---
 # Already installed manually on this machine (a differing Hack Nerd Font in
