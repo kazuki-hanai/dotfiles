@@ -40,13 +40,14 @@ cd ~/.dotfiles
 | --- | --- | --- |
 | 1 | `packages` | System packages (Brewfile on macOS / `packages/apt.txt` on Ubuntu) |
 | 2 | `tools` | `mise install` — runtimes & CLI dev tools |
-| 3 | `nvim-build` | Build Neovim from source into `~/.local` |
-| 4 | `tmux-build` | Build tmux from source into `~/.local` |
-| 5 | `hjkl` | Build/install the hjkl keyboard remapper (**macOS only**) |
-| 6 | `aizu` | Build/install the Aizu notification app (**macOS only**) |
-| 7 | `link` | Symlink dotfiles (`mise bootstrap dotfiles apply`) |
-| 8 | `defaults` | Login shell (Unix) + macOS defaults (**macOS only**) |
-| 9 | `vim` | Install/sync Neovim (lazy.nvim) plugins |
+| 3 | `completion` | Install mise completion for zsh |
+| 4 | `nvim-build` | Build Neovim from source into `~/.local` |
+| 5 | `tmux-build` | Build tmux from source into `~/.local` |
+| 6 | `hjkl` | Build/install the hjkl keyboard remapper (**macOS only**) |
+| 7 | `aizu` | Build/install the Aizu notification app (**macOS only**) |
+| 8 | `link` | Symlink dotfiles (`mise bootstrap dotfiles apply`) |
+| 9 | `defaults` | Login shell (Unix) + macOS defaults (**macOS only**) |
+| 10 | `vim` | Install/sync Neovim (lazy.nvim) plugins |
 
 Run any single task with `./up <task>` (e.g. `./up hjkl`, `./up nvim-build`) or
 `mise run <task>`. List them with `mise tasks`. macOS-only tasks self-skip on

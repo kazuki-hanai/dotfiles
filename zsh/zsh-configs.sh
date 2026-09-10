@@ -2,6 +2,7 @@
 
 # completions
 fpath+=~/.local/share/zsh-completions
+fpath+=~/.local/share/zsh/site-functions
 fpath+=~/.zfunc
 
 # bashcompinit

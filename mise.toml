@@ -24,6 +24,7 @@ go = "latest"
 deno = "latest"
 bun = "latest"
 terraform = "latest"
+gh = "latest"
 # Install the official Google Cloud SDK archive via mise. The Homebrew
 # gcloud-cli cask currently fails during its Python 3.14 virtualenv postinstall
 # on macOS, before the cask can finish linking the SDK.
@@ -37,6 +38,8 @@ dust = "latest"
 bottom = "latest"
 zoxide = "latest"
 fzf = "latest"
+# Safe, cross-platform replacement for rm (aliased in zsh/gomi.sh).
+"github:babarot/gomi" = "latest"
 # The aqua registry falls back to its unsupported `cargo` package type on
 # macOS. Use mise's native cargo backend directly on every platform instead.
 "cargo:eza" = "latest"
@@ -52,6 +55,8 @@ protoc-gen-go = "latest"
 # Azure CLI (`az`). No native/aqua build exists, so install the official
 # package via pipx (mise's pipx backend manages the isolated venv).
 "pipx:azure-cli" = "latest"
+pnpm = "11.25.0"
+python = "3.12.14"
 
 # -----------------------------------------------------------------------------
 # Dotfile symlinks (replaces zsh/symbolic-link.sh)
@@ -91,6 +96,7 @@ description = "Provision this machine end-to-end (macOS & Ubuntu)"
 run = [
   { task = "packages" },
   { task = "tools" },
+  { task = "completion" },
   { task = "nvim-build" },
   { task = "tmux-build" },
   { task = "hjkl" },
@@ -107,6 +113,10 @@ run = "{{config_root}}/scripts/install-packages"
 [tasks.tools]
 description = "Install runtimes & dev tools ([tools])"
 run = "mise install"
+
+[tasks.completion]
+description = "Install mise completion for zsh"
+run = "mise completion zsh --install"
 
 [tasks.nvim-build]
 description = "Build Neovim from source into ~/.local"
